@@ -6,13 +6,13 @@
 /*   By: fleonte <fleonte@student.42madrid.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/13 16:03:13 by fleonte           #+#    #+#             */
-/*   Updated: 2023/09/13 16:39:40 by fleonte          ###   ########.fr       */
+/*   Updated: 2023/09/13 19:45:50 by fleonte          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void    *memchr(const void *s, int c, size_t n)
+void    *ft_memchr(const void *s, int c, size_t n)
 {
     int i;
 

@@ -6,11 +6,11 @@
 /*   By: fleonte <fleonte@student.42madrid.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/12 18:07:10 by fleonte           #+#    #+#             */
-/*   Updated: 2023/09/13 15:50:46 by fleonte          ###   ########.fr       */
+/*   Updated: 2023/09/13 19:45:24 by fleonte          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "Libft"
+#include "libft.h"
 
 int	ft_isprint(int c)
 {

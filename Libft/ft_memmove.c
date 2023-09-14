@@ -6,9 +6,11 @@
 /*   By: fleonte <fleonte@student.42madrid.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/12 21:24:21 by fleonte           #+#    #+#             */
-/*   Updated: 2023/09/13 15:50:47 by fleonte          ###   ########.fr       */
+/*   Updated: 2023/09/13 19:46:40 by fleonte          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+#include "libft.h"
 
 void	*ft_memmove(void *dst, const void *src, size_t len)
 {

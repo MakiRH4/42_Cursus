@@ -6,13 +6,13 @@
 /*   By: fleonte <fleonte@student.42madrid.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/12 21:26:16 by fleonte           #+#    #+#             */
-/*   Updated: 2023/09/13 15:50:52 by fleonte          ###   ########.fr       */
+/*   Updated: 2023/09/13 22:02:25 by fleonte          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "Libft"
+#include "libft.h"
 
-int	ft_strlen(char *s)
+int	ft_strlen(const char *s)
 {
 	int i;
 

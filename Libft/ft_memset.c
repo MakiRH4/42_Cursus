@@ -6,17 +6,18 @@
 /*   By: fleonte <fleonte@student.42madrid.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/12 21:24:43 by fleonte           #+#    #+#             */
-/*   Updated: 2023/09/13 15:50:48 by fleonte          ###   ########.fr       */
+/*   Updated: 2023/09/13 23:21:51 by fleonte          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	*memset(void *b, int c, size_t len)
+void	*ft_memset(void *b, int c, size_t len)
 {
-	int	i;
+	size_t	i;
 
 	i = 0;
 	while (i++ <= len)
-		b++ = c;
-}	
+		*b++ = (unsigned char)c;
+	return (b - i);
+}
