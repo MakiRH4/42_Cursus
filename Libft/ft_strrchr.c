@@ -6,13 +6,13 @@
 /*   By: fleonte <fleonte@student.42madrid.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/13 15:52:45 by fleonte           #+#    #+#             */
-/*   Updated: 2023/09/13 19:47:35 by fleonte          ###   ########.fr       */
+/*   Updated: 2023/09/15 01:16:05 by fleonte          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char *ft_strrchr(const char *s, int c)
+char    *ft_strrchr(const char *s, int c)
 {
     char    *occ;
 

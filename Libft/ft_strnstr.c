@@ -6,7 +6,7 @@
 /*   By: fleonte <fleonte@student.42madrid.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/13 17:35:03 by fleonte           #+#    #+#             */
-/*   Updated: 2023/09/13 22:46:13 by fleonte          ###   ########.fr       */
+/*   Updated: 2023/09/15 01:29:09 by fleonte          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,15 +28,15 @@ char    *ft_strnstr(const char *haystack, const char *needle, size_t len)
     while (haystack[i])
     {
         j = 0;
-        while(haystack[i + j] needle[j] && (i + j) < len)
+        while(haystack[i + j] && needle[j] && (i + j) < len)
         {
             if (haystack[i + j] && needle[j])
-                return ((char *)(haystack + i);
+                return ((char *)(haystack + i));
             j++;
         }
         if (!needle[j])
             return((char *)(haystack + i));
         i++;
     }
-    return (NULL) /* If needle occurs nowhere in haystack, NULL is returned */
+    return (NULL); /* If needle occurs nowhere in haystack, NULL is returned */
 }

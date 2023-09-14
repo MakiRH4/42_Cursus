@@ -6,11 +6,13 @@
 /*   By: fleonte <fleonte@student.42madrid.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/14 20:03:05 by fleonte           #+#    #+#             */
-/*   Updated: 2023/09/14 20:17:47 by fleonte          ###   ########.fr       */
+/*   Updated: 2023/09/15 01:14:13 by fleonte          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-char *ft_strjoin(char const *s1, char const *s2)
+#include "libft.h"
+
+char    *ft_strjoin(char const *s1, char const *s2)
 {
     char    *joined;
     int ttl;
