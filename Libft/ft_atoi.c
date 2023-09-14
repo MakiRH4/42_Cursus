@@ -6,33 +6,40 @@
 /*   By: fleonte <fleonte@student.42madrid.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/13 22:51:02 by fleonte           #+#    #+#             */
-/*   Updated: 2023/09/13 23:41:00 by fleonte          ###   ########.fr       */
+/*   Updated: 2023/09/14 18:27:50 by fleonte          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "stdlib.h"
 
-int atoi(const char *str)
+int ft_atoi(const char *str)
 {
     int	sign;
 	int	res;
-    int signcont;
+    int signcount;
 
 	sign = 1;
-    signcont = 0;
+    signcount = 0;
 	res = 0;
 	if (*str)
 	{
-		while ((*str >= 9 && *str <= 13) || *str == 32 || *str == 43)
+		while ((*str >= 9 && *str <= 13) || *str == 32)
 			str++;
 		if (*str == 45)
         {
 			sign = -sign;
-            signcont++;
-            if (signcont > 1)
+            signcount++;
+            if (signcount > 1)
                 return (0);
-        }
-        str++;
+        	str++;
+		}
+		if (*str == 43)
+        {
+			sign = -sign;
+            signcount++;
+            if (signcount > 1)
+                return (0);
+        	str++;
 		}
 		while (*str >= 48 && *str <= 57)
 		{
