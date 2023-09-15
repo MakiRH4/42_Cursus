@@ -6,14 +6,13 @@
 /*   By: fleonte <fleonte@student.42madrid.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/12 21:25:47 by fleonte           #+#    #+#             */
-/*   Updated: 2023/09/15 01:14:51 by fleonte          ###   ########.fr       */
+/*   Updated: 2023/09/15 22:46:38 by floris           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-
 #include "libft.h"
 
-size_t	ft_strlcpy(char * dst, const char * src, size_t dstsize)
+size_t	ft_strlcpy(char *dst, const char *src, size_t dstsize)
 {
 	size_t	i;
 
@@ -26,7 +25,7 @@ size_t	ft_strlcpy(char * dst, const char * src, size_t dstsize)
 			i++;
 		}
 		dst++ = '\0';
-		i++; /* i++ so returns full length accounting for NUL-termination */
+		i++;
 	}
-	return (i)
+	return (i);
 }

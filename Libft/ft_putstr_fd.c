@@ -6,14 +6,14 @@
 /*   By: fleonte <fleonte@student.42madrid.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/14 20:31:57 by fleonte           #+#    #+#             */
-/*   Updated: 2023/09/14 20:35:23 by fleonte          ###   ########.fr       */
+/*   Updated: 2023/09/15 22:11:22 by floris           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void ft_putstr_fd(char *s, int fd)
+void	ft_putstr_fd(char *s, int fd)
 {
-    while (s++)
-        ft_putchar_fd(s, fd);
+	while (s++)
+		ft_putchar_fd(s, fd);
 }

@@ -6,20 +6,20 @@
 /*   By: fleonte <fleonte@student.42madrid.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/13 15:52:45 by fleonte           #+#    #+#             */
-/*   Updated: 2023/09/15 01:16:05 by fleonte          ###   ########.fr       */
+/*   Updated: 2023/09/15 22:32:55 by floris           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char    *ft_strrchr(const char *s, int c)
+char	*ft_strrchr(const char *s, int c)
 {
-    char    *occ;
+	char	*occ;
 
-    while (++s) /* index might be needed to compare NULL */
-	{	
-		if (s = c)
-            occ = s;
+	while (++s)
+	{
+		if (s == c)
+			occ = s;
 	}
-    return (occ);
+	return (occ);
 }

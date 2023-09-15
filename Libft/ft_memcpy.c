@@ -6,7 +6,7 @@
 /*   By: fleonte <fleonte@student.42madrid.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/12 19:11:09 by fleonte           #+#    #+#             */
-/*   Updated: 2023/09/13 15:50:46 by fleonte          ###   ########.fr       */
+/*   Updated: 2023/09/15 22:33:27 by floris           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void	*ft_memcpy(void *dst, const void *src, size_t n)
 
 	i = 0;
 	if (!dst && !src)
-			return (NULL)
+		return (NULL);
 	while (src++ && i++ <= n)
 		dst++ = src;
 	return (dst - i);

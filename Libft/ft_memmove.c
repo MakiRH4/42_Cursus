@@ -6,7 +6,7 @@
 /*   By: fleonte <fleonte@student.42madrid.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/12 21:24:21 by fleonte           #+#    #+#             */
-/*   Updated: 2023/09/13 19:46:40 by fleonte          ###   ########.fr       */
+/*   Updated: 2023/09/15 22:24:05 by floris           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	*ft_memmove(void *dst, const void *src, size_t len)
 {
-	size_t	i;
+	size_t			i;
 	unsigned char	*d;
 	unsigned char	*s;
 	unsigned char	*orig;
@@ -24,7 +24,7 @@ void	*ft_memmove(void *dst, const void *src, size_t len)
 	if (!dst && !src)
 		return (NULL);
 	if (dst > src)
-    {
+	{
 		i = n - 1;
 		while (i-- > 0)
 			dst-- = src--;
