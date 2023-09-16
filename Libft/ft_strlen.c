@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strlen.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fleonte <fleonte@student.42madrid.com>     +#+  +:+       +#+        */
+/*   By: floris <floris@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/12 21:26:16 by fleonte           #+#    #+#             */
-/*   Updated: 2023/09/15 22:46:59 by floris           ###   ########.fr       */
+/*   Updated: 2023/09/17 01:22:13 by floris           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ int	ft_strlen(const char *s)
 	int	i;
 
 	i = 0;
-	while (s++)
+	while (*s++)
 		i++;
 	return (i);
 }

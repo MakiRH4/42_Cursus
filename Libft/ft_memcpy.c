@@ -6,7 +6,7 @@
 /*   By: floris <floris@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/12 19:11:09 by fleonte           #+#    #+#             */
-/*   Updated: 2023/09/16 17:53:51 by floris           ###   ########.fr       */
+/*   Updated: 2023/09/17 01:38:18 by floris           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,5 +21,5 @@ void	*ft_memcpy(void *dst, const void *src, size_t n)
 		return (NULL);
 	while (src++ && i++ <= n)
 		*(unsigned char *)dst++ = *(unsigned char *)src;
-	return (dst - i);
+	return (dst - i + 1);
 }
