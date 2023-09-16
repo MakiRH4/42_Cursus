@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strlcpy.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fleonte <fleonte@student.42madrid.com>     +#+  +:+       +#+        */
+/*   By: floris <floris@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/12 21:25:47 by fleonte           #+#    #+#             */
-/*   Updated: 2023/09/15 22:46:38 by floris           ###   ########.fr       */
+/*   Updated: 2023/09/16 17:12:32 by floris           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,10 +21,10 @@ size_t	ft_strlcpy(char *dst, const char *src, size_t dstsize)
 	{
 		while (src && i <= (dstsize - 1))
 		{
-			dst++ = src++;
+			*dst++ = *src++;
 			i++;
 		}
-		dst++ = '\0';
+		*dst++ = '\0';
 		i++;
 	}
 	return (i);
