@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_atoi.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fleonte <fleonte@student.42madrid.com>     +#+  +:+       +#+        */
+/*   By: floris <floris@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/13 22:51:02 by fleonte           #+#    #+#             */
-/*   Updated: 2023/09/14 18:27:50 by fleonte          ###   ########.fr       */
+/*   Updated: 2023/09/17 17:46:41 by floris           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,6 @@ int ft_atoi(const char *str)
 		}
 		if (*str == 43)
         {
-			sign = -sign;
             signcount++;
             if (signcount > 1)
                 return (0);
