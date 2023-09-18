@@ -6,7 +6,7 @@
 /*   By: floris <floris@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/13 15:52:45 by fleonte           #+#    #+#             */
-/*   Updated: 2023/09/16 17:58:47 by floris           ###   ########.fr       */
+/*   Updated: 2023/09/18 03:36:54 by floris           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,16 @@
 
 char	*ft_strrchr(const char *s, int c)
 {
-	char	*occ;
+	int	i;
 
-	while (++s)
+	i = 0;
+	while (s[i])
+		i++;
+	while (i >= 0)
 	{
-		if (*s == (char)c)
-			occ = (char *)s;
+		if (s[i] == (char)c)
+			return ((char *)(s + i));
+		i--;
 	}
-	return (occ);
+	return (NULL);
 }

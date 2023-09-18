@@ -6,7 +6,7 @@
 /*   By: floris <floris@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/14 20:31:57 by fleonte           #+#    #+#             */
-/*   Updated: 2023/09/16 17:10:26 by floris           ###   ########.fr       */
+/*   Updated: 2023/09/18 02:54:39 by floris           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,9 @@
 
 void	ft_putstr_fd(char *s, int fd)
 {
-	while (s++)
+	while (*s)
+	{
 		ft_putchar_fd(*s, fd);
+		s++;
+	}
 }
