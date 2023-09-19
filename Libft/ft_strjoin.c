@@ -6,7 +6,7 @@
 /*   By: floris <floris@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/14 20:03:05 by fleonte           #+#    #+#             */
-/*   Updated: 2023/09/18 20:11:29 by floris           ###   ########.fr       */
+/*   Updated: 2023/09/19 18:40:35 by floris           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,18 +15,16 @@
 char	*ft_strjoin(char const *s1, char const *s2)
 {
 	char	*joined;
-	int		ttl;
+	char	*ret;
 
-	ttl = ft_strlen(s1) + ft_strlen(s2);
-	joined = (char *)malloc(sizeof(s1) + sizeof(s2) + 1);
+	joined = (char *)malloc(sizeof(char) * (ft_strlen(s1) + ft_strlen(s2)) + 1);
+	ret = joined;
 	if (!joined)
 		return (NULL);
-	while (*s2)
-	{
-		while (*s1)
+	while (*s1)
 			*joined++ = *s1++;
+	while (*s2)
 		*joined++ = *s2++;
-	}
-	*(++joined) = '\0';
-	return (joined - (ttl + 1));
+	*(joined) = '\0';
+	return (ret);
 }
