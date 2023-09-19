@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_memmove.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: floris <floris@student.42.fr>              +#+  +:+       +#+        */
+/*   By: fleonte <fleonte@student.42madrid.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/12 21:24:21 by fleonte           #+#    #+#             */
-/*   Updated: 2023/09/18 18:16:12 by floris           ###   ########.fr       */
+/*   Updated: 2023/09/19 15:42:59 by fleonte          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 void	*ft_memmove(void *dst, const void *src, size_t len)
 {
 	int			i;
-	
+
 	if (!dst && !src)
 		return (0);
 	if (dst == src || len == 0)
