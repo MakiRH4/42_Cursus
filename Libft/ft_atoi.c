@@ -6,7 +6,7 @@
 /*   By: floris <floris@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/13 22:51:02 by fleonte           #+#    #+#             */
-/*   Updated: 2023/09/17 17:46:41 by floris           ###   ########.fr       */
+/*   Updated: 2023/09/19 12:47:34 by floris           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,19 +26,19 @@ int ft_atoi(const char *str)
 		while ((*str >= 9 && *str <= 13) || *str == 32)
 			str++;
 		if (*str == 45)
-        {
+		{
 			sign = -sign;
-            signcount++;
-            if (signcount > 1)
-                return (0);
-        	str++;
+			signcount++;
+			if (signcount > 1)
+				return (0);
+			str++;
 		}
 		if (*str == 43)
-        {
-            signcount++;
-            if (signcount > 1)
-                return (0);
-        	str++;
+		{
+			signcount++;
+			if (signcount > 1)
+				return (0);
+			str++;
 		}
 		while (*str >= 48 && *str <= 57)
 		{
