@@ -6,7 +6,7 @@
 /*   By: floris <floris@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/14 22:13:11 by fleonte           #+#    #+#             */
-/*   Updated: 2023/09/22 14:22:40 by floris           ###   ########.fr       */
+/*   Updated: 2023/09/22 21:30:10 by floris           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,9 @@ char	*ft_strtrim(char const *s1, char const *set)
 
 int	main ()
 {
-	char *s1 = "1234sdfghgf12345";
+	char *s1;
+	
+	*s1 = "1234sdfghgf12345";
 	char *trim = "1234567890";
 	char *res = ft_strtrim(s1, trim);
 	printf("dis is di res boss: %s\n", res);
