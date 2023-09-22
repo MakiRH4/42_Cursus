@@ -6,7 +6,7 @@
 /*   By: floris <floris@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/14 22:13:11 by fleonte           #+#    #+#             */
-/*   Updated: 2023/09/20 17:21:17 by floris           ###   ########.fr       */
+/*   Updated: 2023/09/22 14:23:16 by floris           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,24 +25,26 @@ static int	ft_istrimmable(char c, char *sett)
 	}
 	return (0);
 }
+
 char	*ft_strtrim(char const *s1, char const *set)
 {
-	char	*start;
-	char	*end;
+	const char	*start;
+	const char	*end;
 	char	*return_string;
     int i;
 
-	start = (char *)s1;
-	end = (char *)s1 + (ft_strlen(s1) - 1);
-	while (*start && (ft_istrimmable(*start, (char *)set)))
-		*start++ = '\0';
-    while (*end && (ft_istrimmable(*end, (char *)set)))
-		*end-- = '\0';
-	return_string = (char *)malloc(sizeof(char) * (ft_strlen(start) + 1));
+	start = s1;
+	end = s1 + (ft_strlen(s1) - 1);
+	while (*start && ft_istrimmable(*start, (char *)set))
+		start++;
+    while (end > start&& ft_istrimmable(*end, (char *)set))
+		end--;
+	return_string = (char *)malloc(sizeof(char) * (end - start + 2));
 	if (!return_string)
 		return (NULL);
     i = 0;
-    while (*start)
+    while (start <= end)
         return_string[i++] = *start++;
+	return_string[i] = '\0';
 	return (return_string);
 }
