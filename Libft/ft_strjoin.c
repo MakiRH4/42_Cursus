@@ -6,7 +6,7 @@
 /*   By: floris <floris@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/14 20:03:05 by fleonte           #+#    #+#             */
-/*   Updated: 2023/09/19 18:40:35 by floris           ###   ########.fr       */
+/*   Updated: 2023/09/23 22:19:09 by floris           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ char	*ft_strjoin(char const *s1, char const *s2)
 	if (!joined)
 		return (NULL);
 	while (*s1)
-			*joined++ = *s1++;
+		*joined++ = *s1++;
 	while (*s2)
 		*joined++ = *s2++;
 	*(joined) = '\0';

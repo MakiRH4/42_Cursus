@@ -6,7 +6,7 @@
 /*   By: floris <floris@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/19 20:18:21 by floris            #+#    #+#             */
-/*   Updated: 2023/09/22 22:15:51 by floris           ###   ########.fr       */
+/*   Updated: 2023/09/23 22:15:23 by floris           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,17 +14,17 @@
 
 char	*ft_strmapi(char const *s, char (*f)(unsigned int, char))
 {
-    char            *string;
-    unsigned int    i;
+	unsigned int	i;
+	char			*string;
 
-    i = 0;
-    string = ft_strdup(s);
-    if (!string)
-        return(NULL);
-    while(string[i])
-    {
-        string[i] = (*f)(i, string[i]);
-        i++;
-    }
-    return(string);
+	i = 0;
+	string = ft_strdup(s);
+	if (!string)
+		return (NULL);
+	while (string[i])
+	{
+		string[i] = (*f)(i, string[i]);
+		i++;
+	}
+	return (string);
 }

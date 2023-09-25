@@ -6,7 +6,7 @@
 #    By: floris <floris@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/09/15 00:51:06 by fleonte           #+#    #+#              #
-#    Updated: 2023/09/22 22:17:38 by floris           ###   ########.fr        #
+#    Updated: 2023/09/23 22:23:57 by floris           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,7 +16,7 @@ SRCS = ft_strnstr.c ft_isdigit.c ft_putstr_fd.c ft_strlcpy.c ft_strlen.c \
 	ft_isalpha.c ft_memchr.c ft_putchar_fd.c ft_memset.c ft_substr.c \
 	ft_strncmp.c ft_strtrim.c ft_memmove.c ft_strlcat.c ft_calloc.c \
 	ft_strdup.c ft_atoi.c ft_isalnum.c ft_tolower.c ft_itoa.c ft_strmapi.c \
-	ft_striteri.c ft_putendl.c
+	ft_striteri.c ft_putendl_fd.c
 OBJS = ${SRCS:.c=.o}
 NAME = libft.a
 LIBC = ar rcs
