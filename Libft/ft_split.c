@@ -6,9 +6,13 @@
 /*   By: floris <floris@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/19 20:18:16 by floris            #+#    #+#             */
-/*   Updated: 2023/09/19 21:14:46 by floris           ###   ########.fr       */
+/*   Updated: 2023/09/29 15:29:12 by floris           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
+char    **ft_split(char const *s, char c)
+{
+    
+}
