@@ -6,7 +6,7 @@
 /*   By: floris <floris@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/12 21:27:31 by fleonte           #+#    #+#             */
-/*   Updated: 2023/09/23 22:19:40 by floris           ###   ########.fr       */
+/*   Updated: 2023/09/29 23:55:34 by floris           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,7 @@ char	*ft_strnstr(const char *haystack, const char *needle, size_t len);
 char	*ft_strrchr(const char *s, int c);
 char	*ft_strtrim(const char *s1, char const *set);
 char	*ft_substr(const char *s, unsigned int start, size_t len);
+char	**ft_split(char const *s, char c);
 void	ft_bzero(void *s, size_t n);
 void	ft_striteri(char *s, void (*f)(unsigned int, char*));
 void	ft_putchar_fd(char c, int fd);
