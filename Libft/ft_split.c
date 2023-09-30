@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_split.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: floris <floris@student.42.fr>              +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/19 20:18:16 by floris            #+#    #+#             */
-/*   Updated: 2023/09/30 01:18:37 by floris           ###   ########.fr       */
+/*   Updated: 2023/09/30 13:40:18 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 #include <stdio.h>
 #include <unistd.h>
 #include <string.h>
+#include <stdlib.h>
 
 //ft_wordcount, counts how many words are in the intial string, *s
 static int	ft_wordcount(char const *s, char c)
@@ -38,7 +39,7 @@ static void ft_strprep(char *copy_of_s, char c)
     int length;
 
     i = 0;
-    length = ft_strlen(copy_of_s);
+    length = strlen(copy_of_s);
     while (i <= length)
     {
         if (copy_of_s[i] == c)
@@ -55,12 +56,14 @@ char    **ft_split(char const *s, char c)
     int number_of_words;
     int word_length;
     int i;
+    int copied_words;
 
     i = 0;
+    copied_words = 0;
 //    if (s)
 //    {
-        copy_of_s = (char *)malloc(sizeof(char) * (ft_strlen(s) + 1)); //malloc to copy s
-        ft_memcpy(copy_of_s, s, (ft_strlen(s) + 1)); //memcopy of s to copy_of_s
+        copy_of_s = (char *)malloc(sizeof(char) * (strlen(s) + 1)); //malloc to copy s
+        memcpy(copy_of_s, s, (strlen(s) + 1)); //memcopy of s to copy_of_s
 //    }
     number_of_words = ft_wordcount(s, c);
     array = (char **)malloc(sizeof(char *) * (number_of_words + 1));
@@ -69,20 +72,23 @@ char    **ft_split(char const *s, char c)
     ft_strprep(copy_of_s, c);
     while(i <= number_of_words)
     {
-        word_length = ft_strlen(copy_of_s);
+        word_length = strlen(copy_of_s);
         array[i] = (char *)malloc(sizeof(char) * (word_length + 1));
-        ft_memcpy(array[i], copy_of_s, word_length);
+        memcpy(array[i], copy_of_s, word_length);
+        array[i][word_length] = '\0';
+        ++copied_words;
         copy_of_s += word_length;
-//        while (*copy_of_s == '\0')
-//            ++copy_of_s;
+        while (*copy_of_s == '\0' && copied_words < number_of_words)
+            ++copy_of_s;
         ++i;
     }
     return (array);
 }
-
+/*
 int main(int argc, char **argv)
 {
     (void)argc;
     printf ("El array: %s", ft_split(argv[1], argv[2]));
     return (0);
 }
+*/
