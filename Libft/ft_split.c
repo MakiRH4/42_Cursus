@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_split.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: floris <floris@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/19 20:18:16 by floris            #+#    #+#             */
-/*   Updated: 2023/09/30 17:56:57 by marvin           ###   ########.fr       */
+/*   Updated: 2023/10/04 00:10:58 by floris           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ static void	ft_strprep(char *copy_of_s, char c)
 	}
 }
 
-static int	ft_malloc_word(char **array, int i, int word_length)
+static int	ft_malloc_word(char **array, int i, int word_length, char **copy_of_s)
 {
 	int	copied_word;
 
@@ -58,6 +58,7 @@ static int	ft_malloc_word(char **array, int i, int word_length)
 		while (copied_word <= i)
 			free(array[copied_word++]);
 		free(array);
+		free(copy_of_s);
 		return (0);
 	}
 	return (1);
@@ -79,18 +80,14 @@ char	**ft_split(char const *s, char c)
 	number_of_words = ft_wordcount(s, c);
 	array = (char **)malloc(sizeof(char *) * (number_of_words + 1));
 	if (!array)
-	{
-		free(copy_of_s);
-		free(array);
 		return (0);
-	}
 	ft_strprep(copy_of_s, c);
 	while (i < number_of_words)
 	{
 		while (*copy_of_s == '\0')
 			copy_of_s++;
 		word_length = strlen(copy_of_s);
-		if (!ft_malloc_word(array, i, word_length))
+		if (!ft_malloc_word(array, i, word_length, &copy_of_s))
 			return (0);
 		memcpy(array[i], copy_of_s, word_length);
 		array[i++][word_length] = '\0';
@@ -98,6 +95,6 @@ char	**ft_split(char const *s, char c)
 		while (*copy_of_s == '\0' && i < number_of_words)
 			++copy_of_s;
 	}
-	array[i] = '\0';
+	array[i] = 0;
 	return (array);
 }
