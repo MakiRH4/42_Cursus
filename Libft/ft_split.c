@@ -80,6 +80,11 @@ char	**ft_split(char const *s, char c)
 	number_of_words = ft_wordcount(s, c);
 	array = (char **)malloc(sizeof(char *) * (number_of_words + 1));
 	if (!array)
+<<<<<<< Updated upstream
+=======
+	{
+		free(array);
+>>>>>>> Stashed changes
 		return (0);
 	ft_strprep(copy_of_s, c);
 	while (i < number_of_words)

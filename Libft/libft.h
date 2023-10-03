@@ -3,17 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: floris <floris@student.42.fr>              +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/12 21:27:31 by fleonte           #+#    #+#             */
-/*   Updated: 2023/09/29 23:55:34 by floris           ###   ########.fr       */
+/*   Updated: 2023/10/04 01:48:23 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef LIBFT_H
 # define LIBFT_H
-# include <stdlib.h> /* size_t malloc*/
-# include <unistd.h> /* write */
+# include <stdlib.h>
+# include <unistd.h>
 
 typedef struct s_list
 {
