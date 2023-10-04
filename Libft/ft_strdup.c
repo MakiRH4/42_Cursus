@@ -6,7 +6,7 @@
 /*   By: floris <floris@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/14 18:26:40 by fleonte           #+#    #+#             */
-/*   Updated: 2023/09/16 19:08:32 by floris           ###   ########.fr       */
+/*   Updated: 2023/10/04 18:28:20 by floris           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ char	*ft_strdup(const char *s1)
 	int		strl;
 
 	strl = ft_strlen(s1);
-	str = malloc(strl + 1);
+	str = (char *)malloc(sizeof(char) * strl + 1);
 	if (!str)
 		return (NULL);
 	ft_memcpy(str, s1, strl);
