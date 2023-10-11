@@ -26,7 +26,7 @@ typedef struct s_printer
     int     count;
 }	                t_printer;
 
-int ft_printf(char const *, ...);
+int ft_printf(char const *format, ...);
 
 //the other functs
 
