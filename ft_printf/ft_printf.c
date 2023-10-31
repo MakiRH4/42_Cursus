@@ -10,6 +10,8 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "ft_printf.h"
+
 int ft_printf(char const *text, ...);
 {
     va_list arguments;
@@ -40,4 +42,8 @@ void    print_ints(int num, ...)
     }
 
     va_end(args);
+}
+int ft_printf(char const *, ...)
+{
+    
 }

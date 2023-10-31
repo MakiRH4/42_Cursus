@@ -12,6 +12,8 @@
 
 #ifndef FT_PRINTF_H
 # define FT_PRINTF_H
+
+# include "libft/libft.h"
 # include <stdio.h>
 # include <stdlib.h>
 # include <unistd.h>
@@ -24,7 +26,7 @@ typedef struct s_printer
     int     count;
 }	                t_printer;
 
-int ft_printf(char const *, ...);
+int ft_printf(char const *format, ...);
 
 //the other functs
 
