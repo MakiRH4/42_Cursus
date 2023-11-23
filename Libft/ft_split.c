@@ -6,7 +6,7 @@
 /*   By: floris <floris@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/19 20:18:16 by floris            #+#    #+#             */
-/*   Updated: 2023/10/04 20:33:41 by floris           ###   ########.fr       */
+/*   Updated: 2023/11/23 16:17:30 by floris           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,6 +92,8 @@ char	**ft_split(char const *s, char c)
 	char	**array;
 	int		number_of_words;
 
+	if (!s)
+		return NULL;
 	copy_of_s = ft_strdup(s);
 	if (!copy_of_s)
 		return (0);

@@ -6,7 +6,7 @@
 /*   By: floris <floris@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/14 20:03:05 by fleonte           #+#    #+#             */
-/*   Updated: 2023/09/23 22:19:09 by floris           ###   ########.fr       */
+/*   Updated: 2023/11/23 16:11:24 by floris           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@ char	*ft_strjoin(char const *s1, char const *s2)
 	char	*joined;
 	char	*ret;
 
+	if (!s1 || !s2)
+		return NULL;
 	joined = (char *)malloc(sizeof(char) * (ft_strlen(s1) + ft_strlen(s2)) + 1);
 	ret = joined;
 	if (!joined)

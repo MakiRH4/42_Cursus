@@ -6,7 +6,7 @@
 /*   By: floris <floris@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/19 20:18:26 by floris            #+#    #+#             */
-/*   Updated: 2023/09/24 17:06:10 by floris           ###   ########.fr       */
+/*   Updated: 2023/11/23 16:22:44 by floris           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,8 @@ void	ft_putendl_fd(char *s, int fd)
 {
 	char	*output;
 
+	if (!s)
+		return;
 	output = s;
 	while (*output)
 	{

@@ -6,7 +6,7 @@
 /*   By: floris <floris@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/14 22:13:11 by fleonte           #+#    #+#             */
-/*   Updated: 2023/09/23 22:13:28 by floris           ###   ########.fr       */
+/*   Updated: 2023/11/23 16:12:37 by floris           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,8 @@ char	*ft_strtrim(char const *s1, char const *set)
 	char		*return_string;
 	int			i;
 
+	if (!s1 || !set)
+		return NULL;
 	start = s1;
 	end = s1 + (ft_strlen(s1) - 1);
 	while (*start && ft_istrimmable(*start, (char *)set))
