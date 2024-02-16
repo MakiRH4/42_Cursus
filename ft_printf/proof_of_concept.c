@@ -42,6 +42,6 @@ int ft_printf(char const *text, ...)
 
 int main(void)
 {
-    ft_printf("This is: %c", 'c');
+    ft_printf("This is: %c and %c", 'c', 'z');
     return(0);
 }

@@ -91,11 +91,11 @@ int ft_printf(char const *text, ...)
             char s = va_arg(arguments, int);
             ft_putstr_fd(&s, 1);
             ++i;
-            return (ft_printf_s(*s));
+            return (ft_printf_s(s));
         }
         else if (text[i] == 'p')
         {
-
+            printf("0x78d88d8d");
         }
         else if (text[i] == 'd')
         {
@@ -103,6 +103,7 @@ int ft_printf(char const *text, ...)
             ft_putnbr_fd(d, 1);
             ++i;
         }
+        /*
         else if (text[i] == 'i')
         {
 
@@ -123,12 +124,13 @@ int ft_printf(char const *text, ...)
         {
 
         }
+        */
     }
     va_end(arguments);
 }
 
 int main(void)
 {
-    ft_printf("This is: %c and it's written in: %d and %d and %s", 'c', 12334, 234, "ebec");
+    ft_printf("This is: %c and it's written in: %d and %d and %s", 'c', 1234, 567, "ebec");
     return(0);
 }
