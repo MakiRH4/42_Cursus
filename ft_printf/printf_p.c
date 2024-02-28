@@ -1,4 +1,4 @@
-#include <uintptr_t>
+#include <stdint.h>
 
 int printf_p(void *p)
 {

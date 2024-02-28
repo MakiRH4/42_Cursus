@@ -19,7 +19,7 @@ int main(void)
 {
     int i = 2;
     printf ("this is a two %d\n", i);
-    printf ("mein funktion does dis\n");
+    printf ("meine funktion macht das\n");
     ft_putstr_fd ("this is a two 2\n", 1);
     
     return (0);

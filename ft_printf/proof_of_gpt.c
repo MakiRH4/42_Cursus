@@ -130,6 +130,6 @@ int ft_printf(char const *text, ...)
 
 int main(void)
 {
-    ft_printf("This is: %c and it's written in: %d and %d and %s", 'c', 1234, 567, "ebec");
+    ft_printf("This is: %c and it's written in: %d , %d and %s. ze pointer ist %p", 'c', 1234, 567, "ebec", );
     return(0);
 }
