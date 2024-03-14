@@ -83,14 +83,15 @@ int printf_p(void *p)
     int ret1;
     int ret2;
 
-    /*if (p == NULL)
-        return (ft_putstr_fd("0x0", 1));
-    ret1 = ft_putstr_fd("0x", 1); */
-//    if (ret1 == -1)
-//        return (-1);
+    if (p == NULL)
+        return (0);
+        //return (ft_putstr_fd("0x0", 1));
+    ret1 = 1; //ft_putstr_fd("0x", 1);
+    if (ret1 == -1)
+        return (-1);
     ret2 = printf_x((uintptr_t)p, "0123456789abcdef");
-//    if (ret2 == -1)
-//        return (-1);
+    if (ret2 == -1)
+        return (-1);
     return (ret1 + ret2);
 }
 
@@ -132,8 +133,8 @@ int ft_printf(char const *text, ...)
             ++i;
             printed_chars += 2; // '0x' added
         */
-            printf_p(va_arg(arguments, void *));
-            //printed_chars += printf_p(va_arg(arguments, void *)); needed to add chars for return
+            //printf_p(va_arg(arguments, void *));
+            printed_chars += printf_p(va_arg(arguments, void *)); //needed to add chars for return
         }
         else if (text[i] == 'd')
         {
@@ -172,6 +173,8 @@ int ft_printf(char const *text, ...)
 
 int main(void)
 {
-    ft_printf("This is: %c and it's written in: %d , %d and %s. ze pointer ist %p", 'c', 1234, 567, "ebec");
+    int len;
+    len = ft_printf("This is: %c and it's written in: %d , %d and %s. ze pointer ist %p", 'c', 1234, 567, "ebec");
+    printf("\ndie länge ist: %d chars\n", len);
     return(0);
 }
