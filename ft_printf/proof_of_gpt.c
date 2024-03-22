@@ -89,7 +89,7 @@ int printf_p(void *p)
     ret1 = 1; //ft_putstr_fd("0x", 1);
     if (ret1 == -1)
         return (-1);
-    ret2 = printf_x((uintptr_t)p, "0123456789abcdef");
+    ret2 = printf_x((uintptr_t) p, "0123456789abcdef");
     if (ret2 == -1)
         return (-1);
     return (ret1 + ret2);
@@ -173,8 +173,25 @@ int ft_printf(char const *text, ...)
 
 int main(void)
 {
+    char c = 'c';
+    char *s = "string";
+    void *p = (char *)s;
+    int d = 012;
+    int x = 123;
+    int X = 123;
+    char symbol = '%';
     int len;
-    len = ft_printf("This is: %c and it's written in: %d , %d and %s. ze pointer ist %p", 'c', 1234, 567, "ebec");
+    len = ft_printf("Das ist: %c und es schreibt:\nd: %d\nx: %x\nX: %X\ns: %s\nund Zeiger: %p", 'C', 925, 925, 925, "925", (void *)&p);
     printf("\ndie länge ist: %d chars\n", len);
+    printf("Adresse des Zeigers: %p\n", (void *)&p);
+    printf("Das ist: %c und es schreibt:\nd: %d\nx: %x\nX: %X\ns: %s\nund Zeiger: %p", 'C', 92000005, 9200005, 92000005, "925", (void *)&p);
+/*
+int number = 10;
+    int *ptr = &number; // Pointer pointing to the address of 'number'
+
+    // Printing the address of the pointer using printf
+    printf("Address of the pointer: %p\n", (void *)&ptr);
+*/
+
     return(0);
 }
