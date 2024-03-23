@@ -70,8 +70,8 @@ int printf_x(int number, char *base)
 {
     if (number >= 16)
     {
-        write (1, &(char){base[number % 16]}, 1);
         printf_x((number / 16), base);
+        write (1, &(char){base[number % 16]}, 1);
     }
     else 
         write (1, &(char){base[number % 16]}, 1);
@@ -181,10 +181,10 @@ int main(void)
     int X = 123;
     char symbol = '%';
     int len;
-    len = ft_printf("Das ist: %c und es schreibt:\nd: %d\nx: %x\nX: %X\ns: %s\nund Zeiger: %p", 'C', 925, 925, 925, "925", (void *)&p);
+    len = ft_printf("Das ist: %c und es schreibt:\nd: %d\nx: %x\nX: %X\ns: %s\nund Zeiger: %p", 'C', 92000005, 92000005, 92000005, "925", (void *)&p);
     printf("\ndie länge ist: %d chars\n", len);
     printf("Adresse des Zeigers: %p\n", (void *)&p);
-    printf("Das ist: %c und es schreibt:\nd: %d\nx: %x\nX: %X\ns: %s\nund Zeiger: %p", 'C', 92000005, 9200005, 92000005, "925", (void *)&p);
+    printf("Das ist: %c und es schreibt:\nd: %d\nx: %x\nX: %X\ns: %s\nund Zeiger: %p", 'C', 92000005, 92000005, 92000005, "925", (void *)&p);
 /*
 int number = 10;
     int *ptr = &number; // Pointer pointing to the address of 'number'

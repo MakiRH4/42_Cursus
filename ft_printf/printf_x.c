@@ -5,8 +5,8 @@ int printf_x(int number, char *base)
 {
     if (number >= 16)
     {
-        write (1, &(char){base[number % 16]}, 1);
         printf_x((number / 16), base);
+        write (1, &(char){base[number % 16]}, 1);
     }
     else 
         write (1, &(char){base[number % 16]}, 1);
