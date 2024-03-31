@@ -12,38 +12,85 @@
 
 #include "ft_printf.h"
 
-int ft_printf(char const *text, ...);
+int ft_printf(char const *text, ...)
 {
     va_list arguments;
+    int i;
+    int printed_chars = 0;
 
-    while (text != '\0')
-    {
-        
-    }
-
+    i = 0;
     va_start(arguments, text);
 
-    printf(text)
-
-    va_end(arguments);
-}
-
-// EXAMPLE
-void    print_ints(int num, ...)
-{
-    va_list args;
-
-    va_start(args, num);
-
-    for (int i = 0; i < num; i++)
+    while (text[i] != '\0')
     {
-        int value = va_arg(args, int);
-        printf("%d: %d\n", i, value);
+        if(text[i] != '%')
+        {
+            ft_putchar_fd(text[i], 1);
+            ++i;
+            ++printed_chars;
+            continue;
+        }
+        if(text[++i] == 'c')
+        {
+            char c = va_arg(arguments, int);
+            ft_putchar_fd(c, 1);
+            ++i;
+            printed_chars++;
+        }
+        else if (text[i] == 's')
+        {
+            printed_chars += ft_printf_s(arguments);
+            ++i;
+        }
+        else if (text[i] == 'p')
+        {
+            void *zeiger;
+            zeiger = va_arg(arguments, void *);
+            printed_chars += write(1, "0x", 2);
+            printed_chars += printf_p((void *)&zeiger);
+        }
+        else if (text[i] == 'd')
+        {
+            int d = va_arg(arguments, int);
+            ft_putnbr_fd(d, 1);
+            ++i;
+            int digits = 0;
+            int temp = d;
+            if (temp == 0)
+                digits = 1;
+            else
+            {
+                while (temp != 0)
+                {
+                    temp /= 10;
+                    digits++;
+                }
+            }
+            printed_chars += digits;
+        }
+        else if (text[i] == '%')
+        {
+            ft_putchar_fd('%', 1);
+            ++i;
+            printed_chars++;
+        }
+        else if (text[i] == 'x')
+        {
+            uintptr_t x;
+            x = va_arg(arguments, int);
+            printf_x(x, "0123456789abcdef");
+            printed_chars += length_printf_x(x);
+            ++i;
+        }
+        else if (text[i] == 'X')
+        {
+            uintptr_t X;
+            X = va_arg(arguments, int);
+            printf_x(X, "0123456789ABCDEF");
+            printed_chars += length_printf_x(X);
+            ++i;
+        }
     }
-
-    va_end(args);
-}
-int ft_printf(char const *, ...)
-{
-    
+    va_end(arguments);
+    return printed_chars;
 }

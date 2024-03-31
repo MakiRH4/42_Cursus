@@ -1,19 +1,23 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_printf_full_copy.c                              :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: floris <floris@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/04/01 00:59:22 by floris            #+#    #+#             */
+/*   Updated: 2024/04/01 00:59:40 by floris           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include <stdio.h>
 #include <stdarg.h>
 #include <unistd.h>
 #include <stdint.h>
 
-void    ft_putchar_fd(char c, int fd);
-void    ft_put_c(char c);
-
 void    ft_putchar_fd(char c, int fd)
 {
     write(fd, &c, 1);
-}
-
-void    ft_put_c(char c)
-{
-    ft_putchar_fd(c, 1);
 }
 
 void    ft_putstr_fd(char *s, int fd)
@@ -23,24 +27,6 @@ void    ft_putstr_fd(char *s, int fd)
         ft_putchar_fd(*s, fd);
         s++;
     }
-}
-
-int ft_printf_s(va_list s)
-{
-    char    *str;
-    int     len;
-
-    str = va_arg(s, char *);
-    if (str == NULL)
-        str = "(null)";
-    len = 0;
-    while (*str)
-    {
-        ft_putchar_fd(*str, 1);
-        str++;
-        len++;
-    }
-    return len;
 }
 
 void    ft_putnbr_fd(int n, int fd)
@@ -66,26 +52,59 @@ void    ft_putnbr_fd(int n, int fd)
         ft_putchar_fd(n + 48, fd);
 }
 
-int printf_x(uintptr_t number, char *base)
+int ft_printf_s(va_list s)
 {
-    int digits;
+    char    *str;
+    int     len;
 
-    digits = 0;
+    str = va_arg(s, char *);
+    if (str == NULL)
+        str = "(null)";
+    len = 0;
+    while (*str)
+    {
+        ft_putchar_fd(*str, 1);
+        str++;
+        len++;
+    }
+    return len;
+}
+
+int	length_printf_x(uintptr_t number)
+{
+	int length;
+
+	length = 0;
+	while (number != 0)
+	{
+		length++;
+		number = number / 16;
+	}
+	return (length);
+}
+
+void write_printf_x(uintptr_t number, char *base)
+{
     if (number >= 16)
     {
-        printf_x((number / 16), base);
+        write_printf_x((number / 16), base);
         write (1, &(char){base[number % 16]}, 1);
-        digits += 1;
     }
     else 
         write (1, &(char){base[number % 16]}, 1);
-        digits += 1;
-    return (digits);
+}
+
+int printf_x(uintptr_t number, char *base)
+{
+    write_printf_x(number, base);
+    return(length_printf_x(number));
 }
 
 int printf_p(void *pointer)
 {
-    return (printf_x((uintptr_t) pointer, "0123456789abcdef"));
+    int length;
+    length = printf_x((uintptr_t) pointer, "0123456789abcdef");
+    return (length);
 }
 
 int ft_printf(char const *text, ...)
@@ -152,12 +171,18 @@ int ft_printf(char const *text, ...)
         }
         else if (text[i] == 'x')
         {
-            printed_chars += printf_x(va_arg(arguments, int), "0123456789abcdef");
+            uintptr_t x;
+            x = va_arg(arguments, int);
+            printf_x(x, "0123456789abcdef");
+            printed_chars += length_printf_x(x);
             ++i;
         }
         else if (text[i] == 'X')
         {
-            printed_chars += printf_x(va_arg(arguments, int), "0123456789ABCDEF");
+            uintptr_t X;
+            X = va_arg(arguments, int);
+            printf_x(X, "0123456789ABCDEF");
+            printed_chars += length_printf_x(X);
             ++i;
         }
     }
@@ -171,15 +196,22 @@ int main(void)
     char *s = "stringgggg";
     void *p = (char *)s;
     int d = 012;
-    int x = 123;
+    int x = 765432;
     int X = 123;
     char symbol = '%';
     int ft_printf_len;
     int printf_len;
-    ft_printf_len = ft_printf("Das ist: %c und es schreibt:\nd: %d\nx: %x\nX: %X\ns: %s\nund Zeiger: %p\nund der neueste freund: %%\n", 'C', d, x, X, s, (void *)&d);
-    printf("ft_printf-länge ist: %d chars\n", ft_printf_len);
-    printf("Adresse des Zeigers: %p\n", (void *)&d);
-    printf_len = printf("Das ist: %c und es schreibt:\nd: %d\nx: %x\nX: %X\ns: %s\nund Zeiger: %p\nund der neueste freund: %%\n", 'C', d, x, X, s, (void *)&d);
-    printf ("printf-länge ist: %d chars\n", printf_len);
+    //ft_printf_len = ft_printf("Das ist: %c und es schreibt:\nd: %d\nx: %x\nX: %X\ns: %s\nund Zeiger: %p\nund der neueste freund: %%\n", 'C', d, x, X, s, (void *)&d);
+    //printf("ft_printf-länge ist: %d chars\n", ft_printf_len);
+    //printf("Adresse des Zeigers: %p\n", (void *)&d);
+    //printf_len = printf("Das ist: %c und es schreibt:\nd: %d\nx: %x\nX: %X\ns: %s\nund Zeiger: %p\nund der neueste freund: %%\n", 'C', d, x, X, s, (void *)&d);
+    //printf ("printf-länge ist: %d chars\n", printf_len);
+    /*
+    ft_printf_len = ft_printf("\n%p", (void *)&d);
+    printf_len = printf("\n%p", (void *)&d);
+    */
+    ft_printf_len = ft_printf("\n%p", s);
+    printf_len = printf("\n%p", s);
+    printf("\n%d vs %d", ft_printf_len, printf_len);
     return(0);
 }
