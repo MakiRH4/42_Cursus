@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf_full_copy.c                              :+:      :+:    :+:   */
+/*   ft_printf_full.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: floris <floris@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/01 00:59:22 by floris            #+#    #+#             */
-/*   Updated: 2024/04/01 00:59:40 by floris           ###   ########.fr       */
+/*   Updated: 2024/04/01 01:16:06 by floris           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,8 +103,9 @@ int printf_x(uintptr_t number, char *base)
 int printf_p(void *pointer)
 {
     int length;
+    write(1, "0x", 2);
     length = printf_x((uintptr_t) pointer, "0123456789abcdef");
-    return (length);
+    return (length+2);
 }
 
 int ft_printf(char const *text, ...)
@@ -141,8 +142,8 @@ int ft_printf(char const *text, ...)
         {
             void *zeiger;
             zeiger = va_arg(arguments, void *);
-            printed_chars += write(1, "0x", 2);
-            printed_chars += printf_p((void *)&zeiger);
+            printed_chars += printf_p((void *)zeiger);
+            ++i; // Increment i to skip the 'p' character
         }
         else if (text[i] == 'd')
         {
@@ -201,17 +202,17 @@ int main(void)
     char symbol = '%';
     int ft_printf_len;
     int printf_len;
-    //ft_printf_len = ft_printf("Das ist: %c und es schreibt:\nd: %d\nx: %x\nX: %X\ns: %s\nund Zeiger: %p\nund der neueste freund: %%\n", 'C', d, x, X, s, (void *)&d);
-    //printf("ft_printf-länge ist: %d chars\n", ft_printf_len);
-    //printf("Adresse des Zeigers: %p\n", (void *)&d);
-    //printf_len = printf("Das ist: %c und es schreibt:\nd: %d\nx: %x\nX: %X\ns: %s\nund Zeiger: %p\nund der neueste freund: %%\n", 'C', d, x, X, s, (void *)&d);
-    //printf ("printf-länge ist: %d chars\n", printf_len);
+    ft_printf_len = ft_printf("Das ist: %c und es schreibt:\nd: %d\nx: %x\nX: %X\ns: %s\nund Zeiger: %p\nund der neueste freund: %%\n", 'C', d, x, X, s, (void *)&d);
+    printf("ft_printf-länge ist: %d chars\n", ft_printf_len);
+    printf("Adresse des Zeigers: %p\n", (void *)&d);
+    printf_len = printf("Das ist: %c und es schreibt:\nd: %d\nx: %x\nX: %X\ns: %s\nund Zeiger: %p\nund der neueste freund: %%\n", 'C', d, x, X, s, (void *)&d);
+    printf ("printf-länge ist: %d chars\n", printf_len);
     /*
     ft_printf_len = ft_printf("\n%p", (void *)&d);
     printf_len = printf("\n%p", (void *)&d);
     */
-    ft_printf_len = ft_printf("\n%p", s);
-    printf_len = printf("\n%p", s);
+    //ft_printf_len = ft_printf("\n%p", s);
+    //printf_len = printf("\n%p", s);
     printf("\n%d vs %d", ft_printf_len, printf_len);
     return(0);
 }
