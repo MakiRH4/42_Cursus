@@ -26,7 +26,12 @@ typedef struct s_printer
     int     count;
 }	                t_printer;
 
-int ft_printf(char const *format, ...);
+int ft_printf(char const *text, ...);
+int printf_p(void *pointer);
+int printf_x(uintptr_t number, char *base);
+int printf_s(va_list s);
+
+
 
 //the other functs
 

@@ -1,24 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   printf_p.c                                         :+:      :+:    :+:   */
+/*   printf_s.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: floris <floris@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/04/01 00:51:38 by floris            #+#    #+#             */
-/*   Updated: 2024/04/01 01:47:34 by floris           ###   ########.fr       */
+/*   Created: 2024/04/01 00:56:13 by floris            #+#    #+#             */
+/*   Updated: 2024/04/01 01:47:29 by floris           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int printf_p(void *pointer)
+int printf_s(va_list s)
 {
-    int length;
-    int pointer_check;
+    char    *str;
+    int     len;
 
-    pointer_check = 0;
-
-    write(1, "0x", 2);
-    pointer check = 2;
-    length = printf_x((uintptr_t) pointer, "0123456789abcdef");
-    return (length + pointer_check);
+    str = va_arg(s, char *);
+    if (str == NULL)
+        str = "(null)";
+    len = 0;
+    while (*str)
+    {
+        ft_putchar_fd(*str, 1);
+        str++;
+        len++;
+    }
+    return len;
 }

@@ -39,7 +39,7 @@ int ft_printf(char const *text, ...)
         }
         else if (text[i] == 's')
         {
-            printed_chars += ft_printf_s(arguments);
+            printed_chars += printf_s(arguments);
             ++i;
         }
         else if (text[i] == 'p')

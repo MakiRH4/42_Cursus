@@ -1,24 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   printf_p.c                                         :+:      :+:    :+:   */
+/*   printf_d.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: floris <floris@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/04/01 00:51:38 by floris            #+#    #+#             */
-/*   Updated: 2024/04/01 01:47:34 by floris           ###   ########.fr       */
+/*   Created: 2024/04/01 01:36:10 by floris            #+#    #+#             */
+/*   Updated: 2024/04/01 01:47:32 by floris           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int printf_p(void *pointer)
+int printf_d(int d)
 {
-    int length;
-    int pointer_check;
+    int digits;
 
-    pointer_check = 0;
-
-    write(1, "0x", 2);
-    pointer check = 2;
-    length = printf_x((uintptr_t) pointer, "0123456789abcdef");
-    return (length + pointer_check);
+    digits = 0;
+    ft_putnbr_fd(d, 1);
+    if (d == 0)
+        digits = 1;
+    else
+    {
+        while (d != 0)
+        {
+            d /= 10;
+            digits++;
+        }
+    }
+    return (digits);
 }

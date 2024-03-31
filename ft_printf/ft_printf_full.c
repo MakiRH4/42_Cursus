@@ -6,7 +6,7 @@
 /*   By: floris <floris@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/01 00:59:22 by floris            #+#    #+#             */
-/*   Updated: 2024/04/01 01:16:06 by floris           ###   ########.fr       */
+/*   Updated: 2024/04/01 01:51:19 by floris           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,45 @@ void    ft_putnbr_fd(int n, int fd)
         ft_putchar_fd(n + 48, fd);
 }
 
-int ft_printf_s(va_list s)
+int printf_d(int d)
+{
+    int digits;
+
+    digits = 0;
+    ft_putnbr_fd(d, 1);
+    if (d == 0)
+        digits = 1;
+    else
+    {
+        while (d != 0)
+        {
+            d /= 10;
+            digits++;
+        }
+    }
+    return (digits);
+}
+
+int printf_i(int i)
+{
+    int digits;
+
+    digits = 0;
+    ft_putnbr_fd(i, 1);
+    if (i == 0)
+        digits = 1;
+    else
+    {
+        while (i != 0)
+        {
+            i /= 10;
+            digits++;
+        }
+    }
+    return (digits);
+}
+
+int printf_s(va_list s)
 {
     char    *str;
     int     len;
@@ -128,14 +166,13 @@ int ft_printf(char const *text, ...)
         }
         if(text[++i] == 'c')
         {
-            char c = va_arg(arguments, int);
-            ft_putchar_fd(c, 1);
+            ft_putchar_fd(va_arg(arguments, int), 1);
             ++i;
             printed_chars++;
         }
         else if (text[i] == 's')
         {
-            printed_chars += ft_printf_s(arguments);
+            printed_chars += printf_s(arguments);
             ++i;
         }
         else if (text[i] == 'p')
@@ -148,21 +185,14 @@ int ft_printf(char const *text, ...)
         else if (text[i] == 'd')
         {
             int d = va_arg(arguments, int);
-            ft_putnbr_fd(d, 1);
             ++i;
-            int digits = 0;
-            int temp = d;
-            if (temp == 0)
-                digits = 1;
-            else
-            {
-                while (temp != 0)
-                {
-                    temp /= 10;
-                    digits++;
-                }
-            }
-            printed_chars += digits;
+            printed_chars += printf_d(d);
+        }
+        else if (text[i] == 'i')
+        {
+            int i = va_arg(arguments, int);
+            ++i;
+            printed_chars += printf_d(i);
         }
         else if (text[i] == '%')
         {
