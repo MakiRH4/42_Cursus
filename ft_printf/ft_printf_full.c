@@ -66,33 +66,26 @@ void    ft_putnbr_fd(int n, int fd)
         ft_putchar_fd(n + 48, fd);
 }
 
-int printf_x(int number, char *base)
+int printf_x(uintptr_t number, char *base)
 {
+    int digits;
+
+    digits = 0;
     if (number >= 16)
     {
         printf_x((number / 16), base);
         write (1, &(char){base[number % 16]}, 1);
+        digits += 1;
     }
     else 
         write (1, &(char){base[number % 16]}, 1);
-    return (0);
+        digits += 1;
+    return (digits);
 }
 
-int printf_p(void *p)
+int printf_p(void *pointer)
 {
-    int ret1;
-    int ret2;
-
-    if (p == NULL)
-        return (0);
-        //return (ft_putstr_fd("0x0", 1));
-    ret1 = 1; //ft_putstr_fd("0x", 1);
-    if (ret1 == -1)
-        return (-1);
-    ret2 = printf_x((uintptr_t) p, "0123456789abcdef");
-    if (ret2 == -1)
-        return (-1);
-    return (ret1 + ret2);
+    return (printf_x((uintptr_t) pointer, "0123456789abcdef"));
 }
 
 int ft_printf(char const *text, ...)
@@ -127,21 +120,16 @@ int ft_printf(char const *text, ...)
         }
         else if (text[i] == 'p')
         {
-        /*    // Assuming pointer value is being passed as argument
-            void *p = va_arg(arguments, void *);
-            printf("0x%p", p);
-            ++i;
-            printed_chars += 2; // '0x' added
-        */
-            //printf_p(va_arg(arguments, void *));
-            printed_chars += printf_p(va_arg(arguments, void *)); //needed to add chars for return
+            void *zeiger;
+            zeiger = va_arg(arguments, void *);
+            printed_chars += write(1, "0x", 2);
+            printed_chars += printf_p((void *)&zeiger);
         }
         else if (text[i] == 'd')
         {
             int d = va_arg(arguments, int);
             ft_putnbr_fd(d, 1);
             ++i;
-            // Count digits in number
             int digits = 0;
             int temp = d;
             if (temp == 0)
@@ -164,12 +152,12 @@ int ft_printf(char const *text, ...)
         }
         else if (text[i] == 'x')
         {
-            printf_x(va_arg(arguments, int), "0123456789abcdef");
+            printed_chars += printf_x(va_arg(arguments, int), "0123456789abcdef");
             ++i;
         }
         else if (text[i] == 'X')
         {
-            printf_x(va_arg(arguments, int), "0123456789ABCDEF");
+            printed_chars += printf_x(va_arg(arguments, int), "0123456789ABCDEF");
             ++i;
         }
     }
@@ -180,7 +168,7 @@ int ft_printf(char const *text, ...)
 int main(void)
 {
     char c = 'c';
-    char *s = "string";
+    char *s = "stringgggg";
     void *p = (char *)s;
     int d = 012;
     int x = 123;
@@ -188,18 +176,10 @@ int main(void)
     char symbol = '%';
     int ft_printf_len;
     int printf_len;
-    ft_printf_len = ft_printf("Das ist: %c und es schreibt:\nd: %d\nx: %x\nX: %X\ns: %s\nund Zeiger: %p\nund der neueste freund: %%\n", 'C', 92000005, 92000005, 92000005, "925", (void *)&p);
+    ft_printf_len = ft_printf("Das ist: %c und es schreibt:\nd: %d\nx: %x\nX: %X\ns: %s\nund Zeiger: %p\nund der neueste freund: %%\n", 'C', d, x, X, s, (void *)&d);
     printf("ft_printf-länge ist: %d chars\n", ft_printf_len);
-    printf("Adresse des Zeigers: %p\n", (void *)&p);
-    printf_len = printf("Das ist: %c und es schreibt:\nd: %d\nx: %x\nX: %X\ns: %s\nund Zeiger: %p\nund der neueste freund: %%\n", 'C', 92000005, 92000005, 92000005, "925", (void *)&p);
+    printf("Adresse des Zeigers: %p\n", (void *)&d);
+    printf_len = printf("Das ist: %c und es schreibt:\nd: %d\nx: %x\nX: %X\ns: %s\nund Zeiger: %p\nund der neueste freund: %%\n", 'C', d, x, X, s, (void *)&d);
     printf ("printf-länge ist: %d chars\n", printf_len);
-/*
-int number = 10;
-    int *ptr = &number; // Pointer pointing to the address of 'number'
-
-    // Printing the address of the pointer using printf
-    printf("Address of the pointer: %p\n", (void *)&ptr);
-*/
-
     return(0);
 }
