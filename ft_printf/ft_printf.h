@@ -13,10 +13,11 @@
 #ifndef FT_PRINTF_H
 # define FT_PRINTF_H
 
-# include "libft/libft.h"
-# include <stdio.h>
-# include <stdlib.h>
-# include <unistd.h>
+#include "libft/libft.h"
+#include <stdio.h>
+#include <stdlib.h>
+#include <unistd.h>
+#include <stdarg.h>
 
 typedef struct s_printer
 {
@@ -30,9 +31,7 @@ int ft_printf(char const *text, ...);
 int printf_p(void *pointer);
 int printf_x(uintptr_t number, char *base);
 int printf_s(va_list s);
-
-
-
-//the other functs
+int printf_i(int i);
+int printf_d(int d);
 
 #endif

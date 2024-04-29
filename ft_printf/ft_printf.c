@@ -78,16 +78,18 @@ int ft_printf(char const *text, ...)
         {
             uintptr_t x;
             x = va_arg(arguments, int);
-            printf_x(x, "0123456789abcdef");
-            printed_chars += length_printf_x(x);
+            //printf_x(x, "0123456789abcdef");
+            //printed_chars += length_printf_x(x);
+            printed_chars += printf_x(x, "0123456789abcdef");
             ++i;
         }
         else if (text[i] == 'X')
         {
             uintptr_t X;
             X = va_arg(arguments, int);
-            printf_x(X, "0123456789ABCDEF");
-            printed_chars += length_printf_x(X);
+            //printf_x(X, "0123456789ABCDEF");
+            //printed_chars += length_printf_x(X);
+            printed_chars += printf_x(X, "0123456789abcdef");
             ++i;
         }
     }
