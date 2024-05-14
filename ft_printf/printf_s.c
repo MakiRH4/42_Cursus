@@ -3,12 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   printf_s.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: floris <floris@student.42.fr>              +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/01 00:56:13 by floris            #+#    #+#             */
-/*   Updated: 2024/04/01 01:47:29 by floris           ###   ########.fr       */
+/*   Updated: 2024/05/14 10:00:08 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+#include "ft_printf.h"
 
 int printf_s(va_list s)
 {

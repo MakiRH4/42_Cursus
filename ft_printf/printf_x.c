@@ -3,12 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   printf_x.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: floris <floris@student.42.fr>              +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/01 00:52:41 by floris            #+#    #+#             */
-/*   Updated: 2024/04/01 01:47:33 by floris           ###   ########.fr       */
+/*   Updated: 2024/05/14 10:00:07 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+#include "ft_printf.h"
 
 int	length_printf_x(uintptr_t number)
 {
