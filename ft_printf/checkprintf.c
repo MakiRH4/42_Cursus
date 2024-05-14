@@ -5,7 +5,7 @@ int main(void)
     char c = 'c';
     char *s = "stringgggg";
     void *p = (char *)s;
-    int d = 012;
+    int d = 01678676896768976976786876789687689766786976976789678967862;
     int x = 765432;
     int X = 123;
     char symbol = '%';
@@ -22,6 +22,6 @@ int main(void)
     */
     //ft_printf_len = ft_printf("\n%p", s);
     //printf_len = printf("\n%p", s);
-    printf("\n%d vs %d", ft_printf_len, printf_len);
+    printf("%d vs %d\n", ft_printf_len, printf_len);
     return(0);
 }

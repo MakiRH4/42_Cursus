@@ -1,30 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   printf_d.c                                         :+:      :+:    :+:   */
+/*   printf_u.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: fleonte <fleonte@student.42madrid.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/01 01:36:10 by floris            #+#    #+#             */
-/*   Updated: 2024/05/14 09:56:50 by marvin           ###   ########.fr       */
+/*   Updated: 2024/05/15 00:59:06 by fleonte          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-int	printf_d(int d)
+int	printf_u(unsigned int number)
 {
 	int digits;
 
 	digits = 0;
-	ft_putnbr_fd(d, 1);
-	if (d == 0)
+	ft_putnbr_fd(number, 1);
+	if (number == 0)
 		digits = 1;
 	else
 	{
-		while (d != 0)
+		while (number != 0)
 		{
-			d /= 10;
+			number /= 10;
 			digits++;
 		}
 	}

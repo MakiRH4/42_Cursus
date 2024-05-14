@@ -1,9 +1,10 @@
-SRCS        :=      printf_i.c \
-                    printf_d.c \
-                    ft_printf.c \
-                    printf_x.c \
+SRCS        :=      printf_c.c \
                     printf_s.c \
                     printf_p.c \
+                    ft_printf.c \
+                    printf_x.c \
+                    printf_d_i.c \
+                    printf_u.c
 
 OBJS = $(SRCS:.c=.o)
 

@@ -29,10 +29,11 @@ typedef struct s_printer
 }	                t_printer;
 
 int ft_printf(char const *text, ...);
+int printf_c(int c);
 int printf_p(void *pointer);
 int printf_x(uintptr_t number, char *base);
-int printf_s(va_list s);
-int printf_i(int i);
-int printf_d(int d);
+int printf_s(char *str);
+int printf_d_i(int number);
+int printf_u(unsigned int number);
 
 #endif

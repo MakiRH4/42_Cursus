@@ -1,30 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   printf_i.c                                         :+:      :+:    :+:   */
+/*   printf_d_i.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: fleonte <fleonte@student.42madrid.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/04/01 01:45:36 by floris            #+#    #+#             */
-/*   Updated: 2024/05/14 09:57:48 by marvin           ###   ########.fr       */
+/*   Created: 2024/04/01 01:36:10 by floris            #+#    #+#             */
+/*   Updated: 2024/05/15 01:15:30 by fleonte          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-int	printf_i(int i)
+int	printf_d_i(int number)
 {
-	int	digits;
+	int digits;
 
 	digits = 0;
-	ft_putnbr_fd(i, 1);
-	if (i == 0)
+	ft_putnbr_fd(number, 1);
+	if (number == 0)
 		digits = 1;
+	else if (number < 0)
+	{
+		digits += 1;
+		number *= -1;
+	}
 	else
 	{
-		while (i != 0)
+		while (number != 0)
 		{
-			i /= 10;
+			number /= 10;
 			digits++;
 		}
 	}

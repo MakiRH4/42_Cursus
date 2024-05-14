@@ -3,29 +3,27 @@
 /*                                                        :::      ::::::::   */
 /*   printf_s.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: fleonte <fleonte@student.42madrid.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/01 00:56:13 by floris            #+#    #+#             */
-/*   Updated: 2024/05/14 10:00:08 by marvin           ###   ########.fr       */
+/*   Updated: 2024/05/15 01:06:33 by fleonte          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-int printf_s(va_list s)
+int printf_s(char *str)
 {
-    char    *str;
     int     len;
 
-    str = va_arg(s, char *);
-    if (str == NULL)
-        str = "(null)";
     len = 0;
+    if (str == NULL)
+        return (write(1, "(null)", 6));
     while (*str)
     {
-        ft_putchar_fd(*str, 1);
+        ft_putchar_fd((int)(*str), 1);
         str++;
         len++;
     }
-    return len;
+    return (len);
 }
