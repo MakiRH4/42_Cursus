@@ -6,25 +6,25 @@
 /*   By: floris <floris@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/01 01:45:36 by floris            #+#    #+#             */
-/*   Updated: 2024/04/30 18:16:50 by floris           ###   ########.fr       */
+/*   Updated: 2024/05/14 09:06:57 by floris           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int printf_i(int i)
+int	printf_i(int i)
 {
-    int digits;
+	int	digits;
 
-    digits = 0;
-    ft_putnbr_fd(i, 1);
-    if (i == 0)
-        digits = 1;
-    else
-    {
-        while (i != 0)
-        {
-            i /= 10;
-            digits++;
-        }
-    }
-    return (digits);
+	digits = 0;
+	ft_putnbr_fd(i, 1);
+	if (i == 0)
+		digits = 1;
+	else
+	{
+		while (i != 0)
+		{
+			i /= 10;
+			digits++;
+		}
+	}
+	return (digits);
 }

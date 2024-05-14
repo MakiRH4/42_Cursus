@@ -10,21 +10,21 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-int printf_d(int d)
+int	printf_d(int d)
 {
-    int digits;
+	int digits;
 
-    digits = 0;
-    ft_putnbr_fd(d, 1);
-    if (d == 0)
-        digits = 1;
-    else
-    {
-        while (d != 0)
-        {
-            d /= 10;
-            digits++;
-        }
-    }
-    return (digits);
+	digits = 0;
+	ft_putnbr_fd(d, 1);
+	if (d == 0)
+		digits = 1;
+	else
+	{
+		while (d != 0)
+		{
+			d /= 10;
+			digits++;
+		}
+	}
+	return (digits);
 }
