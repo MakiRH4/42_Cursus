@@ -1,75 +1,38 @@
-# **************************************************************************** #
-#                                                                              #
-#                                                         :::      ::::::::    #
-#    Makefile                                           :+:      :+:    :+:    #
-#                                                     +:+ +:+         +:+      #
-#    By: marvin <marvin@student.42.fr>              +#+  +:+       +#+         #
-#                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2023/10/04 01:48:45 by marvin            #+#    #+#              #
-#    Updated: 2023/10/04 01:48:45 by marvin           ###   ########.fr        #
-#                                                                              #
-# **************************************************************************** #
-
-
-SRC = ft_printf.c
-OBJ = $(SRC:.c=.o)
-
-LIBFT = ./libft/libft.a
-
 NAME = libftprintf.a
-CFLAGS = -Wall -Wextra -Werror
-CC = gcc
+CC = cc
+FLAGS = -Wall -Wextra -Werror
+RM = rm -rf
+
+SRCS        :=      printf_i.c \
+                    printf_d.c \
+                    ft_printf.c \
+                    printf_x.c \
+                    printf_s.c \
+                    printf_p.c \
+                          
+OBJS = $(SRCS:.c=.o)
+
+LIBFT_PATH = ./libft
+LIBFT = $(LIBFT_PATH)/libft.a
+
+#------------------------------------------------------------------------------#
 
 all: $(NAME)
 
-.c.o:
-	$(CC) $(CFLAGS) -c $< -o ${<:.c=.o}
+$(NAME): $(LIBFT) $(OBJS)
+	$(CC) $(CFLAGS) $(OBJS) -o $(NAME) $(LIBFT)
 
 $(LIBFT):
-	make -C libft
+	make -C $(LIBFT_PATH) all
 
-$(NAME): $(LIBFT) $(OBJ)
-	cp $(LIBFT) $(NAME)
-	ar -rcs $@ $(OBJ)
+clean:
+	make -C $(LIBFT_PATH) clean
+	$(RM) $(OBJS)
+
+fclean: clean
+	make -C $(LIBFT_PATH) fclean
+	$(RM) $(NAME)
 
 re: fclean all
 
-clean:
-	rm -f $(OBJ) 
-	make -C libft clean
-
-fclean: clean
-	rm -f $(NAME) $(LIBFT)
-	make -C libft fclean
-
-.PHONY: all re clean fclean
-
-#SRCS = ft_strnstr.c ft_isdigit.c ft_putstr_fd.c ft_strlcpy.c ft_strlen.c \
-#	ft_memcmp.c ft_putnbr_fd.c ft_strchr.c ft_bzero.c ft_strjoin.c \
-#	ft_isascii.c ft_memcpy.c ft_isprint.c ft_toupper.c ft_strrchr.c \
-#	ft_isalpha.c ft_memchr.c ft_putchar_fd.c ft_memset.c ft_substr.c \
-#	ft_strncmp.c ft_strtrim.c ft_memmove.c ft_strlcat.c ft_calloc.c \
-#	ft_strdup.c ft_atoi.c ft_isalnum.c ft_tolower.c ft_itoa.c ft_strmapi.c \
-#	ft_striteri.c ft_putendl_fd.c ft_split.c
-#OBJS = ${SRCS:.c=.o}
-#NAME = libft.a
-#LIBC = ar rcs
-#CC = cc
-#RM = rm -f
-#CFLAGS = -Wall -Wextra -Werror
-#
-#.c.o:
-#		${CC} ${CFLAGS} -c $< -o ${<:.c=.o}
-#
-#${NAME}: ${OBJS}
-#		${LIBC} ${NAME} ${OBJS}
-#
-#all: ${NAME}
-#
-#clean:
-#		${RM} ${OBJS}
-#
-#fclean: clean
-#		${RM} ${NAME}
-#
-#re: fclean all
+.PHONY: all clean fclean re libft
