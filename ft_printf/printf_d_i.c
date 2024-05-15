@@ -6,7 +6,7 @@
 /*   By: fleonte <fleonte@student.42madrid.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/01 01:36:10 by floris            #+#    #+#             */
-/*   Updated: 2024/05/15 01:15:30 by fleonte          ###   ########.fr       */
+/*   Updated: 2024/05/15 17:09:42 by fleonte          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,16 +22,13 @@ int	printf_d_i(int number)
 		digits = 1;
 	else if (number < 0)
 	{
-		digits += 1;
+		digits++;
 		number *= -1;
 	}
-	else
+	while (number != 0)
 	{
-		while (number != 0)
-		{
-			number /= 10;
-			digits++;
-		}
+		number /= 10;
+		digits++;
 	}
 	return (digits);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   printf_x.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: fleonte <fleonte@student.42madrid.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/01 00:52:41 by floris            #+#    #+#             */
-/*   Updated: 2024/05/14 10:00:07 by marvin           ###   ########.fr       */
+/*   Updated: 2024/05/15 18:35:02 by fleonte          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,11 @@ int	length_printf_x(uintptr_t number)
 	int length;
 
 	length = 0;
-	while (number != 0)
+    if (number == 0)
+    {
+        return (1);
+    }
+    while (number != 0)
 	{
 		length++;
 		number = number / 16;
