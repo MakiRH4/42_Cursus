@@ -5,14 +5,14 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: fleonte <fleonte@student.42madrid.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/14 22:32:23 by fleonte           #+#    #+#             */
-/*   Updated: 2024/05/14 22:32:23 by fleonte          ###   ########.fr       */
+/*   Created: 2024/05/15 19:56:46 by fleonte           #+#    #+#             */
+/*   Updated: 2024/05/15 20:10:37 by fleonte          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-int printf_c(int c)
+int	printf_c(int c)
 {
-    return (write(1, &c, 1));
+	return (write(1, &c, 1));
 }

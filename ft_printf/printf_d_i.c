@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: fleonte <fleonte@student.42madrid.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/04/01 01:36:10 by floris            #+#    #+#             */
-/*   Updated: 2024/05/15 17:09:42 by fleonte          ###   ########.fr       */
+/*   Created: 2024/05/15 19:56:58 by fleonte           #+#    #+#             */
+/*   Updated: 2024/05/15 20:25:38 by fleonte          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int	printf_d_i(int number)
 {
-	int digits;
+	int	digits;
 
 	digits = 0;
 	ft_putnbr_fd(number, 1);
