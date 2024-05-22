@@ -8,6 +8,8 @@ int gnl(int fd)
     char string[BUFFER_SIZE];
     int i;
 
+    if (fd < 0 || BUFFER_SIZE <= 0)
+		return (NULL);
     i = 0;
     //read(fd, string, BUFFER_SIZE);
     //printf("%s", string);
