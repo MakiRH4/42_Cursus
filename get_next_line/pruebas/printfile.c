@@ -18,9 +18,7 @@ int gnl(int fd);
 int main(void)
 {
     int fd = open("text.txt", O_RDONLY);
-    int fd2 = open("text.txt", O_RDONLY);
     printf("File descriptor number is: %d\n", fd);
-    printf("2nd File descriptor number is: %d\n", fd2);
     
     gnl(fd);
 
