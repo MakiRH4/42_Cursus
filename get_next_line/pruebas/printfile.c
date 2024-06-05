@@ -13,14 +13,16 @@
 #include <stdio.h>
 #include <fcntl.h>
 
-int gnl(int fd);
+int gnl2(int fd);
 
 int main(void)
 {
-    int fd = open("text.txt", O_RDONLY);
+    int fd;
+    
+    fd = open("text.txt", O_RDONLY);
     printf("File descriptor number is: %d\n", fd);
     
-    gnl(fd);
+    gnl2(fd);
 
 
 

@@ -10,8 +10,12 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FT_PRINTF_H
-# define FT_PRINTF_H
+#ifndef GET_NEXT_LINE_H
+# define GET_NEXT_LINE_H
+
+# ifndef BUFFER_SIZE
+#  define BUFFER_SIZE 8
+# endif
 
 # include <stdio.h>
 # include <stdlib.h>
@@ -19,13 +23,11 @@
 # include <stdarg.h>
 # include <stdint.h>
 
-typedef struct s_printer
+typedef struct s_list
 {
-	va_list	arguments;
-	int		width;
-	int		length;
-	int		count;
-}			t_printer;
+	char			*str_buffer;
+	struct s_list	*next;
+}				t_list;
 
 char *get_next_line(int fd);
 
