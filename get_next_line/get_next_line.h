@@ -26,7 +26,7 @@
 typedef struct s_list
 {
 	char			*str_buffer;
-	struct s_list	*next;
+	struct s_list	*link;
 }				t_list;
 
 char *get_next_line(int fd);

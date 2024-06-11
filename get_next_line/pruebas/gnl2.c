@@ -107,3 +107,13 @@ while (end == 0)
   }
 }
 */
+
+typedef struct points
+{
+  int x;
+  int y;
+}   my_points;
+mypoints p1;
+mypoints p2;
+p1.x = 10;
+p1.y = 20;

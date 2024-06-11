@@ -3,40 +3,123 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-/*
-int check_new_line(char *buffer)
+
+void  polish_list(t_list **list)
 {
-  while (buffer)
+  t_list  *last_node;
+  t_list  *clean node;
+  int i;
+  int k;
+  char *buffer;
+
+  buffer = malloc(BUFFER_SIZE +1);
+  clean_node = malloc(sizeof(t_list));
+  if (!buffer || !clean_node)
+    return;
+  last_node = find_last_node(*list);
+
+  i = 0;
+  k = 0;
+  while (last_node->str_buf[i] != '\0' && last_node->str_buf[i] != '\n')
+    ++i;
+  while (last_node->str_buf[i] != '\0' && last_node->str_buf[++i])
+    buf[k++] = last_node->str_buf[i];
+  buf[k] = '\0';
+  clean_node->str_buf = buffer;
+  clean_node->link = NULL;
+  dealloc(list, clean_node, buffer);
+
+
+}
+
+void  copy_string(t_list *list, char *str)
+{
+  int i;
+  int k;
+
+  if (!list)
+    return;
+  k = 0;
+  while (list)
   {
-    if (*buffer == '\n')
-      return (1);
-    buffer++;
+    i = 0;
+    while (list -> str_buf[i])
+    {
+      if (list -> str_buf[i] == '\n')
+      {
+        str[k++] = '\n';
+        str[k] = '\0';
+        return;
+      }
+      str[k++] = list -> str_buf[i++];
+    }
+    list = list -> link;
   }
-  return (0);
+  str[k] = '\0';
 }
 
-char	*ft_strjoin(char const *s1, char const *s2)
+int len_to_newline(t_list *list)
 {
-	char	*joined;
-	char	*ret;
+  int i;
+  int len;
 
-	if (!s1 || !s2)
-		return NULL;
-	joined = (char *)malloc(sizeof(char) * (strlen(s1) + strlen(s2)) + 1);
-	ret = joined;
-	if (!joined)
-		return (NULL);
-	while (*s1)
-		*joined++ = *s1++;
-	while (*s2)
-		*joined++ = *s2++;
-	*(joined) = '\0';
-	return (ret);
+  if (!list)
+    return (0);
+  len = 0;
+  while (list)
+  {
+    i = 0;
+    while (list -> str_buf[i])
+    {
+      if (list -> str_buf[i] == '\n')
+      {
+        ++len;
+        return(len);
+      }
+      ++i;
+      ++len;
+    }
+    list = list -> link;
+  }
+  return(len);
 }
-*/
-void  create_list(t_list **list, int fd)
+
+char  *get_line(t_list *list)
 {
-  int char_read;
+  int str_len;
+  char  *next_str;
+
+  if (!list)
+    return (NULL);
+  str_len = len_to_newline(list);
+  next_str = malloc(str_len + 1);
+  if (!next_str)
+    return )(NULL);
+  copy_str(list, next_str);
+  return (next_str);
+}
+
+void  append(t_list **list, char *buffer)
+{
+  t_list  *new_node;
+  t_list  *last_node;
+
+  last_node = find_last_node(*list);
+  new_node = malloc(sizeof(t_list));
+  if (!new_node)
+    return;
+  if (!last_node)
+    *list = new_node;
+  else
+    last_node -> link = new_node;
+  
+  new_node -> str_buf = buffer;
+  new_node -> link = NULL;
+}
+
+void  build_list(t_list **list, int fd)
+{
+  int read_length;
   char  *buffer;
 
   while (!found_newline(*list))
@@ -47,25 +130,26 @@ void  create_list(t_list **list, int fd)
       free(buffer);
       return;
     }
-    char_read = read(fd, buffer, BUFFER_SIZE);
-    if (!char_read);
+    read_length = read(fd, buffer, BUFFER_SIZE);
+    if (!read_length);
     {
-      free(char_read);
+      free(read_length);
       return;
     }
-    buffer[char_read] == '\0';
-    append(list, buf);
+    buffer[read_length] == '\0';
+    append(list, buffer);
   }
 }
 
 int *get_next_line(int fd)
 {
-  static t_list *list = NULL;
+  static t_list *list;
   char          *next_line;
 
+  *list = NULL;
   if (fd < 0 || BUFFER_SIZE <= 0 || read(fd, &next_line, 0) < 0) // Last one is control to see if file can be accessed
     return (NULL);
-  create_list(&list, fd);
+  build_list(&list, fd);
 
   if(!list)
     return (NULL);
@@ -75,52 +159,3 @@ int *get_next_line(int fd)
   polish_list(&list);
   return (next_line);
 }
-/*
-  char buffer[BUFFER_SIZE];
-  char *text;
-  int flag;
-  int i;
-  int len;
-
-//    if (fd < 0 || BUFFER_SIZE <= 0)
-//		  return (NULL);
-//read(fd, buffer, BUFFER_SIZE);
-//printf("Line 48, buffer:\n%s", buffer);
-//printf("\n");
-//printf("length is: %d", len = strlen(buffer));
-  i = 0;
-  flag = 0;
-
-      
-//text = ft_strjoin(text, buffer);
-//printf("\nText is:\n%s", text);
-  if (flag == 0)
-  {
-    read(fd, buffer, BUFFER_SIZE);
-    if (check_new_line(buffer))
-    {  
-      flag = 1;
-      text = ft_strjoin(text, buffer);
-    }
-    printf("\n%s", text);
-    printf("\n");
-    printf("Flag is: %d", flag);
-  }  
-  return(0);
-}
-/*
-while (end == 0)
-{
-  while (string[i] < BUFFER_SIZE)
-  {
-    if (string[i] == "\0")
-      {
-        end = 1;
-        break;
-      }
-    read(fd, string, BUFFER_SIZE); 
-    write(1, &string[i], 1);
-    ++i;
-  }
-}
-*/
