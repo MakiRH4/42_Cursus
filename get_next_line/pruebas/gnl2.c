@@ -107,7 +107,7 @@ while (end == 0)
   }
 }
 */
-
+/*
 typedef struct points
 {
   int x;
@@ -117,3 +117,27 @@ mypoints p1;
 mypoints p2;
 p1.x = 10;
 p1.y = 20;
+
+int main()
+{
+  struct points
+  {
+  int x;
+  int y;
+  struct points *link;
+  char *var_check;
+  };
+  struct points p1;
+  p1.x = 10;
+  p1.y = 20;
+  struct points p2;
+  p1.link = &p2;
+  p2.x = 100;
+  p2.y = 200;
+  char *dir;
+  
+  printf("%p", &p1.x);
+  printf("%p", &p1.y);
+  return (0);
+}
+*/

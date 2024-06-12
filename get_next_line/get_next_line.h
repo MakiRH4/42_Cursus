@@ -23,11 +23,11 @@
 # include <stdarg.h>
 # include <stdint.h>
 
-typedef struct s_list
+typedef struct gnl_list
 {
-	char			*str_buffer;
-	struct s_list	*link;
-}				t_list;
+	char			*string_buffer;
+	struct gnl_list	*link;
+}				t_gnl_list;
 
 char *get_next_line(int fd);
 

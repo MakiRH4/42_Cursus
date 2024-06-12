@@ -95,7 +95,7 @@ char  *get_line(t_list *list)
   next_str = malloc(str_len + 1);
   if (!next_str)
     return )(NULL);
-  copy_str(list, next_str);
+  copy_string(list, next_str);
   return (next_str);
 }
 
@@ -119,43 +119,44 @@ void  append(t_list **list, char *buffer)
 
 void  build_list(t_list **list, int fd)
 {
-  int read_length;
-  char  *buffer;
+	int	read_length;
+	char	*buffer;
 
-  while (!found_newline(*list))
-  {
-    buffer = malloc(BUFFER_SIZE + 1);
-    if (!buffer)
-    {
-      free(buffer);
-      return;
-    }
-    read_length = read(fd, buffer, BUFFER_SIZE);
+	while (!found_newline(*list))
+	{
+	buffer = malloc(BUFFER_SIZE + 1);
+	if (!buffer)
+	{
+		free(buffer);
+		return;
+	}
+	read_length = read(fd, buffer, BUFFER_SIZE);
     if (!read_length);
     {
-      free(read_length);
-      return;
+    	free(read_length);
+		return;
     }
-    buffer[read_length] == '\0';
-    append(list, buffer);
-  }
+	buffer[read_length] == '\0';
+	append(list, buffer);
+	}
 }
 
 int *get_next_line(int fd)
 {
-  static t_list *list;
-  char          *next_line;
+	static	t_gnl_list	*list;	//variable deklarieren, list
+	char	*next_line;
 
-  *list = NULL;
-  if (fd < 0 || BUFFER_SIZE <= 0 || read(fd, &next_line, 0) < 0) // Last one is control to see if file can be accessed
-    return (NULL);
-  build_list(&list, fd);
+	if (fd < 0 || BUFFER_SIZE <= 0 || read(fd, &next_line, 0) < 0) //Der korrekte Zugriff auf die Datei wird geprüft
+		return (NULL);
+	*list = NULL;	//Variable initialisieren
 
-  if(!list)
-    return (NULL);
-  
-  next_line = get_line(list);
+	build_list(&list, fd);
+	if(!list)
+		return (NULL);
+	
+	next_line = get_line(list);
 
-  polish_list(&list);
-  return (next_line);
+	polish_list(&list);
+
+	return (next_line);
 }
