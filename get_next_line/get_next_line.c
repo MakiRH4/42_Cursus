@@ -28,7 +28,7 @@ void  polish_list(t_list **list)
   clean_node = malloc(sizeof(t_list));
   if (!buffer || !clean_node)
     return;
-  last_node = find_last_node(*list);
+  last_node = get_last_node(*list);
 
   i = 0;
   k = 0;
@@ -69,6 +69,9 @@ void  copy_string(t_list *list, char *str)
   }
   str[k] = '\0';
 }
+/*
+
+IN .h !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
 int len_to_newline(t_list *list)
 {
@@ -95,7 +98,7 @@ int len_to_newline(t_list *list)
   }
   return(len);
 }
-
+*/
 char  *get_line(t_list *list)
 {
   int str_len;
@@ -116,7 +119,7 @@ void  append(t_list **list, char *buffer)
   t_list  *new_node;
   t_list  *last_node;
 
-  last_node = find_last_node(*list);
+  last_node = get_last_node(*list);
   new_node = malloc(sizeof(t_list));
   if (!new_node)
     return;
@@ -134,22 +137,22 @@ void  build_list(t_list **list, int fd)
 	int	read_length;
 	char	*buffer;
 
-	while (!found_newline(*list))
+	while (!search_newline(*list))
 	{
-	buffer = malloc(BUFFER_SIZE + 1);
-	if (!buffer)
-	{
-		free(buffer);
-		return;
-	}
-	read_length = read(fd, buffer, BUFFER_SIZE);
-    if (!read_length);
-    {
-    	free(read_length);
-		return;
-    }
-	buffer[read_length] == '\0';
-	append(list, buffer);
+		buffer = malloc(BUFFER_SIZE + 1);
+		if (!buffer)
+		{
+			free(buffer);
+			return;
+		}
+		read_length = read(fd, buffer, BUFFER_SIZE);
+		if (!read_length);
+		{
+			free(read_length);
+			return;
+		}
+		buffer[read_length] == '\0';
+		append(list, buffer);
 	}
 }
 

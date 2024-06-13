@@ -13,7 +13,7 @@
 #include <stdio.h>
 #include <fcntl.h>
 
-int gnl2(int fd);
+int get_next_line(int fd);
 
 int main(void)
 {
@@ -22,7 +22,7 @@ int main(void)
     fd = open("text.txt", O_RDONLY);
     printf("File descriptor number is: %d\n", fd);
     
-    gnl2(fd);
+    get_next_line(fd);
 
 
 
