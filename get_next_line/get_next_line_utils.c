@@ -47,7 +47,7 @@ void	cp_str(t_gnl_list *gnl_list, char *str)
 	int	j;
 
 	if (!gnl_list)
-		return;
+		return ;
 	j = 0;
 	while (gnl_list)
 	{
@@ -56,15 +56,15 @@ void	cp_str(t_gnl_list *gnl_list, char *str)
 		{
 			if (gnl_list->string_buffer[i] == '\n')
 			{
-				str[k++] = '\n';
-				str[k] = '\0';
-				return;
+				str[j++] = '\n';
+				str[j] = '\0';
+				return ;
 			}
-			str[k++] = gnl_list->string_buffer[i++];
+			str[j++] = gnl_list->string_buffer[i++];
 		}
 		gnl_list = gnl_list->link;
 	}
-	str[k] = '\0';
+	str[j] = '\0';
 }
 
 int	len_line(t_gnl_list gnl_list)
@@ -95,10 +95,10 @@ int	len_line(t_gnl_list gnl_list)
 
 void	free_all(t_gnl_list **list, t_gnl_list *clean_node, char *buffer)
 {
-	t_gnl_list *tmp;
+	t_gnl_list	*tmp;
 
 	if (*gnl_list == NULL) // funktionert das auch? (!(*list)) 
-		return;
+		return ;
 	while (*gnl_list)
 	{
 		tmp = (*gnl_list)->link;
