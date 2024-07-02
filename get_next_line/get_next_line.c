@@ -21,9 +21,9 @@ void	polish_list(t_gnl_list **list)
 {
 	t_gnl_list	*last_node;
 	t_gnl_list	*clean_node;
-	int	i;
-	int	j;
-	char	*buffer;
+	int			i;
+	int			j;
+	char		*buffer;
 
 	buffer = malloc(BUFFER_SIZE +1);
 	clean_node = malloc(sizeof(t_gnl_list));
@@ -58,19 +58,19 @@ void	copy_string(t_gnl_list *list, char *str)
 			if (list -> string_buffer[i] == '\n')
 			{
 				str[j++] = '\n';
-        		str[j] = '\0';
-        		return ;
-      		}
-      		str[j++] = list -> string_buffer[i++];
-    	}
-    	list = list -> link;
+				str[j] = '\0';
+				return ;
+			}
+			str[j++] = list -> string_buffer[i++];
+		}
+		list = list -> link;
 	}
 	str[j] = '\0';
 }
 
-char  *get_line(t_gnl_list *list)
+char	*get_line(t_gnl_list *list)
 {
-	int	str_len;
+	int		str_len;
 	char	*next_str;
 
 	if (!list)
@@ -83,7 +83,7 @@ char  *get_line(t_gnl_list *list)
 	return (next_str);
 }
 
-void  append(t_gnl_list **list, char *buffer)
+void	append(t_gnl_list **list, char *buffer)
 {
 	t_gnl_list	*new_node;
 	t_gnl_list	*last_node;
@@ -91,18 +91,19 @@ void  append(t_gnl_list **list, char *buffer)
 	last_node = get_last_node(*list);
 	new_node = malloc(sizeof(t_gnl_list));
 	if (!new_node)
-		return;
+		return ;
 	if (!last_node)
 		*list = new_node;
-  	else
+	else
 		last_node -> link = new_node;
 	new_node -> string_buffer = buffer;
+	printf("%s", buffer); //Ächtung! printf here!!!
 	new_node -> link = NULL;
 }
 
 void	build_list(t_gnl_list **list, int fd)
 {
-	int	read_length;
+	int		read_length;
 	char	*buffer;
 
 	while (!search_newline(*list))
@@ -117,17 +118,18 @@ void	build_list(t_gnl_list **list, int fd)
 		if (!read_length)
 		{
 			free(buffer);
-			return;
+			return ;
 		}
 		buffer[read_length] = '\0';
 		append(list, buffer);
+		printf("%s", buffer); //Ächtung! printf here!!!
 	}
 }
 
-char *get_next_line(int fd)
+char	*get_next_line(int fd)
 {
-	static	t_gnl_list	*list; //variable deklarieren, list
-	char	*next_line;
+	static t_gnl_list	*list;
+	char				*next_line;
 
 	if (fd < 0 || BUFFER_SIZE <= 0 || read(fd, &next_line, 0) < 0) //Der korrekte Zugriff auf die Datei wird geprüft
 		return (NULL);
