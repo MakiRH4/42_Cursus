@@ -116,7 +116,7 @@ void	build_list(t_gnl_list **list, int fd)
 		read_length = read(fd, buffer, BUFFER_SIZE);
 		if (!read_length);
 		{
-			free(read_length);
+			free(buffer);
 			return;
 		}
 		buffer[read_length] == '\0';
@@ -131,7 +131,7 @@ int *get_next_line(int fd)
 
 	if (fd < 0 || BUFFER_SIZE <= 0 || read(fd, &next_line, 0) < 0) //Der korrekte Zugriff auf die Datei wird geprüft
 		return (NULL);
-	*list = NULL; //Variable initialisieren
+//	*list = NULL; //Variable initialisieren
 	build_list(&list, fd);
 	if (!list)
 		return (NULL);

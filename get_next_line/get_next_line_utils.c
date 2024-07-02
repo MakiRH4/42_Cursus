@@ -27,7 +27,7 @@ int	search_newline(t_gnl_list *gnl_list)
 				return (1);
 			++i;
 		}
-//		gnl_list = gnl_list->link; //wy dis?
+		gnl_list = gnl_list->link; //wy dis?
 	}
 	return (0);
 }
