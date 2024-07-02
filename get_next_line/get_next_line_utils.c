@@ -67,7 +67,7 @@ void	cp_str(t_gnl_list *gnl_list, char *str)
 	str[j] = '\0';
 }
 
-int	len_line(t_gnl_list gnl_list)
+int	len_line(t_gnl_list *gnl_list)
 {
 	int	i;
 	int	len;
@@ -93,7 +93,7 @@ int	len_line(t_gnl_list gnl_list)
 	return (len);
 }
 
-void	free_all(t_gnl_list **list, t_gnl_list *clean_node, char *buffer)
+void	free_all(t_gnl_list **gnl_list, t_gnl_list *clean_node, char *buffer)
 {
 	t_gnl_list	*tmp;
 

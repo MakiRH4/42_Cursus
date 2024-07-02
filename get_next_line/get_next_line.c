@@ -114,17 +114,17 @@ void	build_list(t_gnl_list **list, int fd)
 			return ;
 		}
 		read_length = read(fd, buffer, BUFFER_SIZE);
-		if (!read_length);
+		if (!read_length)
 		{
 			free(buffer);
 			return;
 		}
-		buffer[read_length] == '\0';
+		buffer[read_length] = '\0';
 		append(list, buffer);
 	}
 }
 
-int *get_next_line(int fd)
+char *get_next_line(int fd)
 {
 	static	t_gnl_list	*list; //variable deklarieren, list
 	char	*next_line;
