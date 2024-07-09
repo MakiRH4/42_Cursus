@@ -10,19 +10,21 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "get_next_line.h"
 #include <stdio.h>
 #include <fcntl.h>
-
-int get_next_line(int fd);
 
 int main(void)
 {
     int fd;
     
+	char *line;
+
     fd = open("text.txt", O_RDONLY);
     printf("File descriptor number is: %d\n", fd);
     
-    get_next_line(fd);
+	line = get_next_line(fd);
+	printf("%s", line); //Ächtung! printf here!!!
 
 
 
