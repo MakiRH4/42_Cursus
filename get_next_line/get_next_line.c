@@ -17,19 +17,133 @@
 #include <stdlib.h>
 #include <string.h>
 
+void	polish_list(t_gnl_list **list)
+{
+	t_gnl_list	*last_node;
+	t_gnl_list	*clean_node;
+	int			i;
+	int			j;
+	char		*buffer;
+
+	buffer = malloc(BUFFER_SIZE +1);
+	clean_node = malloc(sizeof(t_gnl_list));
+	if (!buffer || !clean_node)
+		return ;
+	last_node = get_last_node(*list);
+	i = 0;
+	j = 0;
+	while (last_node->str_buff[i] != '\0' && last_node->str_buff[i] != '\n')
+		++i;
+	while (last_node->str_buff[i] != '\0' && last_node->str_buff[++i])
+		buffer[j++] = last_node->str_buff[i];
+	buffer[j] = '\0';
+	clean_node->str_buff = buffer;
+	clean_node->link = NULL;
+	free_all(list, clean_node, buffer);
+}
+
+void	copy_string(t_gnl_list *list, char *str)
+{
+	int	i;
+	int	j;
+
+	if (!list)
+		return ;
+	j = 0;
+	while (list)
+	{
+		i = 0;
+		while (list -> str_buff[i])
+		{
+			if (list -> str_buff[i] == '\n')
+			{
+				str[j++] = '\n';
+				str[j] = '\0';
+				return ;
+			}
+			str[j++] = list -> str_buff[i++];
+		}
+		list = list -> link;
+	}
+	str[j] = '\0';
+}
+/*
+char	*get_line(t_gnl_list *list)
+{
+	int		str_len;
+	char	*next_str;
+
+	if (!list)
+		return (NULL);
+	str_len = len_line(list);
+	next_str = malloc(str_len + 1);
+	if (!next_str)
+		return (NULL);
+	copy_string(list, next_str);
+	return (next_str);
+}
+*/
+
+void	append(t_gnl_list **list, char *buffer)
+{
+	t_gnl_list	*new_node;
+	t_gnl_list	*last_node;
+
+	last_node = get_last_node(*list);
+	new_node = malloc(sizeof(t_gnl_list));
+	if (!new_node)
+		return ;
+	if (!last_node)
+		*list = new_node;
+	else
+		last_node -> link = new_node;
+	new_node -> str_buff = buffer;
+	new_node -> link = NULL;
+}
+
+void	build_list(t_gnl_list **list, int fd)
+{
+	int		read_length;
+	char	*buffer;
+
+	while (!search_newline(*list))
+	{
+		buffer = malloc(BUFFER_SIZE + 1);
+		if (!buffer)
+		{
+			free(buffer);
+			return ;
+		}
+		read_length = read(fd, buffer, BUFFER_SIZE);
+		if (!read_length)
+		{
+			free(buffer);
+			return ;
+		}
+		buffer[read_length] = '\0';
+		append(list, buffer);
+	}
+}
+
 char	*get_next_line(int fd)
 {
 	static t_gnl_list	*list;
 	char				*next_line;
+	int					str_len;
+	char				*next_str;
 
-//	Der korrekte Zugriff auf die Datei wird geprüft
 	if (fd < 0 || BUFFER_SIZE <= 0 || read(fd, &next_line, 0) < 0)
 		return (NULL);
 //	*list = NULL; //Variable initialisieren
 	build_list(&list, fd);
 	if (!list)
 		return (NULL);
-	next_line = get_line(list);
+	str_len = len_line(list);
+	next_str = malloc(str_len + 1);
+	if (!next_str)
+		return (NULL);
+	copy_string(list, next_str);
+	next_line = next_str;
 	polish_list(&list);
 	return (next_line);
 }
