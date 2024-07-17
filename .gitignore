@@ -26,6 +26,7 @@
 *.a
 *.lib
 *.la
+*.gch
 
 # Executables
 
