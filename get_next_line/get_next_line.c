@@ -67,22 +67,6 @@ void	copy_string(t_gnl_list *list, char *str)
 	}
 	str[j] = '\0';
 }
-/*
-char	*get_line(t_gnl_list *list)
-{
-	int		str_len;
-	char	*next_str;
-
-	if (!list)
-		return (NULL);
-	str_len = len_line(list);
-	next_str = malloc(str_len + 1);
-	if (!next_str)
-		return (NULL);
-	copy_string(list, next_str);
-	return (next_str);
-}
-*/
 
 void	append(t_gnl_list **list, char *buffer)
 {

@@ -29,15 +29,26 @@ typedef struct gnl_list
 	struct gnl_list	*link;
 }				t_gnl_list;
 
+// 
 void		free_all(t_gnl_list **list, t_gnl_list *clean_node, char *buffer);
 void		copy_string(t_gnl_list *list, char *str);
 void		cp_str(t_gnl_list *gnl_list, char *str);
 void		append(t_gnl_list **list, char *buffer);
 void		build_list(t_gnl_list **list, int fd);
 void		polish_list(t_gnl_list **list);
+
+// 
 int			search_newline(t_gnl_list *gnl_list);
+
+// takes a struct of type t_gnl_list and counts the length of the line, moving
+// to the next node until a newiline is found
 int			len_line(t_gnl_list *gnl_list);
+
+// takes a file descriptor as an input, returning a pointer to a string 
+// that contains the first line of the text
 char		*get_next_line(int fd);
+
+// takes a struct of type t_gnl_list and returns a pointer to the last node
 t_gnl_list	*get_last_node(t_gnl_list *gnl_list);
 
 #endif

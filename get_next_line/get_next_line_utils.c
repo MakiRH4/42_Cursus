@@ -12,34 +12,8 @@
 
 #include "get_next_line.h"
 
-int	search_newline(t_gnl_list *gnl_list)
-{
-	int	i;
 
-	if (!gnl_list)
-		return (0);
-	while (gnl_list)
-	{
-		i = 0;
-		while (gnl_list->str_buff[i] && i < BUFFER_SIZE)
-		{
-			if (gnl_list->str_buff[i] == '\n')
-				return (1);
-			++i;
-		}
-		gnl_list = gnl_list->link; //wy dis?
-	}
-	return (0);
-}
 
-t_gnl_list	*get_last_node(t_gnl_list *gnl_list)
-{
-	if (!gnl_list)
-		return (NULL);
-	while (gnl_list->link)
-		gnl_list = gnl_list->link;
-	return (gnl_list);
-}
 
 void	cp_str(t_gnl_list *gnl_list, char *str)
 {
@@ -67,6 +41,26 @@ void	cp_str(t_gnl_list *gnl_list, char *str)
 	str[j] = '\0';
 }
 
+int	search_newline(t_gnl_list *gnl_list)
+{
+	int	i;
+
+	if (!gnl_list)
+		return (0);
+	while (gnl_list)
+	{
+		i = 0;
+		while (gnl_list->str_buff[i] && i < BUFFER_SIZE)
+		{
+			if (gnl_list->str_buff[i] == '\n')
+				return (1);
+			++i;
+		}
+		gnl_list = gnl_list->link; //wy dis?
+	}
+	return (0);
+}
+
 int	len_line(t_gnl_list *gnl_list)
 {
 	int	i;
@@ -92,6 +86,16 @@ int	len_line(t_gnl_list *gnl_list)
 	}
 	return (len);
 }
+
+t_gnl_list	*get_last_node(t_gnl_list *gnl_list)
+{
+	if (!gnl_list)
+		return (NULL);
+	while (gnl_list->link)
+		gnl_list = gnl_list->link;
+	return (gnl_list);
+}
+
 
 void	free_all(t_gnl_list **gnl_list, t_gnl_list *clean_node, char *buffer)
 {
