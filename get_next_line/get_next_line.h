@@ -29,26 +29,39 @@ typedef struct gnl_list
 	struct gnl_list	*link;
 }				t_gnl_list;
 
-// 
-void		free_all(t_gnl_list **list, t_gnl_list *clean_node, char *buffer);
+
+
+// saves at the memory address of *str the line that's present in the *list
 void		copy_string(t_gnl_list *list, char *str);
-void		cp_str(t_gnl_list *gnl_list, char *str);
-void		append(t_gnl_list **list, char *buffer);
+
+// in loop reads from fd as long as no '\n' is read and appends the text read,
+// to **list
 void		build_list(t_gnl_list **list, int fd);
+
+// in **list, creates a new node and finds the last one, if there is no last
+// node, sets the new one as the last one and assings to the last one, the string
+void		append(t_gnl_list **list, char *buffer);
+
+// returns a node that contains only the chars read after a '\n' caused by
+// the buffer size
 void		polish_list(t_gnl_list **list);
 
 // 
+void		free_all(t_gnl_list **list, t_gnl_list *clean_node, char *buffer);
+
+// goes through the variables at each node of *gnl:_list searching for a '\n',
+// if it finds one returns 1, else returns 0
 int			search_newline(t_gnl_list *gnl_list);
 
-// takes a struct of type t_gnl_list and counts the length of the line, moving
-// to the next node until a newiline is found
-int			len_line(t_gnl_list *gnl_list);
+// counts the length of the line in *gnl_list moving to the next node until
+// a '\n' is found
+int			line_length(t_gnl_list *gnl_list);
 
-// takes a file descriptor as an input, returning a pointer to a string 
-// that contains the first line of the text
+// returns a pointer to a string that contains the first line of the text
+// present in the fd
 char		*get_next_line(int fd);
 
-// takes a struct of type t_gnl_list and returns a pointer to the last node
+// returns a pointer to the last node of *gnl_list
 t_gnl_list	*get_last_node(t_gnl_list *gnl_list);
 
 #endif

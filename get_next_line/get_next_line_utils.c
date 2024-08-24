@@ -12,35 +12,6 @@
 
 #include "get_next_line.h"
 
-
-
-
-void	cp_str(t_gnl_list *gnl_list, char *str)
-{
-	int	i;
-	int	j;
-
-	if (!gnl_list)
-		return ;
-	j = 0;
-	while (gnl_list)
-	{
-		i = 0;
-		while (gnl_list->str_buff[i])
-		{
-			if (gnl_list->str_buff[i] == '\n')
-			{
-				str[j++] = '\n';
-				str[j] = '\0';
-				return ;
-			}
-			str[j++] = gnl_list->str_buff[i++];
-		}
-		gnl_list = gnl_list->link;
-	}
-	str[j] = '\0';
-}
-
 int	search_newline(t_gnl_list *gnl_list)
 {
 	int	i;
@@ -56,12 +27,12 @@ int	search_newline(t_gnl_list *gnl_list)
 				return (1);
 			++i;
 		}
-		gnl_list = gnl_list->link; //wy dis?
+		gnl_list = gnl_list->link;
 	}
 	return (0);
 }
 
-int	len_line(t_gnl_list *gnl_list)
+int	line_length(t_gnl_list *gnl_list)
 {
 	int	i;
 	int	len;
@@ -95,7 +66,6 @@ t_gnl_list	*get_last_node(t_gnl_list *gnl_list)
 		gnl_list = gnl_list->link;
 	return (gnl_list);
 }
-
 
 void	free_all(t_gnl_list **gnl_list, t_gnl_list *clean_node, char *buffer)
 {

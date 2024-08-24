@@ -53,17 +53,17 @@ void	copy_string(t_gnl_list *list, char *str)
 	while (list)
 	{
 		i = 0;
-		while (list -> str_buff[i])
+		while (list->str_buff[i])
 		{
-			if (list -> str_buff[i] == '\n')
+			if (list->str_buff[i] == '\n')
 			{
 				str[j++] = '\n';
 				str[j] = '\0';
 				return ;
 			}
-			str[j++] = list -> str_buff[i++];
+			str[j++] = list->str_buff[i++];
 		}
-		list = list -> link;
+		list = list->link;
 	}
 	str[j] = '\0';
 }
@@ -80,9 +80,9 @@ void	append(t_gnl_list **list, char *buffer)
 	if (!last_node)
 		*list = new_node;
 	else
-		last_node -> link = new_node;
-	new_node -> str_buff = buffer;
-	new_node -> link = NULL;
+		last_node->link = new_node;
+	new_node->str_buff = buffer;
+	new_node->link = NULL;
 }
 
 void	build_list(t_gnl_list **list, int fd)
@@ -112,9 +112,9 @@ void	build_list(t_gnl_list **list, int fd)
 char	*get_next_line(int fd)
 {
 	static t_gnl_list	*list;
-	char				*next_line;
-	int					str_len;
+	int					line_len;
 	char				*next_str;
+	char				*next_line;
 
 	if (fd < 0 || BUFFER_SIZE <= 0 || read(fd, &next_line, 0) < 0)
 		return (NULL);
@@ -122,11 +122,13 @@ char	*get_next_line(int fd)
 	build_list(&list, fd);
 	if (!list)
 		return (NULL);
-	str_len = len_line(list);
-	next_str = malloc(str_len + 1);
+	line_len = line_length(list);
+	next_str = malloc(line_len + 1);
+	printf("First next_str is: %s \n", next_str);
 	if (!next_str)
 		return (NULL);
 	copy_string(list, next_str);
+	printf("Second next_str is: %s", next_str);
 	next_line = next_str;
 	polish_list(&list);
 	return (next_line);
