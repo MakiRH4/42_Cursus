@@ -17,16 +17,27 @@
 int main(void)
 {
     int fd;
-    
-	char *line;
+    char *line;
 
+    // Open the file in read-only mode
     fd = open("text.txt", O_RDONLY);
-    printf("File descriptor number is: %d\n", fd);
+    if (fd < 0)
+    {
+        perror("Error opening file");
+        return (1);
+    }
     
-	line = get_next_line(fd);
-	printf("%s", line); //Ächtung! printf here!!!
+    printf("File descriptor number is: %d\n", fd);
 
+    // Loop to read the file line by line
+    while ((line = get_next_line(fd)) != NULL)
+    {
+        printf("%s", line); // Print each line
+        free(line); // Free the allocated memory for the line
+    }
 
+    // Close the file descriptor
+    close(fd);
 
     return (0);
 }

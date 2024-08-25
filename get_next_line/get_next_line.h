@@ -43,7 +43,7 @@ void		build_list(t_gnl_list **list, int fd);
 void		append(t_gnl_list **list, char *buffer);
 
 // returns a node that contains only the chars read after a '\n' caused by
-// the buffer size
+// the buffer size and frees the memory from all other nodes
 void		polish_list(t_gnl_list **list);
 
 // 

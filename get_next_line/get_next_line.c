@@ -124,11 +124,9 @@ char	*get_next_line(int fd)
 		return (NULL);
 	line_len = line_length(list);
 	next_str = malloc(line_len + 1);
-	printf("First next_str is: %s \n", next_str);
 	if (!next_str)
 		return (NULL);
 	copy_string(list, next_str);
-	printf("Second next_str is: %s", next_str);
 	next_line = next_str;
 	polish_list(&list);
 	return (next_line);
