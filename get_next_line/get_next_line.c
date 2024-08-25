@@ -118,7 +118,6 @@ char	*get_next_line(int fd)
 
 	if (fd < 0 || BUFFER_SIZE <= 0 || read(fd, &next_line, 0) < 0)
 		return (NULL);
-//	*list = NULL; //Variable initialisieren
 	build_list(&list, fd);
 	if (!list)
 		return (NULL);
