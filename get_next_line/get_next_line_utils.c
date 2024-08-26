@@ -14,7 +14,7 @@
 
 int	search_newline(t_gnl_list *gnl_list)
 {
-	int	i;
+	size_t	i;
 
 	if (!gnl_list)
 		return (0);
