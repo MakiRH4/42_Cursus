@@ -25,6 +25,8 @@ void	polish_list(t_gnl_list **list)
 	int			j;
 	char		*buffer;
 
+	printf("The defined BUFFER_SIZE is: %d\n", BUFFER_SIZE);
+
 	buffer = malloc(BUFFER_SIZE +1);
 	clean_node = malloc(sizeof(t_gnl_list));
 	if (!buffer || !clean_node)
@@ -90,6 +92,8 @@ void	build_list(t_gnl_list **list, int fd)
 	int		read_length;
 	char	*buffer;
 
+	printf("The defined BUFFER_SIZE is: %d\n", BUFFER_SIZE);
+
 	while (!search_newline(*list))
 	{
 		buffer = malloc(BUFFER_SIZE + 1);
@@ -114,6 +118,8 @@ char	*get_next_line(int fd)
 	static t_gnl_list	*list;
 	int					line_len;
 	char				*next_line;
+
+	printf("The defined BUFFER_SIZE is: %d\n", BUFFER_SIZE);
 
 	if (fd < 0 || BUFFER_SIZE <= 0 || read(fd, &next_line, 0) < 0)
 		return (NULL);
