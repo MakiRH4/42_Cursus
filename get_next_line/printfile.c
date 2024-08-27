@@ -6,7 +6,7 @@
 /*   By: fleonte <fleonte@student.42madrid.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/21 14:22:54 by fleonte           #+#    #+#             */
-/*   Updated: 2024/05/21 14:22:54 by fleonte          ###   ########.fr       */
+/*   Updated: 2024/08/27 02:00:04 by fleonte          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,16 +28,29 @@ int main(void)
     }
     
     printf("File descriptor number is: %d\n", fd);
-
+/*
     // Loop to read the file line by line
     while ((line = get_next_line(fd)) != NULL)
     {
         printf("%s", line); // Print each line
         free(line); // Free the allocated memory for the line
     }
-
+*/
+/*
+	line = get_next_line(fd);
+	printf("%s", line); // Print each line
+*/
+// YT way
+	line = get_next_line(fd);
+	if (line != NULL)
+	{
+		printf("%s", line);
+		free(line);
+		line = get_next_line(fd);
+	}
     // Close the file descriptor
     close(fd);
 
     return (0);
 }
+

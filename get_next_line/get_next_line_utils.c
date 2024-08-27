@@ -14,14 +14,14 @@
 
 int	search_newline(t_gnl_list *gnl_list)
 {
-	size_t	i;
+	int	i;
 
 	if (!gnl_list)
 		return (0);
 	while (gnl_list)
 	{
 		i = 0;
-		while (gnl_list->str_buff[i] && i < BUFFER_SIZE)
+		while (gnl_list->str_buff[i])
 		{
 			if (gnl_list->str_buff[i] == '\n')
 				return (1);
@@ -71,7 +71,7 @@ void	free_all(t_gnl_list **gnl_list, t_gnl_list *clean_node, char *buffer)
 {
 	t_gnl_list	*tmp;
 
-	if (*gnl_list == NULL) // funktionert das auch? (!(*list)) 
+	if (*gnl_list == NULL)
 		return ;
 	while (*gnl_list)
 	{

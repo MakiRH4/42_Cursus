@@ -6,7 +6,7 @@
 /*   By: fleonte <fleonte@student.42madrid.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/19 23:35:49 by fleonte           #+#    #+#             */
-/*   Updated: 2024/05/19 23:35:49 by fleonte          ###   ########.fr       */
+/*   Updated: 2024/08/27 02:18:16 by fleonte          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,21 +113,18 @@ char	*get_next_line(int fd)
 {
 	static t_gnl_list	*list;
 	int					line_len;
-	char				*next_str;
 	char				*next_line;
 
 	if (fd < 0 || BUFFER_SIZE <= 0 || read(fd, &next_line, 0) < 0)
 		return (NULL);
-	
 	build_list(&list, fd);
 	if (!list)
 		return (NULL);
 	line_len = line_length(list);
-	next_str = malloc(line_len + 1);
-	if (!next_str)
+	next_line = malloc(line_len + 1);
+	if (!next_line)
 		return (NULL);
-	copy_string(list, next_str);
-	next_line = next_str;
+	copy_string(list, next_line);
 	polish_list(&list);
 	return (next_line);
 }
