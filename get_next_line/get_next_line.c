@@ -25,22 +25,22 @@ void	polish_list(t_gnl_list **list)
 	int			j;
 	char		*buffer;
 
-	printf("The defined BUFFER_SIZE is: %d\n", BUFFER_SIZE);
-
 	buffer = malloc(BUFFER_SIZE +1);
-	clean_node = malloc(sizeof(t_gnl_list));
-	if (!buffer || !clean_node)
+	if (!buffer)
 		return ;
+	clean_node = malloc(sizeof(t_gnl_list));
+	if (!clean_node)
+	{
+		free(buffer);
+		return ;
+	}
 	last_node = get_last_node(*list);
-	i = 0;
-	j = 0;
+	j = ((i = 0), 0);
 	while (last_node->str_buff[i] != '\0' && last_node->str_buff[i] != '\n')
 		++i;
 	while (last_node->str_buff[i] != '\0' && last_node->str_buff[++i])
 		buffer[j++] = last_node->str_buff[i];
-	buffer[j] = '\0';
-	clean_node->str_buff = buffer;
-	clean_node->link = NULL;
+	clean_node->str_buff = ((clean_node->link = 0), (buffer[j] = 0), buffer);
 	free_all(list, clean_node, buffer);
 }
 
@@ -92,8 +92,6 @@ void	build_list(t_gnl_list **list, int fd)
 	int		read_length;
 	char	*buffer;
 
-	printf("The defined BUFFER_SIZE is: %d\n", BUFFER_SIZE);
-
 	while (!search_newline(*list))
 	{
 		buffer = malloc(BUFFER_SIZE + 1);
@@ -103,7 +101,7 @@ void	build_list(t_gnl_list **list, int fd)
 			return ;
 		}
 		read_length = read(fd, buffer, BUFFER_SIZE);
-		if (!read_length)
+		if (!read_length || read_length < 0)
 		{
 			free(buffer);
 			return ;
@@ -119,9 +117,7 @@ char	*get_next_line(int fd)
 	int					line_len;
 	char				*next_line;
 
-	printf("The defined BUFFER_SIZE is: %d\n", BUFFER_SIZE);
-
-	if (fd < 0 || BUFFER_SIZE <= 0 || read(fd, &next_line, 0) < 0)
+	if (fd < 0 || BUFFER_SIZE <= 0)
 		return (NULL);
 	build_list(&list, fd);
 	if (!list)
