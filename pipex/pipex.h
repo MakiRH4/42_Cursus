@@ -6,18 +6,26 @@
 /*   By: fleonte <fleonte@student.42madrid.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/30 16:17:20 by fleonte           #+#    #+#             */
-/*   Updated: 2024/09/01 02:02:05 by fleonte          ###   ########.fr       */
+/*   Updated: 2024/09/02 02:45:37 by fleonte          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PIPEX_H
 # define PIPEX_H
+# define FILE1			1	// 1st file
+# define COMMAND1		2	// 1st command
+# define COMMAND2		3	// 2nd command
+# define FILE2			4	// 2nd file
+# define PIPE_INLET		0
+# define PIPE_OUTLET	1
 
 # include <stdio.h>
 # include <stdlib.h>
 # include <unistd.h>
 # include <stdarg.h>
 # include <stdint.h>
+# include <sys/wait.h>
+# include <fcntl.h>
 
 char	**ft_split(char const *s, char c);
 char	*ft_strdup(const char *s1);
@@ -27,6 +35,7 @@ char	*str_in_str(const char *haystack, const char *needle);
 size_t	ft_strlen(const char *s);
 int		pipex(char **command_id, char **argv, char **env);
 void	*ft_memcpy(void *dst, const void *src, size_t n);
+size_t	ft_strlen(const char *s);
 
 
 

@@ -6,7 +6,7 @@
 /*   By: fleonte <fleonte@student.42madrid.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/30 23:33:54 by fleonte           #+#    #+#             */
-/*   Updated: 2024/09/01 02:04:10 by fleonte          ###   ########.fr       */
+/*   Updated: 2024/09/02 02:45:25 by fleonte          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,4 +105,14 @@ void	*ft_memcpy(void *dst, const void *src, size_t n)
 	while (i++ < n)
 		*(unsigned char *)dst++ = *(unsigned char *)src++;
 	return (dst - i + 1);
+}
+
+size_t	ft_strlen(const char *s)
+{
+	size_t	i;
+
+	i = 0;
+	while (*s++)
+		i++;
+	return (i);
 }

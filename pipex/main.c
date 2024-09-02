@@ -6,31 +6,34 @@
 /*   By: fleonte <fleonte@student.42madrid.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/30 16:17:04 by fleonte           #+#    #+#             */
-/*   Updated: 2024/09/01 02:06:09 by fleonte          ###   ########.fr       */
+/*   Updated: 2024/09/02 03:33:49 by fleonte          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
 #include "pipex.h"
 
-# define FILE1			1	// 1st file
-# define COMM1			2	// 1st command
-# define COMM2			3	// 2nd command
-# define FILE2			4	// 2nd file
-# define PIPE_INLET		0
-# define PIPE_OUTLET	1
+// executes the commands
+int	exeggutor(char *command_id, char *argv, char **env)
+{
+	pid_t	pid;
 
+	if ((pid = fork()) < 0)
+		return (printf("fork for pid[0] failed"));
+	else if (pid == 0)
+	{
+		execve(find_path(command_id, env), &argv, env);
 
+	}
+	return (pid);
+}
+
+/*
 int	pipex(char **command_id, char **argv, char **env)
 {
-	int	piped_fds[2];
-	pid_t	pid[2];
 	int		i;
 
 	
-	// we PIPE here
-	if (pipe(piped_fds) == -1)
-		return (printf("pipe failed"));
+	
 
 	// we DUP2 here
 	dup2(piped_fds[PIPE_INLET], STDOUT_FILENO);
@@ -60,21 +63,45 @@ int	pipex(char **command_id, char **argv, char **env)
 	}
 	
 }
-
+*/
 int	main(int argc, char **argv, char **env)
 {
 	char	**splitted_command;
 	char	*command_id[2];
+	int		piped_fds[2];
+	pid_t	pid[2];
+	int		status;
 
 	if (argc != 5)
 		return (printf("%s", "wrong arg count"));
+
+	printf("Parent PID: %d\n\n", getpid());
+	
+	// we PIPE here
+	if (pipe(piped_fds) == -1)
+		return (printf("pipe failed"));
+	//printf("piped_fds: %d and %d\n", piped_fds[0], piped_fds[1]);
 
 	splitted_command = ft_split(argv[1], ' ');
 	command_id[0] = splitted_command[0];
 	splitted_command = ft_split(argv[2], ' ');
 	command_id[1] = splitted_command[0];
 
-	pipex(command_id , argv, env);
+	pid[0] = exeggutor(command_id[0], argv[2], env); // child for first command(argv[comm1])
+	printf("PID: %d //printed after line 90\n\n", getpid());
+	pid[1] = exeggutor(command_id[1], argv[3], env); // child for second command(argv[comm2])
+	printf("PID: %d //printed after line 92\n", getpid());
 
+
+	//printf("pids: %d and %d\n", pid[0], pid[1]);
+//	if (pid[1] == 0)
+//	{
+//		printf("STATUSES:\n");
+//		printf("PID: %d\n", getpid());
+//	}
+	waitpid(pid[0], &status, 0); // can't use wait(&status) because we have 2 parallel childs
+//	printf("PID: %d // status pid[0]: %d\n", getpid(), status);
+	waitpid(pid[1], &status, 0); //-||-||-
+//	printf("PID: %d // status pid[1]: %d\n", getpid(), status);
 	return 0;
 }
