@@ -6,7 +6,7 @@
 /*   By: fleonte <fleonte@student.42madrid.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/30 16:17:04 by fleonte           #+#    #+#             */
-/*   Updated: 2024/09/02 22:04:42 by fleonte          ###   ########.fr       */
+/*   Updated: 2024/09/02 22:53:03 by fleonte          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,15 +16,21 @@
 int	exeggutor(char *command_id, char *argv, char **env, int fd)
 {
 	pid_t	pid;
+	int		file_fd;
 
 	if ((pid = fork()) < 0)
 		return (printf("fork for pid[0] failed"));
 	else if (pid == 0)
 	{
-		dup2(fd, STDOUT_FILENO);
-		execve(find_path(command_id, env), &argv, env);
+//		dup2(fd, STDOUT_FILENO);
+//		execve(find_path(command_id, env), &argv, env);
 //		exit;
 
+//		file_fd = open ("text.txt", O_WRONLY);
+//		printf("file_fd:%d\n", file_fd);
+		dup2(fd, STDOUT_FILENO);
+		printf("file_fd:%d\n", fd);
+		execlp("/bin/ls", "ls", "-l", NULL);
 	}
 	return (pid); // Is it being returned if it is after an exit or an execve?
 }
@@ -73,7 +79,7 @@ int	main(int argc, char **argv, char **env)
 	int		piped_fds[2];
 	pid_t	pid[2];
 	int		status;
-
+	int		file_fd;
 //	if (argc != 5)
 //		return (printf("%s", "wrong arg count"));
 
@@ -83,8 +89,10 @@ int	main(int argc, char **argv, char **env)
 	if (pipe(piped_fds) == -1)
 		return (printf("pipe failed"));
 	//printf("piped_fds: %d and %d\n", piped_fds[0], piped_fds[1]);
+	file_fd = open ("text.txt", O_WRONLY);
 
-	dup2(PIPE_OUTLET, STDIN_FILENO);
+	dup2(file_fd, STDOUT_FILENO);
+
 	splitted_command = ft_split(argv[1], ' ');
 	command_id[0] = splitted_command[0];
 	splitted_command = ft_split(argv[2], ' ');
