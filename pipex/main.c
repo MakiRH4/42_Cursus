@@ -6,7 +6,7 @@
 /*   By: fleonte <fleonte@student.42madrid.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/30 16:17:04 by fleonte           #+#    #+#             */
-/*   Updated: 2024/09/03 02:14:56 by fleonte          ###   ########.fr       */
+/*   Updated: 2024/09/04 19:38:16 by fleonte          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,8 @@ int	main(int argc, char **argv, char **env)
 	pid_t	pid[2];
 	int		status;
 	
-	if (argc != 5)
-		return (printf("%s", "wrong arg count"));
+//	if (argc != 5)
+//		return (printf("%s", "wrong arg count"));
 	
 	// we PIPE here
 	if (pipe(piped_fds) == -1)
@@ -31,6 +31,9 @@ int	main(int argc, char **argv, char **env)
 	command_id[0] = splitted_command[0];
 	splitted_command = ft_split(argv[3], ' ');
 	command_id[1] = splitted_command[0];
+
+	close(piped_fds[WRITE]);
+	dup2(STDOUT_FILENO, piped_fds[WRITE]);
 
 	pid[0] = exeggutor(command_id[0], argv, env, piped_fds); // child for first command(argv[comm1])
 
