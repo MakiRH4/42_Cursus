@@ -6,7 +6,7 @@
 #    By: fleonte <fleonte@student.42madrid.com>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/09/15 00:51:06 by fleonte           #+#    #+#              #
-#    Updated: 2024/09/05 02:23:56 by fleonte          ###   ########.fr        #
+#    Updated: 2024/09/05 05:26:16 by fleonte          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,7 +19,7 @@ NAME_BONUS = pipex_bonus
 CC = cc
 RM = rm -f
 LIB = Libft/libft.a
-CFLAGS = -Wall -Wextra -Werror
+CFLAGS = -Wall -Wextra -Werror -g
 
 ${NAME}: ${OBJS}
 		make all -C Libft/

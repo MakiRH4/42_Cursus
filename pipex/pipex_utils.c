@@ -6,7 +6,7 @@
 /*   By: fleonte <fleonte@student.42madrid.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/30 23:33:54 by fleonte           #+#    #+#             */
-/*   Updated: 2024/09/05 04:45:33 by fleonte          ###   ########.fr       */
+/*   Updated: 2024/09/05 06:07:07 by fleonte          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,8 +93,11 @@ char **ft_verify_command(char *command, char **env)
 	else
 	{
 		valid_path = find_path(command_splitted[0], env);
-		free(command_splitted[0]);
-		command_splitted[0] = valid_path;
+		if (ft_strncmp(valid_path, command_splitted[0], ft_strlen(valid_path)) != 0)
+		{
+			free(command_splitted[0]);
+			command_splitted[0] = valid_path;
+		}
 		return (command_splitted);
 	}
 	return(command_splitted);
@@ -102,36 +105,30 @@ char **ft_verify_command(char *command, char **env)
 char	*find_path(char *command_id, char **env)
 {
 	char	**env_arr;
-	char	**env_arr_cp;
 	char	*path_temp;
 	char	*path;
+	int		i;
 
-	while (*env++)
+	i = -1;
+	while (*env)
 	{
 		// if PATH= is found in **env, conditional evaluates to true
-		if (str_in_str(*env, "PATH="))
+		if (ft_strnstr(*env, "PATH=", ft_strlen(*env)) && *env[0] == 'P')
 		{
-			env_arr = ft_split(*env, ':'); //ft_split gets a string from env
-			env_arr_cp = env_arr;
-			while (*env_arr++)
+			env_arr = ft_split(*env, ':'); //ft_split gets a string from envm
+			while (env_arr[++i])
 			{
-				path_temp = ft_strjoin(*env_arr, "/"); // path + /
+				path_temp = ft_strjoin(env_arr[i], "/"); // path + /
 				path = ft_strjoin(path_temp, command_id); // path/ + command
 				free(path_temp); //otherwise path_temp creates memory leaks
-				ft_putstr_fd(path, 2);
-				ft_putstr_fd("\n", 2);
-				
 				if (access(path, F_OK | X_OK) == 0)
-				{
-					ft_putstr_fd("al sona prohibida", 2);
-					return (free_array(env_arr_cp), path);
-				}
+					return (free_array(env_arr), path);
 				free(path);
 			}
-			free_array(env_arr_cp);
+			free_array(env_arr);
 		}
+		env++;
 	}
-	ft_putstr_fd(command_id, 2);
 	return command_id;
 }
 
