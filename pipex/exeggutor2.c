@@ -1,19 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   exeggutor.c                                        :+:      :+:    :+:   */
+/*   exeggutor2.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fleonte <fleonte@student.42madrid.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/03 00:12:22 by fleonte           #+#    #+#             */
-/*   Updated: 2024/09/05 03:41:54 by fleonte          ###   ########.fr       */
+/*   Updated: 2024/09/05 02:25:06 by fleonte          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
 
-// executes the commands
-int	exeggutor(char **command_id, char **argv, char **env, int *piped_fds)
+int	exeggutor2(char **command_id, char **argv, char **env, int *piped_fds)
 {
 	pid_t	pid;
 
@@ -24,16 +23,18 @@ int	exeggutor(char **command_id, char **argv, char **env, int *piped_fds)
 	else if (pid == 0)
 	{
 
-		int fd = open(argv[1], O_RDONLY);
-		if (fd < 0)
-			(ft_putstr_fd("failed to open infile", 2), exit(127));
-		dup2(fd, STDIN_FILENO);
+		int fd = open(argv[4], O_WRONLY | O_CREAT, 0777);	
 
-		dup2(piped_fds[WRITE], STDOUT_FILENO);
-		close(piped_fds[WRITE]);
-		execve(command_id[0], command_id, env);
+		dup2(fd, STDOUT_FILENO);
+		close(fd);
+		dup2(piped_fds[READ], STDIN_FILENO);
+		close(piped_fds[READ]);
+		if ((execve(command_id[0], command_id, env)) == -1)
+		{
+			perror("Execve failed");
+			exit(127);
+		}
 	}
-	free_array(command_id);
-	close(piped_fds[WRITE]);
+	close(piped_fds[READ]);
 	return (pid);
 }

@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   ft_split.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fleonte <fleonte@student.42madrid.com>     +#+  +:+       +#+        */
+/*   By: floris <floris@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/19 20:18:16 by floris            #+#    #+#             */
-/*   Updated: 2024/09/02 02:51:34 by fleonte          ###   ########.fr       */
+/*   Updated: 2023/11/23 16:17:30 by floris           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# include "pipex.h"
+#include "libft.h"
 
 static int	ft_wordcount(char const *s, char c)
 {

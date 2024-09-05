@@ -6,11 +6,21 @@
 /*   By: fleonte <fleonte@student.42madrid.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/30 23:33:54 by fleonte           #+#    #+#             */
-/*   Updated: 2024/09/02 02:45:25 by fleonte          ###   ########.fr       */
+/*   Updated: 2024/09/05 03:41:43 by fleonte          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
+
+void	free_array(char **array)
+{
+	int	strings;
+
+	strings = -1;
+	while (array[++strings])
+		free(array[strings]);
+	free(array);
+}
 
 char	*ft_strdup(const char *s1)
 {
@@ -68,6 +78,27 @@ char	*str_in_str(const char *haystack, const char *needle)
 	return (NULL);
 }
 
+
+char **ft_verify_command(char *command, char **env)
+{
+	char **command_splitted;
+	char *valid_path;
+
+	//Chequeo si me enviaron ./ls y si puedo ejecutarlo.
+	command_splitted = ft_split(command, ' ');
+	if (access(command_splitted[0], F_OK | X_OK) && str_in_str(command_splitted[0], "./"))
+		return (command_splitted);
+	else if(access(command_splitted[0], F_OK | X_OK) != 0 && ft_strchr(command_splitted[0], '/')) //Que pasa si me envian un comando incompleto bin/ls
+		return (free_array(command_splitted), NULL);
+	else
+	{
+		valid_path = find_path(command_splitted[0], env);
+		free(command_splitted[0]);
+		command_splitted[0] = valid_path;
+		return (command_splitted);
+	}
+	return(command_splitted);
+}
 char	*find_path(char *command_id, char **env)
 {
 	char	**env_arr;
@@ -86,13 +117,14 @@ char	*find_path(char *command_id, char **env)
 				path = ft_strjoin(path_temp, command_id); // path/ + command
 				free(path_temp); //otherwise path_temp creates memory leaks
 				if (access(path, F_OK | X_OK) == 0)
-					return (path);
+					return (free_array(env_arr), path);
 				free(path);
 			}
+			free_array(env_arr);
 		}
 	}
 	printf ("command %s not found", command_id);
-	return NULL;
+	return command_id;
 }
 
 void	*ft_memcpy(void *dst, const void *src, size_t n)
