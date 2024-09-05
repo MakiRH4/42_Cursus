@@ -6,7 +6,7 @@
 /*   By: fleonte <fleonte@student.42madrid.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/30 23:33:54 by fleonte           #+#    #+#             */
-/*   Updated: 2024/09/05 03:41:43 by fleonte          ###   ########.fr       */
+/*   Updated: 2024/09/05 04:45:33 by fleonte          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,6 +102,7 @@ char **ft_verify_command(char *command, char **env)
 char	*find_path(char *command_id, char **env)
 {
 	char	**env_arr;
+	char	**env_arr_cp;
 	char	*path_temp;
 	char	*path;
 
@@ -111,19 +112,26 @@ char	*find_path(char *command_id, char **env)
 		if (str_in_str(*env, "PATH="))
 		{
 			env_arr = ft_split(*env, ':'); //ft_split gets a string from env
+			env_arr_cp = env_arr;
 			while (*env_arr++)
 			{
 				path_temp = ft_strjoin(*env_arr, "/"); // path + /
 				path = ft_strjoin(path_temp, command_id); // path/ + command
 				free(path_temp); //otherwise path_temp creates memory leaks
+				ft_putstr_fd(path, 2);
+				ft_putstr_fd("\n", 2);
+				
 				if (access(path, F_OK | X_OK) == 0)
-					return (free_array(env_arr), path);
+				{
+					ft_putstr_fd("al sona prohibida", 2);
+					return (free_array(env_arr_cp), path);
+				}
 				free(path);
 			}
-			free_array(env_arr);
+			free_array(env_arr_cp);
 		}
 	}
-	printf ("command %s not found", command_id);
+	ft_putstr_fd(command_id, 2);
 	return command_id;
 }
 
