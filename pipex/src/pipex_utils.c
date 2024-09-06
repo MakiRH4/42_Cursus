@@ -6,7 +6,7 @@
 /*   By: fleonte <fleonte@student.42madrid.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/30 23:33:54 by fleonte           #+#    #+#             */
-/*   Updated: 2024/09/05 06:07:07 by fleonte          ###   ########.fr       */
+/*   Updated: 2024/09/06 20:13:54 by fleonte          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,39 +20,6 @@ void	free_array(char **array)
 	while (array[++strings])
 		free(array[strings]);
 	free(array);
-}
-
-char	*ft_strdup(const char *s1)
-{
-	char	*str;
-	int		strl;
-
-	strl = ft_strlen(s1);
-	str = (char *)malloc(sizeof(char) * strl + 1);
-	if (!str)
-		return (NULL);
-	ft_memcpy(str, s1, strl);
-	str[strl] = '\0';
-	return (str);
-}
-
-char	*ft_strjoin(char const *s1, char const *s2)
-{
-	char	*joined;
-	char	*ret;
-
-	if (!s1 || !s2)
-		return (NULL);
-	joined = (char *)malloc(sizeof(char) * (ft_strlen(s1) + ft_strlen(s2)) + 1);
-	ret = joined;
-	if (!joined)
-		return (NULL);
-	while (*s1)
-		*joined++ = *s1++;
-	while (*s2)
-		*joined++ = *s2++;
-	*(joined) = '\0';
-	return (ret);
 }
 
 char	*str_in_str(const char *haystack, const char *needle)
@@ -78,6 +45,35 @@ char	*str_in_str(const char *haystack, const char *needle)
 	return (NULL);
 }
 
+char	*find_path(char *command_id, char **env)
+{
+	char	**env_arr;
+	char	*path_temp;
+	char	*path;
+	int		i;
+
+	i = -1;
+	while (*env)
+	{
+		// if PATH= is found in **env, conditional evaluates to true
+		if (str_in_str/*ft_strnstr*/(*env, "PATH="/*, ft_strlen(*env)*/) && *env[0] == 'P')
+		{
+			env_arr = ft_split(*env, ':'); //ft_split gets a string from envm
+			while (env_arr[++i])
+			{
+				path_temp = ft_strjoin(env_arr[i], "/"); // path + /
+				path = ft_strjoin(path_temp, command_id); // path/ + command
+				free(path_temp); //otherwise path_temp creates memory leaks
+				if (access(path, F_OK | X_OK) == 0)
+					return (free_array(env_arr), path);
+				free(path);
+			}
+			free_array(env_arr);
+		}
+		env++;
+	}
+	return command_id;
+}
 
 char **ft_verify_command(char *command, char **env)
 {
@@ -101,55 +97,4 @@ char **ft_verify_command(char *command, char **env)
 		return (command_splitted);
 	}
 	return(command_splitted);
-}
-char	*find_path(char *command_id, char **env)
-{
-	char	**env_arr;
-	char	*path_temp;
-	char	*path;
-	int		i;
-
-	i = -1;
-	while (*env)
-	{
-		// if PATH= is found in **env, conditional evaluates to true
-		if (ft_strnstr(*env, "PATH=", ft_strlen(*env)) && *env[0] == 'P')
-		{
-			env_arr = ft_split(*env, ':'); //ft_split gets a string from envm
-			while (env_arr[++i])
-			{
-				path_temp = ft_strjoin(env_arr[i], "/"); // path + /
-				path = ft_strjoin(path_temp, command_id); // path/ + command
-				free(path_temp); //otherwise path_temp creates memory leaks
-				if (access(path, F_OK | X_OK) == 0)
-					return (free_array(env_arr), path);
-				free(path);
-			}
-			free_array(env_arr);
-		}
-		env++;
-	}
-	return command_id;
-}
-
-void	*ft_memcpy(void *dst, const void *src, size_t n)
-{
-	size_t	i;
-
-	i = 0;
-	if (!dst && !src)
-		return (NULL);
-	while (i++ < n)
-		*(unsigned char *)dst++ = *(unsigned char *)src++;
-	return (dst - i + 1);
-}
-
-size_t	ft_strlen(const char *s)
-{
-	size_t	i;
-
-	i = 0;
-	while (*s++)
-		i++;
-	return (i);
 }
