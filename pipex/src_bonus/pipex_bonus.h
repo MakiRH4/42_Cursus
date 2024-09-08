@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pipex.h                                            :+:      :+:    :+:   */
+/*   pipex_bonus.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fleonte <fleonte@student.42madrid.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/30 16:17:20 by fleonte           #+#    #+#             */
-/*   Updated: 2024/09/08 01:09:48 by fleonte          ###   ########.fr       */
+/*   Updated: 2024/09/08 03:40:14 by fleonte          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,12 @@ int		exeggutor_first(char **command_id,
 			char **argv, char **env, int *piped_fds);
 int		exeggutor_last(char **command_id,
 			char **argv, char **env, int *piped_fds);
+int		exeggutor_halfway(char **command_id, char **argv,
+			char **env, int *piped_fds, int i);
+int		something_failed(int reason, char **argv);
 char	*find_path(char *command_id, char **env);
 char	*str_in_str(const char *haystack, const char *needle);
 char	**ft_verify_command(char *command, char **env);
+pid_t	*exeggutor_connex(int argc, char **argv, char **env, int *piped_fds);
 
 #endif

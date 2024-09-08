@@ -6,24 +6,25 @@
 /*   By: fleonte <fleonte@student.42madrid.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/07 23:42:40 by fleonte           #+#    #+#             */
-/*   Updated: 2024/09/08 01:09:33 by fleonte          ###   ########.fr       */
+/*   Updated: 2024/09/08 03:42:12 by fleonte          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex_bonus.h"
 
-int	something_failed(int case, char **argv)
+int	something_failed(int reason, char **argv)
 {
-	if (case == 1)
-		close(all fds);
-		ft_printf("fork for pid[0] failed")
-	else if (case == 2)
-		close todas las cosas habidas y por haber
-		ft_printf("zsh: no such file or directory: %s", argv[1]);
-	else if (case == 3)
-		execve failed, do what you gotta do
-		
-		
+	if (reason == 1)
+//		close(all fds);
+		return(ft_printf("fork failed\n"));
+	else if (reason == 2)
+//		close todas las cosas habidas y por haber
+		return(ft_printf("zsh: no such file or directory: %s\n", argv[1]));
+	else if (reason == 3)
+//		execve failed, do what you gotta do
+		return(ft_printf("reason 3, execve failed\n"));
+	else
+		return(0);
 }
 
 void	free_array(char **array)

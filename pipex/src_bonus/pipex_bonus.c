@@ -6,16 +6,16 @@
 /*   By: fleonte <fleonte@student.42madrid.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/30 16:17:04 by fleonte           #+#    #+#             */
-/*   Updated: 2024/09/08 00:57:10 by fleonte          ###   ########.fr       */
+/*   Updated: 2024/09/08 03:37:38 by fleonte          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "pipex.h"
+#include "pipex_bonus.h"
 
 int	main(int argc, char **argv, char **env)
 {
 	int		piped_fds[2];
-//	pid_t	pid[2];
+	pid_t	*pid;
 	int		status;
 	int		i_wait;
 
@@ -24,7 +24,7 @@ int	main(int argc, char **argv, char **env)
 	if (pipe(piped_fds) == -1)
 		return (ft_printf("pipe failed"));
 	
-	exeggutor_connex(argc, argv, env, piped_fds);
+	pid = exeggutor_connex(argc, argv, env, piped_fds);
 /*
 	pid[0] = exeggutor_first(ft_verify_command(argv[2], env),
 			argv, env, piped_fds);
@@ -34,5 +34,6 @@ int	main(int argc, char **argv, char **env)
 	i_wait = -1;
 	while (++i_wait <= argc)
 		waitpid(pid[i_wait], &status, 0);
+	free(pid);
 	return (WEXITSTATUS(status));
 }
