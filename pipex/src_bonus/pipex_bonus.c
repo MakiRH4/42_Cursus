@@ -6,7 +6,7 @@
 /*   By: fleonte <fleonte@student.42madrid.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/30 16:17:04 by fleonte           #+#    #+#             */
-/*   Updated: 2024/09/08 05:40:15 by fleonte          ###   ########.fr       */
+/*   Updated: 2024/09/08 23:05:11 by fleonte          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,14 +17,14 @@ int	main(int argc, char **argv, char **env)
 	int		piped_fds[2];
 	pid_t	*pid;
 	int		status;
-	int		i_wait;
+//	int		i_wait;
 
 	if (argc < 5)
 		return (ft_printf("%s", "wrong arg count"));
 	if (pipe(piped_fds) == -1)
 		return (ft_printf("pipe failed"));
 	pid = exeggutor_connex(argc, argv, env, piped_fds);
-	i_wait = -1;
+//	i_wait = -1;
 /* 	while (++i_wait <= argc - 3)
 		waitpid(pid[i_wait], &status, 0);
  */	

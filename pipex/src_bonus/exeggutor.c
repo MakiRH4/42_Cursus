@@ -6,13 +6,13 @@
 /*   By: fleonte <fleonte@student.42madrid.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/03 00:12:22 by fleonte           #+#    #+#             */
-/*   Updated: 2024/09/08 06:04:17 by fleonte          ###   ########.fr       */
+/*   Updated: 2024/09/08 23:05:09 by fleonte          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex_bonus.h"
 
-pid_t	exeggutor_last(char **command_id, char **argv, char **env, int *piped_fds, int argc)
+pid_t	exeggutor_last(char **command_id, char **argv, char **env, int piped_fds[2], int argc)
 {
 	int		fd;
 	pid_t	pid;
@@ -47,7 +47,7 @@ pid_t	exeggutor_last(char **command_id, char **argv, char **env, int *piped_fds,
 	return (pid);
 }
 
-pid_t	exeggutor_halfway(char **command_id, char **argv, char **env, int piped_fds[2], int i)
+pid_t	exeggutor_halfway(char **command_id, char **argv, char **env, int piped_fds[2])
 {
 	pid_t	pid;
 	int		pipe_halfway[2];
@@ -67,7 +67,7 @@ pid_t	exeggutor_halfway(char **command_id, char **argv, char **env, int piped_fd
 		close(piped_fds[READ]);
 		dup2(pipe_halfway[WRITE], STDOUT_FILENO);
 		close(pipe_halfway[WRITE]);
-		execve(command_id[i], command_id, env);
+		execve(command_id[0], command_id, env);
 		exit(0);
 	}
 	free_array(command_id);
@@ -124,7 +124,7 @@ pid_t	*exeggutor_connex(int argc, char **argv, char **env, int piped_fds[2])
 	while (++i_pid + 2 < argc - 2)
 	{
 		pid[i_pid] = exeggutor_halfway(ft_verify_command(argv[i_pid+2], env),
-				argv, env, piped_fds, i_pid);
+				argv, env, piped_fds);
 		if (pid[i_pid] == -1)
 		{
 			free(pid);
