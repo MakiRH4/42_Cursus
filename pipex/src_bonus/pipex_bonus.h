@@ -6,12 +6,12 @@
 /*   By: fleonte <fleonte@student.42madrid.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/30 16:17:20 by fleonte           #+#    #+#             */
-/*   Updated: 2024/09/08 23:05:09 by fleonte          ###   ########.fr       */
+/*   Updated: 2024/09/11 00:02:24 by fleonte          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PIPEX_H
-# define PIPEX_H
+#ifndef PIPEX_BONUS_H
+# define PIPEX_BONUS_H
 # define READ			0
 # define WRITE			1
 # include <stdio.h>
