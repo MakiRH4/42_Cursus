@@ -6,7 +6,7 @@
 /*   By: fleonte <fleonte@student.42madrid.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/07 23:42:40 by fleonte           #+#    #+#             */
-/*   Updated: 2024/09/11 00:37:07 by fleonte          ###   ########.fr       */
+/*   Updated: 2024/09/11 01:43:13 by fleonte          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ int	something_failed(int reason, char *file_name)
 		return(ft_printf("zsh: no such file or directory: %s\n", file_name));
 	else if (reason == 3)
 //		execve failed, do what you gotta do
-		return(ft_printf("reason 3, execve failed\n"));
+		return(ft_printf("zsh: command not found: %s\n", file_name));
 	else
 		return(0);
 }

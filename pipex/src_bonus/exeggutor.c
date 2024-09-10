@@ -6,13 +6,14 @@
 /*   By: fleonte <fleonte@student.42madrid.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/03 00:12:22 by fleonte           #+#    #+#             */
-/*   Updated: 2024/09/11 00:38:20 by fleonte          ###   ########.fr       */
+/*   Updated: 2024/09/11 01:47:43 by fleonte          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex_bonus.h"
 
-pid_t	exeggutor_last(char **command_id, char *outfile, char **env, int piped_fds[2])
+pid_t	exeggutor_last(char **command_id, char *outfile,
+			char **env, int piped_fds[2])
 {
 	int		fd;
 	pid_t	pid;
@@ -30,9 +31,10 @@ pid_t	exeggutor_last(char **command_id, char *outfile, char **env, int piped_fds
 		close(piped_fds[READ]);
 		if ((execve(command_id[0], command_id, env)) == -1)
 		{
-			something_failed(3, outfile);
+			something_failed(3, command_id[0]);
 			exit(127);
 		}
+//		exit(0); // yes?
 	}
 	close(piped_fds[READ]);
 	close(piped_fds[WRITE]);
@@ -40,7 +42,8 @@ pid_t	exeggutor_last(char **command_id, char *outfile, char **env, int piped_fds
 	return (pid);
 }
 
-pid_t	exeggutor_halfway(char **command_id, char **argv, char **env, int piped_fds[2])
+pid_t	exeggutor_halfway(char **command_id, char **argv,
+			char **env, int piped_fds[2])
 {
 	pid_t	pid;
 	int		pipe_halfway[2];
@@ -57,7 +60,11 @@ pid_t	exeggutor_halfway(char **command_id, char **argv, char **env, int piped_fd
 		close(piped_fds[READ]);
 		dup2(pipe_halfway[WRITE], STDOUT_FILENO);
 		close(pipe_halfway[WRITE]);
-		execve(command_id[0], command_id, env);
+		if ((execve(command_id[0], command_id, env)) == -1)
+		{
+			something_failed(3, command_id[0]);
+			exit(127);
+		}
 		exit(0);
 	}
 	free_array(command_id);
@@ -67,7 +74,8 @@ pid_t	exeggutor_halfway(char **command_id, char **argv, char **env, int piped_fd
 	return (pid);
 }
 
-pid_t	exeggutor_first(char **command_id, char **argv, char **env, int piped_fds[2])
+pid_t	exeggutor_first(char **command_id, char **argv,
+			char **env, int piped_fds[2])
 {
 	int		fd;
 	pid_t	pid;
@@ -87,7 +95,13 @@ pid_t	exeggutor_first(char **command_id, char **argv, char **env, int piped_fds[
 		close(fd);
 		dup2(piped_fds[WRITE], STDOUT_FILENO);
 		close(piped_fds[WRITE]);
-		execve(command_id[0], command_id, env);
+		if ((execve(command_id[0], command_id, env)) == -1)
+		{
+			something_failed(3, command_id[0]);
+			exit(127);
+		}
+		exit(0);
+		
 	}
 	free_array(command_id);
 	return (pid);
@@ -103,26 +117,17 @@ pid_t	*exeggutor_connex(int argc, char **argv, char **env, int piped_fds[2])
 	pid[i_pid] = exeggutor_first(ft_verify_command(argv[i_pid + 2], env),
 			argv, env, piped_fds);
 	if (pid[i_pid] == -1)
-	{
-		free(pid);
-		return (NULL);
-	}
+		return (free(pid), NULL);
 	while (++i_pid + 2 < argc - 2)
 	{
-		pid[i_pid] = exeggutor_halfway(ft_verify_command(argv[i_pid+2], env),
+		pid[i_pid] = exeggutor_halfway(ft_verify_command(argv[i_pid + 2], env),
 				argv, env, piped_fds);
 		if (pid[i_pid] == -1)
-		{
-			free(pid);
-			return (NULL);
-		}
+			return (free(pid), NULL);
 	}
 	pid[i_pid] = exeggutor_last(ft_verify_command(argv[argc - 2], env),
 			argv[argc - 1], env, piped_fds);
 	if (pid[i_pid] == -1)
-	{
-		free(pid);
-		return (NULL);
-	}
+		return (free(pid), NULL);
 	return (pid);
 }
