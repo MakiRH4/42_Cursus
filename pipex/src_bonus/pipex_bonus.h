@@ -6,7 +6,7 @@
 /*   By: fleonte <fleonte@student.42madrid.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/30 16:17:20 by fleonte           #+#    #+#             */
-/*   Updated: 2024/09/11 00:02:24 by fleonte          ###   ########.fr       */
+/*   Updated: 2024/09/11 00:38:07 by fleonte          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,10 +28,10 @@ void	free_array(char **array);
 int		exeggutor_first(char **command_id,
 			char **argv, char **env, int piped_fds[2]);
 int		exeggutor_last(char **command_id,
-			char **argv, char **env, int piped_fds[2], int argc);
+			char *outfile, char **env, int piped_fds[2]);
 int		exeggutor_halfway(char **command_id, char **argv,
 			char **env, int piped_fds[2]);
-int		something_failed(int reason, char **argv);
+int		something_failed(int reason, char *file_name);
 char	*find_path(char *command_id, char **env);
 char	*str_in_str(const char *haystack, const char *needle);
 char	**ft_verify_command(char *command, char **env);

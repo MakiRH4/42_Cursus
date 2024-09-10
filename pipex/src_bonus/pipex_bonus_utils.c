@@ -6,20 +6,20 @@
 /*   By: fleonte <fleonte@student.42madrid.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/07 23:42:40 by fleonte           #+#    #+#             */
-/*   Updated: 2024/09/08 03:42:12 by fleonte          ###   ########.fr       */
+/*   Updated: 2024/09/11 00:37:07 by fleonte          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex_bonus.h"
 
-int	something_failed(int reason, char **argv)
+int	something_failed(int reason, char *file_name)
 {
 	if (reason == 1)
 //		close(all fds);
 		return(ft_printf("fork failed\n"));
 	else if (reason == 2)
 //		close todas las cosas habidas y por haber
-		return(ft_printf("zsh: no such file or directory: %s\n", argv[1]));
+		return(ft_printf("zsh: no such file or directory: %s\n", file_name));
 	else if (reason == 3)
 //		execve failed, do what you gotta do
 		return(ft_printf("reason 3, execve failed\n"));
