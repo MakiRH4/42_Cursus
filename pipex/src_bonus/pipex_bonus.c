@@ -6,7 +6,7 @@
 /*   By: fleonte <fleonte@student.42madrid.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/30 16:17:04 by fleonte           #+#    #+#             */
-/*   Updated: 2024/09/11 01:29:18 by fleonte          ###   ########.fr       */
+/*   Updated: 2024/09/11 02:44:56 by fleonte          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,11 +19,19 @@ int	main(int argc, char **argv, char **env)
 	int		status;
 	int		i_wait;
 
-//	if (argc < 5)
-//		return (ft_printf("%s", "wrong arg count"));
+	if (argc < 5)
+		return (-1);
 	if (pipe(piped_fds) == -1)
-		return (ft_printf("pipe failed"));
-	pid = exeggutor_connex(argc, argv, env, piped_fds);
+		return (ft_printf("pipe failed"), -1);
+	if (strnmcp(argv[1], "here_doc") == 0 && argc > 5)
+		here_doc(argc, argv, env, piped_fds);
+	else
+	{
+		if (strnmcp(argv[1], "here_doc") == 0)
+			return(throw_error(4, NULL, piped_fds));
+		else
+			pid = exeggutor_connex(argc, argv, env, piped_fds);
+	}
 	i_wait = -1;
 	while (++i_wait <= argc - 3)
 		waitpid(pid[i_wait], &status, 0);

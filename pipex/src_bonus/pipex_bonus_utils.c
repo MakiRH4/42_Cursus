@@ -6,23 +6,28 @@
 /*   By: fleonte <fleonte@student.42madrid.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/07 23:42:40 by fleonte           #+#    #+#             */
-/*   Updated: 2024/09/11 01:43:13 by fleonte          ###   ########.fr       */
+/*   Updated: 2024/09/11 02:35:19 by fleonte          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex_bonus.h"
 
-int	something_failed(int reason, char *file_name)
+int	throw_error(int reason, char *file_name, int *open_fds)
 {
 	if (reason == 1)
-//		close(all fds);
+//		fork failed, should close pipe_halfdway[READ/WRITE]?
 		return(ft_printf("fork failed\n"));
 	else if (reason == 2)
-//		close todas las cosas habidas y por haber
+//		nothing else needed, fork is closed with exit(127)?
 		return(ft_printf("zsh: no such file or directory: %s\n", file_name));
 	else if (reason == 3)
-//		execve failed, do what you gotta do
+//		should close all fds?
 		return(ft_printf("zsh: command not found: %s\n", file_name));
+	else if (reason == 4)
+	{
+		(close(open_fds[0]), close(open_fds[1]));
+		return(ft_printf("Wrong argument count for here_doc"));
+	}
 	else
 		return(0);
 }

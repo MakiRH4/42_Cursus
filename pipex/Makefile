@@ -6,7 +6,7 @@
 #    By: fleonte <fleonte@student.42madrid.com>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/09/15 00:51:06 by fleonte           #+#    #+#              #
-#    Updated: 2024/09/08 04:12:05 by fleonte          ###   ########.fr        #
+#    Updated: 2024/09/11 02:47:35 by fleonte          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -57,6 +57,6 @@ clean:
 fclean: clean
 		make fclean -C libft/
 		make fclean -C ft_printf/
-		${RM} ${NAME}
+		${RM} ${NAME} ${NAME_BONUS}
 
 re: fclean all
