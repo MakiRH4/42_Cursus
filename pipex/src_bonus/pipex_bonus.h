@@ -6,7 +6,7 @@
 /*   By: fleonte <fleonte@student.42madrid.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/30 16:17:20 by fleonte           #+#    #+#             */
-/*   Updated: 2024/09/11 02:35:55 by fleonte          ###   ########.fr       */
+/*   Updated: 2024/09/11 03:47:30 by fleonte          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 # define PIPEX_BONUS_H
 # define READ			0
 # define WRITE			1
+# define TRUE			1
 # include <stdio.h>
 # include <stdlib.h>
 # include <unistd.h>
