@@ -6,7 +6,7 @@
 /*   By: fleonte <fleonte@student.42madrid.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/07 23:42:40 by fleonte           #+#    #+#             */
-/*   Updated: 2024/09/11 02:35:19 by fleonte          ###   ########.fr       */
+/*   Updated: 2024/09/12 09:42:55 by fleonte          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ int	throw_error(int reason, char *file_name, int *open_fds)
 	else if (reason == 4)
 	{
 		(close(open_fds[0]), close(open_fds[1]));
-		return(ft_printf("Wrong argument count for here_doc"));
+		return(ft_printf("Wrong argument count for here_doc\n"));
 	}
 	else
 		return(0);

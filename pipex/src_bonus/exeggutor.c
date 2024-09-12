@@ -1,3 +1,4 @@
+
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
@@ -20,7 +21,7 @@ pid_t	exeggutor_last(char **command_id, char *outfile,
 
 	pid = fork();
 	if (pid < 0)
-		return (throw_error(1, outfile), exit(1), -1);
+		return (throw_error(1, outfile, NULL), exit(1), -1);
 	else if (pid == 0)
 	{
 		fd = open(outfile, O_WRONLY | O_CREAT, 0777);
@@ -30,7 +31,7 @@ pid_t	exeggutor_last(char **command_id, char *outfile,
 		dup2(piped_fds[READ], STDIN_FILENO);
 		close(piped_fds[READ]);
 		if ((execve(command_id[0], command_id, env)) == -1)
-			(throw_error(3, command_id[0]), exit(127));
+			(throw_error(3, command_id[0], PHI), exit(127));
 //		exit(0); // needed?
 	}
 	close(piped_fds[READ]);
@@ -48,7 +49,7 @@ pid_t	exeggutor_halfway(char **command_id, char **argv,
 	pipe(pipe_halfway);
 	pid = fork();
 	if (pid < 0)
-		return (throw_error(1, argv[0]), exit(1), -1);
+		return (throw_error(1, argv[0], PHI), exit(1), -1);
 	else if (pid == 0)
 	{
 		close(pipe_halfway[READ]);
@@ -58,7 +59,7 @@ pid_t	exeggutor_halfway(char **command_id, char **argv,
 		dup2(pipe_halfway[WRITE], STDOUT_FILENO);
 		close(pipe_halfway[WRITE]);
 		if ((execve(command_id[0], command_id, env)) == -1)
-			(throw_error(3, command_id[0]), exit(127));
+			(throw_error(3, command_id[0], PHI), exit(127));
 		exit(0);
 	}
 	free_array(command_id);
@@ -76,18 +77,18 @@ pid_t	exeggutor_first(char **command_id, char **argv,
 
 	pid = fork();
 	if (pid < 0)
-		return (throw_error(1, NULL), exit(1), -1);
+		return (throw_error(1, NULL, PHI), exit(1), -1);
 	else if (pid == 0)
 	{
 		fd = open(argv[1], O_RDONLY);
 		if (fd < 0)
-			(throw_error(2, argv[1]), exit(127));
+			(throw_error(2, argv[1], NULL), exit(127));
 		dup2(fd, STDIN_FILENO);
 		close(fd);
 		dup2(piped_fds[WRITE], STDOUT_FILENO);
 		close(piped_fds[WRITE]);
 		if ((execve(command_id[0], command_id, env)) == -1)
-			(throw_error(3, command_id[0]), exit(127));
+			(throw_error(3, command_id[0], PHI), exit(127));
 		exit(0);	
 	}
 	free_array(command_id);

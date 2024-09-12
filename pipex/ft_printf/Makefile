@@ -1,16 +1,4 @@
-# **************************************************************************** #
-#                                                                              #
-#                                                         :::      ::::::::    #
-#    Makefile                                           :+:      :+:    :+:    #
-#                                                     +:+ +:+         +:+      #
-#    By: fleonte <fleonte@student.42madrid.com>     +#+  +:+       +#+         #
-#                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2024/09/06 21:06:37 by fleonte           #+#    #+#              #
-#    Updated: 2024/09/06 21:58:30 by fleonte          ###   ########.fr        #
-#                                                                              #
-# **************************************************************************** #
-
-SRCS        =      printf_c.c \
+SRCS        :=      printf_c.c \
                     printf_s.c \
                     printf_p.c \
                     ft_printf.c \
@@ -20,16 +8,14 @@ SRCS        =      printf_c.c \
 
 OBJS = $(SRCS:.c=.o)
 
-LIBFT_PATH = ../libft
+LIBFT_PATH = ./libft
 LIBFT = $(LIBFT_PATH)/libft.a
-
-NAME = libftprintf.a
 
 CC = cc
 RM = rm -rf
 CFLAGS = -Wall -Wextra -Werror
                         
-
+NAME = libftprintf.a
 
 #------------------------------------------------------------------------------#
 

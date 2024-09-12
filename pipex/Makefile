@@ -6,7 +6,7 @@
 #    By: fleonte <fleonte@student.42madrid.com>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/09/15 00:51:06 by fleonte           #+#    #+#              #
-#    Updated: 2024/09/11 02:47:35 by fleonte          ###   ########.fr        #
+#    Updated: 2024/09/12 09:06:27 by fleonte          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,7 +16,10 @@ SRCS	=	src/exeggutor.c \
 			
 SRCS_BONUS	=	src_bonus/exeggutor.c \
 				src_bonus/pipex_bonus_utils.c \
-				src_bonus/pipex_bonus.c
+				src_bonus/pipex_bonus.c \
+				src_bonus/here_doc.c \
+				get_next_line/get_next_line.c  \
+				get_next_line/get_next_line_utils.c
 
 OBJS = ${SRCS:.c=.o}
 OBJS_BONUS = ${SRCS_BONUS:.c=.o}
