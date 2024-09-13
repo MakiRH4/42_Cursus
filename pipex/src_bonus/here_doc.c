@@ -6,11 +6,63 @@
 /*   By: fleonte <fleonte@student.42madrid.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/06 23:59:08 by fleonte           #+#    #+#             */
-/*   Updated: 2024/09/12 18:46:27 by fleonte          ###   ########.fr       */
+/*   Updated: 2024/09/13 02:44:34 by fleonte          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex_bonus.h"
+
+pid_t	exeggutor_first_hd(char **command_id, char **env, int piped_fds[2])
+{
+	pid_t	pid;
+	int		status;
+
+	status = 0;
+	pid = fork();
+	if (pid < 0)
+		return (throw_error(1, NULL, PHI), exit(1), -1);
+	else if (pid == 0)
+	{
+		dup2(piped_fds[READ], STDIN_FILENO);
+		close(piped_fds[READ]);
+		dup2(piped_fds[WRITE], STDOUT_FILENO);
+		close(piped_fds[WRITE]);
+		if ((execve(command_id[0], command_id, env)) == -1)
+			(throw_error(3, command_id[0], PHI), exit(127));
+		exit(0);	
+	}
+	waitpid(-1, &status, 0);
+	if (WEXITSTATUS(status) == 12)
+		return(-1);
+	free_array(command_id);
+	return (pid);
+}
+
+pid_t	*exeggutor_connex_hd(int argc, char **argv, char **env, int piped_fds[2])
+{
+	pid_t	*pid;
+	int		i_pid;
+
+	i_pid = 0;
+	pid = malloc(sizeof(pid_t) * (argc - 2));
+	pid[i_pid] = exeggutor_first_hd(ft_verify_command(argv[i_pid + 2], env),
+			env, piped_fds);
+	if (pid[i_pid] == -1)
+		return (free(pid), NULL);
+	while (++i_pid + 2 < argc - 2)
+	{
+		pid[i_pid] = exeggutor_halfway(ft_verify_command(argv[i_pid + 2], env),
+				argv, env, piped_fds);
+		if (pid[i_pid] == -1)
+			return (free(pid), NULL);
+	}
+	pid[i_pid] = exeggutor_last(ft_verify_command(argv[argc - 2], env),
+			argv[argc - 1], env, piped_fds);
+	if (pid[i_pid] == -1)
+		return (free(pid), NULL);
+	return (pid);
+}
+
 
 int	here_doc(int argc, char **argv, char **env, int *piped_fds)
 {
@@ -18,11 +70,10 @@ int	here_doc(int argc, char **argv, char **env, int *piped_fds)
 	char	*lim;
 	pid_t	pid;
 	char	**new_argv;
-	//pid_t	*pid_arr;
 	int		i_argv;
+	int		num;
 
-	ft_putnbr_fd(argc, 2);
-	ft_putstr_fd("\n", 2);
+	num = 0;
 	pid = fork();
 	if (pid < 0)
 		return(throw_error(1, PHI, PHI));
@@ -30,45 +81,32 @@ int	here_doc(int argc, char **argv, char **env, int *piped_fds)
 	{
 		lim = argv[2];
 		close(piped_fds[READ]);
-
 		while (TRUE)
 		{
 			line = get_next_line(0);
-			if (ft_strncmp(line, lim, ft_strlen(lim)) == 0 &&
-						ft_strlen(line) == ft_strlen(lim))
+			ft_putstr_fd(line, piped_fds[WRITE]);
+/*			if (ft_strncmp(line, lim, ft_strlen(lim)) == 0 &&
+						ft_strlen(line) == (ft_strlen(lim) + 1))
+*/			if (++num == 4)
+				{
+				ft_putstr_fd("detected\n", 2);
 				(free(line), close(piped_fds[WRITE]), exit(0));
+				
+				}
 			(ft_putstr_fd(line, piped_fds[WRITE]), free(line));
 		}
 		free(lim);
-		exit(0); // redundant as it will always shpuld exit on line 32?
+		exit(0); // redundant as it should always exit on line 32?
 	}
-// for exeggutor_first, open(piped_fds[WRITE]) or fd == piped_fds[WRITE]
-// and argv[1] == piped_fds[WRITE]
-// **argv has to be modified prior to calling exeggutor_connex
-//	should call exeggutor_connex
 	i_argv = 0;
 	new_argv = malloc(sizeof(char*) * (argc)); // argc so can add NULL
 	new_argv[argc] = NULL;
 	while (i_argv < (argc -1))
 	{
-		ft_putstr_fd("argv:", 2);
-		ft_putstr_fd(ft_itoa(i_argv), 2);
-		ft_putstr_fd("\n", 2);
-		ft_putstr_fd(argv[i_argv], 2);
-		ft_putstr_fd("\n", 2);
-//		ft_memcpy(argv[i_argv], argv[i_argv + 1], ft_strlen(argv[i_argv + 1])); // but with memcopy
 		new_argv[i_argv] = malloc(sizeof(char) * ft_strlen(argv[i_argv + 1]));
 		ft_memcpy(new_argv[i_argv], argv[i_argv + 1], ft_strlen(argv[i_argv + 1])); // but with memcopy
-		ft_putstr_fd("new_argv:", 2);
-		ft_putstr_fd(ft_itoa(i_argv), 2);
-		ft_putstr_fd("\n", 2);
-		ft_putstr_fd(new_argv[i_argv], 2);
-		ft_putstr_fd("\n", 2);
 		++i_argv;
 	}
-	ft_putstr_fd("we made it?", 2);
-	ft_putstr_fd("\n", 2);
-
-	exeggutor_connex((argc - 1), new_argv, env, piped_fds);
-	return (0);
+	exeggutor_connex_hd((argc - 1), new_argv, env, piped_fds);
+	return (argc);
 }

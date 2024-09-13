@@ -32,7 +32,7 @@ pid_t	exeggutor_last(char **command_id, char *outfile,
 		close(piped_fds[READ]);
 		if ((execve(command_id[0], command_id, env)) == -1)
 			(throw_error(3, command_id[0], PHI), exit(127));
-//		exit(0); // needed?
+		exit(0); // needed?
 	}
 	close(piped_fds[READ]);
 	close(piped_fds[WRITE]);
@@ -74,7 +74,9 @@ pid_t	exeggutor_first(char **command_id, char **argv,
 {
 	int		fd;
 	pid_t	pid;
+	int		status;
 
+	status = 0;
 	pid = fork();
 	if (pid < 0)
 		return (throw_error(1, NULL, PHI), exit(1), -1);
@@ -82,7 +84,7 @@ pid_t	exeggutor_first(char **command_id, char **argv,
 	{
 		fd = open(argv[1], O_RDONLY);
 		if (fd < 0)
-			(throw_error(2, argv[1], NULL), exit(127));
+			return(throw_error(2, argv[1], NULL), exit(12), -1);
 		dup2(fd, STDIN_FILENO);
 		close(fd);
 		dup2(piped_fds[WRITE], STDOUT_FILENO);
@@ -91,6 +93,9 @@ pid_t	exeggutor_first(char **command_id, char **argv,
 			(throw_error(3, command_id[0], PHI), exit(127));
 		exit(0);	
 	}
+	waitpid(-1, &status, 0);
+	if (WEXITSTATUS(status) == 12)
+		return(-1);
 	free_array(command_id);
 	return (pid);
 }

@@ -6,7 +6,7 @@
 /*   By: fleonte <fleonte@student.42madrid.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/30 16:17:04 by fleonte           #+#    #+#             */
-/*   Updated: 2024/09/12 09:24:31 by fleonte          ###   ########.fr       */
+/*   Updated: 2024/09/13 01:30:16 by fleonte          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,12 +19,14 @@ int	main(int argc, char **argv, char **env)
 	int		status;
 	int		i_wait;
 
+	status = 0;
+	pid = NULL;
 	if (argc < 5)
 		return (-1);
 	if (pipe(piped_fds) == -1)
 		return (ft_printf("pipe failed"), -1);
 	if (ft_strncmp(argv[1], "here_doc", 8) == 0 && argc > 5)
-		here_doc(argc, argv, env, piped_fds);
+		argc = here_doc(argc, argv, env, piped_fds);
 	else
 	{
 		if (ft_strncmp(argv[1], "here_doc", 8) == 0)
@@ -34,7 +36,7 @@ int	main(int argc, char **argv, char **env)
 	}
 	i_wait = -1;
 	while (++i_wait <= argc - 3)
-		waitpid(pid[i_wait], &status, 0);
+		waitpid(-1, &status, 0);
 	free(pid);
 	return (WEXITSTATUS(status));
 }
