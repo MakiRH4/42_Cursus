@@ -6,7 +6,7 @@
 /*   By: fleonte <fleonte@student.42madrid.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/06 23:59:08 by fleonte           #+#    #+#             */
-/*   Updated: 2024/09/13 02:44:34 by fleonte          ###   ########.fr       */
+/*   Updated: 2024/09/16 14:47:44 by fleonte          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,9 +71,7 @@ int	here_doc(int argc, char **argv, char **env, int *piped_fds)
 	pid_t	pid;
 	char	**new_argv;
 	int		i_argv;
-	int		num;
 
-	num = 0;
 	pid = fork();
 	if (pid < 0)
 		return(throw_error(1, PHI, PHI));
@@ -84,23 +82,18 @@ int	here_doc(int argc, char **argv, char **env, int *piped_fds)
 		while (TRUE)
 		{
 			line = get_next_line(0);
-			ft_putstr_fd(line, piped_fds[WRITE]);
-/*			if (ft_strncmp(line, lim, ft_strlen(lim)) == 0 &&
+			if (ft_strncmp(line, lim, ft_strlen(lim)) == 0 &&
 						ft_strlen(line) == (ft_strlen(lim) + 1))
-*/			if (++num == 4)
-				{
-				ft_putstr_fd("detected\n", 2);
-				(free(line), close(piped_fds[WRITE]), exit(0));
-				
-				}
-			(ft_putstr_fd(line, piped_fds[WRITE]), free(line));
+				break;
+			ft_putstr_fd(line, piped_fds[WRITE]); /*free(line)*/;
 		}
-		free(lim);
-		exit(0); // redundant as it should always exit on line 32?
+		ft_putstr_fd("after wh", 2);
+		//exit(0);
 	}
 	i_argv = 0;
 	new_argv = malloc(sizeof(char*) * (argc)); // argc so can add NULL
 	new_argv[argc] = NULL;
+	ft_putstr_fd("after fork", 2);
 	while (i_argv < (argc -1))
 	{
 		new_argv[i_argv] = malloc(sizeof(char) * ft_strlen(argv[i_argv + 1]));
