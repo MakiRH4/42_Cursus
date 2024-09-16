@@ -6,7 +6,7 @@
 /*   By: fleonte <fleonte@student.42madrid.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/07 23:42:40 by fleonte           #+#    #+#             */
-/*   Updated: 2024/09/12 23:22:33 by fleonte          ###   ########.fr       */
+/*   Updated: 2024/09/17 00:30:30 by fleonte          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,19 +16,19 @@ int	throw_error(int reason, char *file_name, int *open_fds)
 {
 	if (reason == 1)
 //		fork failed, should close pipe_halfdway[READ/WRITE]?
-		return(ft_printf("fork failed\n"));
+		return(ft_printf("pipex: fork failed\n"));
 	else if (reason == 2)
 	{
 //		nothing else needed, fork is closed with exit(127)?
-		return(ft_printf("terminal: no such file or directory: %s\n", file_name));
+		return(ft_printf("pipex: no such file or directory: %s\n", file_name));
 	}
 	else if (reason == 3)
 //		should close all fds?
-		return(ft_printf("zsh: command not found: %s\n", file_name));
+		return(ft_printf("pipex: command not found: %s\n", file_name));
 	else if (reason == 4)
 	{
 		(close(open_fds[0]), close(open_fds[1]));
-		return(ft_printf("Wrong argument count for here_doc\n"));
+		return(ft_printf("pipex: wrong argument count for here_doc\n"));
 	}
 	else
 		return(0);

@@ -6,7 +6,7 @@
 /*   By: fleonte <fleonte@student.42madrid.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/30 16:17:04 by fleonte           #+#    #+#             */
-/*   Updated: 2024/09/13 01:30:16 by fleonte          ###   ########.fr       */
+/*   Updated: 2024/09/17 00:32:48 by fleonte          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,8 @@ int	main(int argc, char **argv, char **env)
 		else
 			pid = exeggutor_connex(argc, argv, env, piped_fds);
 	}
+	ft_putnbr_fd(argc, 2);
+	ft_putstr_fd("\n", 2);
 	i_wait = -1;
 	while (++i_wait <= argc - 3)
 		waitpid(-1, &status, 0);
