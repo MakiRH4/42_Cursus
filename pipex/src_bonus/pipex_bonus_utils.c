@@ -6,7 +6,7 @@
 /*   By: fleonte <fleonte@student.42madrid.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/07 23:42:40 by fleonte           #+#    #+#             */
-/*   Updated: 2024/09/17 00:30:30 by fleonte          ###   ########.fr       */
+/*   Updated: 2024/09/17 04:18:20 by fleonte          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,19 +16,19 @@ int	throw_error(int reason, char *file_name, int *open_fds)
 {
 	if (reason == 1)
 //		fork failed, should close pipe_halfdway[READ/WRITE]?
-		return(ft_printf("pipex: fork failed\n"));
+		return(ft_putstr_fd("pipex: fork failed\n", 2), 1);
 	else if (reason == 2)
-	{
 //		nothing else needed, fork is closed with exit(127)?
-		return(ft_printf("pipex: no such file or directory: %s\n", file_name));
-	}
+		return(ft_putstr_fd("pipex: no such file or directory: ", 2),
+				ft_putstr_fd(file_name, 2), ft_putstr_fd("\n", 2), 1);
 	else if (reason == 3)
 //		should close all fds?
-		return(ft_printf("pipex: command not found: %s\n", file_name));
+		return(ft_putstr_fd("pipex: command not found: ", 2),
+				ft_putstr_fd(file_name, 2), ft_putstr_fd("\n", 2), 1);
 	else if (reason == 4)
 	{
 		(close(open_fds[0]), close(open_fds[1]));
-		return(ft_printf("pipex: wrong argument count for here_doc\n"));
+		return(ft_putstr_fd("pipex: wrong argument count for here_doc\n", 2), 1);
 	}
 	else
 		return(0);
@@ -101,7 +101,11 @@ char	**ft_verify_command(char *command, char **env)
 	char	**cmd_splitted;
 	char	*valid_path;
 
+	if (*command == 0)
+		return(NULL);
 	cmd_splitted = ft_split(command, ' ');
+	if (!cmd_splitted)
+		return(NULL);
 	if (access(cmd_splitted[0], F_OK | X_OK)
 		&& str_in_str(cmd_splitted[0], "./"))
 		return (cmd_splitted);

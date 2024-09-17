@@ -19,6 +19,8 @@ pid_t	exeggutor_last(char **command_id, char *outfile,
 	int		fd;
 	pid_t	pid;
 
+	if (command_id == NULL)
+		return(throw_error(3, PHI, PHI), 0);
 	pid = fork();
 	if (pid < 0)
 		return (throw_error(1, outfile, NULL), exit(1), -1);
@@ -46,6 +48,8 @@ pid_t	exeggutor_halfway(char **command_id, char **argv,
 	pid_t	pid;
 	int		pipe_halfway[2];
 
+	if (command_id == NULL)
+		return(throw_error(3, PHI, PHI), 0);
 	pipe(pipe_halfway);
 	pid = fork();
 	if (pid < 0)
@@ -58,6 +62,7 @@ pid_t	exeggutor_halfway(char **command_id, char **argv,
 		close(piped_fds[READ]);
 		dup2(pipe_halfway[WRITE], STDOUT_FILENO);
 		close(pipe_halfway[WRITE]);
+
 		if ((execve(command_id[0], command_id, env)) == -1)
 			(throw_error(3, command_id[0], PHI), exit(127));
 		exit(0);
@@ -77,6 +82,8 @@ pid_t	exeggutor_first(char **command_id, char **argv,
 	int		status;
 
 	status = 0;
+	if (command_id == NULL)
+		return(throw_error(3, PHI, PHI), 0);
 	pid = fork();
 	if (pid < 0)
 		return (throw_error(1, NULL, PHI), exit(1), -1);
