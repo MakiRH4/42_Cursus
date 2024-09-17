@@ -6,7 +6,7 @@
 /*   By: fleonte <fleonte@student.42madrid.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/06 23:59:08 by fleonte           #+#    #+#             */
-/*   Updated: 2024/09/17 01:31:20 by fleonte          ###   ########.fr       */
+/*   Updated: 2024/09/17 05:24:40 by fleonte          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,8 @@ pid_t	exeggutor_first_hd(char **command_id, char **env, int piped_fds[2])
 	int		status;
 
 	status = 0;
-	ft_putstr_fd(command_id[0], 2);
-	ft_putstr_fd("\n", 2);
+	if (command_id == NULL)
+		return(throw_error(3, PHI, PHI), 0);
 	pid = fork();
 	if (pid < 0)
 		return (throw_error(1, NULL, PHI), exit(1), -1);
@@ -87,21 +87,24 @@ int	here_doc(int argc, char **argv, char **env, int *piped_fds)
 		line = get_next_line(0);
 		if (ft_strncmp(line, lim, ft_strlen(lim)) == 0 &&
 					ft_strlen(line) == (ft_strlen(lim) + 1))
+		{
+			free(line);
 			break;
-		ft_putstr_fd(line, piped_fds[WRITE]); /*free(line)*/;
+		}
+		ft_putstr_fd(line, piped_fds[WRITE]);
+		free(line);
 	}
 		//exit(0);
 //	}
 //	elsed
 //		waitpid(-1, &status, 0);
 	i_argv = 0;
-	new_argv = malloc(sizeof(char*) * (argc)); // argc so can add NULL
-	new_argv[argc] = NULL;
+	new_argv = malloc(sizeof(char *) * (argc - 2)); // argc so can add NULL
 	while (i_argv < (argc -1))
 	{
-		new_argv[i_argv] = malloc(sizeof(char) * ft_strlen(argv[i_argv + 1]));
-		new_argv[i_argv][ft_strlen(argv[i_argv +1])] = 0;
-		ft_memcpy(new_argv[i_argv], argv[i_argv + 1], ft_strlen(argv[i_argv + 1])); // but with memcopy
+		new_argv[i_argv] = malloc(sizeof(char) * ft_strlen(argv[i_argv + 2]));
+		new_argv[i_argv][ft_strlen(argv[i_argv + 2])] = 0;
+		ft_memcpy(new_argv[i_argv], argv[i_argv + 2], ft_strlen(argv[i_argv + 2])); // but with memcopy
 		++i_argv;
 	}
 	exeggutor_connex_hd((argc - 1), new_argv, env, piped_fds);
