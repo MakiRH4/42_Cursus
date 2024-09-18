@@ -56,7 +56,6 @@ pid_t	exeggutor_halfway(char **command_id, char **argv,
 		return (throw_error(1, argv[0], PHI), exit(1), -1);
 	else if (pid == 0)
 	{
-		printf("%s\n",command_id[0]);
 		close(pipe_halfway[READ]);
 		close(piped_fds[WRITE]);
 		dup2(piped_fds[READ], STDIN_FILENO);

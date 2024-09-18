@@ -6,7 +6,7 @@
 /*   By: fleonte <fleonte@student.42madrid.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/06 23:59:08 by fleonte           #+#    #+#             */
-/*   Updated: 2024/09/17 05:24:40 by fleonte          ###   ########.fr       */
+/*   Updated: 2024/09/18 17:18:14 by fleonte          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,6 +88,7 @@ int	here_doc(int argc, char **argv, char **env, int *piped_fds)
 		if (ft_strncmp(line, lim, ft_strlen(lim)) == 0 &&
 					ft_strlen(line) == (ft_strlen(lim) + 1))
 		{
+			ft_putstr_fd("stopped?\n", 2);
 			free(line);
 			break;
 		}
@@ -99,12 +100,13 @@ int	here_doc(int argc, char **argv, char **env, int *piped_fds)
 //	elsed
 //		waitpid(-1, &status, 0);
 	i_argv = 0;
-	new_argv = malloc(sizeof(char *) * (argc - 2)); // argc so can add NULL
-	while (i_argv < (argc -1))
+	new_argv = malloc(sizeof(char *) * (argc)); // argc so can add NULL
+	new_argv[argc -1] = NULL;
+	while (i_argv < (argc -2))
 	{
-		new_argv[i_argv] = malloc(sizeof(char) * ft_strlen(argv[i_argv + 2]));
-		new_argv[i_argv][ft_strlen(argv[i_argv + 2])] = 0;
-		ft_memcpy(new_argv[i_argv], argv[i_argv + 2], ft_strlen(argv[i_argv + 2])); // but with memcopy
+		new_argv[i_argv] = malloc(sizeof(char) * ft_strlen(argv[i_argv + 1]));
+		new_argv[i_argv][ft_strlen(argv[i_argv + 1])] = 0;
+		ft_memcpy(new_argv[i_argv], argv[i_argv + 1], ft_strlen(argv[i_argv + 1])); // but with memcopy
 		++i_argv;
 	}
 	exeggutor_connex_hd((argc - 1), new_argv, env, piped_fds);
