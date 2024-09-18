@@ -6,7 +6,7 @@
 /*   By: fleonte <fleonte@student.42madrid.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/06 23:59:08 by fleonte           #+#    #+#             */
-/*   Updated: 2024/09/18 17:18:14 by fleonte          ###   ########.fr       */
+/*   Updated: 2024/09/18 17:44:42 by fleonte          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,10 +85,11 @@ int	here_doc(int argc, char **argv, char **env, int *piped_fds)
 	while (TRUE)
 	{
 		line = get_next_line(0);
+		ft_putstr_fd("---\n", 2);
 		if (ft_strncmp(line, lim, ft_strlen(lim)) == 0 &&
 					ft_strlen(line) == (ft_strlen(lim) + 1))
 		{
-			ft_putstr_fd("stopped?\n", 2);
+			ft_putstr_fd("stopped\n", 2);
 			free(line);
 			break;
 		}
