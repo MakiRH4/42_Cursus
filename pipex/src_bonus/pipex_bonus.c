@@ -6,7 +6,7 @@
 /*   By: fleonte <fleonte@student.42madrid.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/30 16:17:04 by fleonte           #+#    #+#             */
-/*   Updated: 2024/09/18 17:53:03 by fleonte          ###   ########.fr       */
+/*   Updated: 2024/09/18 19:23:59 by fleonte          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,12 +30,10 @@ int	main(int argc, char **argv, char **env)
 	else
 	{
 		if (ft_strncmp(argv[1], "here_doc", 8) == 0)
-			return(throw_error(4, PHI, piped_fds));
+			return (throw_error(4, NULL, piped_fds));
 		else
 			pid = exeggutor_connex(argc, argv, env, piped_fds);
 	}
-//	close(piped_fds[READ]);
-//	close(piped_fds[WRITE]);
 	i_wait = -1;
 	while (++i_wait <= argc - 3)
 		waitpid(-1, &status, 0);
