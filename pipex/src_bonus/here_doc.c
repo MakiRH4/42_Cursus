@@ -6,7 +6,7 @@
 /*   By: fleonte <fleonte@student.42madrid.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/06 23:59:08 by fleonte           #+#    #+#             */
-/*   Updated: 2024/09/18 18:32:56 by fleonte          ###   ########.fr       */
+/*   Updated: 2024/09/18 21:53:19 by fleonte          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ pid_t	*exeggutor_connex_hd(int argc, char **argv, char **env, int *piped_fds)
 	int		i_pid;
 
 	i_pid = 0;
-	pid = malloc(sizeof(pid_t) * (argc - 2));
+	pid = malloc(sizeof(pid_t) * (argc - 1));
 	while (i_pid + 2 < argc - 2)
 	{
 		pid[i_pid] = exeggutor_halfway(ft_verify_command(argv[i_pid + 2], env),
@@ -27,6 +27,7 @@ pid_t	*exeggutor_connex_hd(int argc, char **argv, char **env, int *piped_fds)
 			return (free(pid), NULL);
 		++i_pid;
 	}
+	ft_putstr_fd(argv[argc - 2], 2);
 	pid[i_pid] = exeggutor_last(ft_verify_command(argv[argc - 2], env),
 			argv[argc - 1], env, piped_fds);
 	if (pid[i_pid] == -1)
@@ -64,6 +65,6 @@ int	here_doc(int argc, char **argv, char **env, int *piped_fds)
 		ft_memcpy(new_argv[i], argv[i + 1], ft_strlen(argv[i + 1]));
 		++i;
 	}
-	exeggutor_connex_hd((argc - 1), new_argv, env, piped_fds);
+	exeggutor_connex_hd((argc -1), new_argv, env, piped_fds);
 	return (argc);
 }
