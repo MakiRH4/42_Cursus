@@ -6,7 +6,7 @@
 /*   By: fleonte <fleonte@student.42madrid.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/06 23:59:08 by fleonte           #+#    #+#             */
-/*   Updated: 2024/09/18 21:53:19 by fleonte          ###   ########.fr       */
+/*   Updated: 2024/09/19 14:51:56 by fleonte          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,6 @@ pid_t	*exeggutor_connex_hd(int argc, char **argv, char **env, int *piped_fds)
 			return (free(pid), NULL);
 		++i_pid;
 	}
-	ft_putstr_fd(argv[argc - 2], 2);
 	pid[i_pid] = exeggutor_last(ft_verify_command(argv[argc - 2], env),
 			argv[argc - 1], env, piped_fds);
 	if (pid[i_pid] == -1)
@@ -58,7 +57,7 @@ int	here_doc(int argc, char **argv, char **env, int *piped_fds)
 	i = 0;
 	new_argv = malloc(sizeof(char *) * (argc));
 	new_argv[argc -1] = NULL;
-	while (i < (argc -2))
+	while (i < (argc -1))
 	{
 		new_argv[i] = malloc(sizeof(char) * ft_strlen(argv[i + 1]));
 		new_argv[i][ft_strlen(argv[i + 1])] = 0;

@@ -6,7 +6,7 @@
 /*   By: fleonte <fleonte@student.42madrid.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/07 23:42:40 by fleonte           #+#    #+#             */
-/*   Updated: 2024/09/18 21:20:35 by fleonte          ###   ########.fr       */
+/*   Updated: 2024/09/19 14:09:58 by fleonte          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,6 @@ int	throw_error(int reason, char *file_name, int *open_fds)
 			ft_putstr_fd(file_name, 2), ft_putstr_fd("\n", 2), 1);
 	else if (reason == 3)
 	{
-		(ft_putnbr_fd(open_fds[READ], 2), ft_putnbr_fd(open_fds[WRITE], 2)); 
 		(close(open_fds[READ]), close(open_fds[WRITE]));
 //		should close all fds?
 		return (ft_putstr_fd("pipex: command not found: ", 2),
