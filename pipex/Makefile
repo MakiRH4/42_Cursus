@@ -6,7 +6,7 @@
 #    By: fleonte <fleonte@student.42madrid.com>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/09/15 00:51:06 by fleonte           #+#    #+#              #
-#    Updated: 2024/09/18 20:37:17 by fleonte          ###   ########.fr        #
+#    Updated: 2024/09/19 16:59:28 by fleonte          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -41,12 +41,12 @@ CFLAGS = -Wall -Wextra -Werror -g
 ${NAME}: ${OBJS}
 		make all -C libft/
 		make all -C ft_printf/
-		${CC} ${OBJS} ${LIBFT} ${FT_PRINTF} -o $(NAME)
+		${CC} ${OBJS} ${LIBFT} ${FT_PRINTF} ${CFLAGS} -o $(NAME)
 
 ${NAME_BONUS}: ${OBJS_BONUS}
 		make all -C libft/
 		make all -C ft_printf/
-		${CC} ${OBJS_BONUS} ${LIBFT} ${FT_PRINTF} -o $(NAME_BONUS)
+		${CC} ${OBJS_BONUS} ${LIBFT} ${FT_PRINTF} ${CFLAGS} -o $(NAME_BONUS)
 
 all: ${NAME}
 

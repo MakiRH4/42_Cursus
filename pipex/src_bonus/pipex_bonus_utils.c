@@ -6,7 +6,7 @@
 /*   By: fleonte <fleonte@student.42madrid.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/07 23:42:40 by fleonte           #+#    #+#             */
-/*   Updated: 2024/09/19 14:09:58 by fleonte          ###   ########.fr       */
+/*   Updated: 2024/09/19 17:15:08 by fleonte          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,12 +15,16 @@
 int	throw_error(int reason, char *file_name, int *open_fds)
 {
 	if (reason == 1)
-//		fork failed, should close pipe_halfdway[READ/WRITE]?
+	{
+		(close(open_fds[READ]), close(open_fds[WRITE]));
 		return (ft_putstr_fd("pipex: fork failed\n", 2), 1);
+	}
 	else if (reason == 2)
-//		nothing else needed, fork is closed with exit(127)?
+	{
+		(close(open_fds[READ]), close(open_fds[WRITE]));
 		return (ft_putstr_fd("pipex: no such file or directory: ", 2),
 			ft_putstr_fd(file_name, 2), ft_putstr_fd("\n", 2), 1);
+	}
 	else if (reason == 3)
 	{
 		(close(open_fds[READ]), close(open_fds[WRITE]));
@@ -30,7 +34,6 @@ int	throw_error(int reason, char *file_name, int *open_fds)
 	}
 	else if (reason == 4)
 	{
-		(ft_putnbr_fd(open_fds[READ], 2), ft_putnbr_fd(open_fds[WRITE], 2));
 		(close(open_fds[0]), close(open_fds[1]));
 		return (ft_putstr_fd("pipex: wrong argc for here_doc\n", 2), 1);
 	}
