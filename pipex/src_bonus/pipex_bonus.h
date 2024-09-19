@@ -6,7 +6,7 @@
 /*   By: fleonte <fleonte@student.42madrid.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/30 16:17:20 by fleonte           #+#    #+#             */
-/*   Updated: 2024/09/18 20:43:42 by fleonte          ###   ########.fr       */
+/*   Updated: 2024/09/19 20:49:07 by fleonte          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ char	*get_next_line(int fd);
 char	*find_path(char *command_id, char **env);
 char	*str_in_str(const char *haystack, const char *needle);
 char	**ft_verify_command(char *command, char **env);
-pid_t	*exeggutor_connex(int argc, char **argv, char **env, int *piped_fds);
+int		*exeggutor_connex(int argc, char **argv, char **env, int *piped_fds);
 
 pid_t	*exeggutor_connex_hd(int argc, char **argv, char **env, int *piped_fds);
 

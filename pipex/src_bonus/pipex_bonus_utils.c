@@ -6,7 +6,7 @@
 /*   By: fleonte <fleonte@student.42madrid.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/07 23:42:40 by fleonte           #+#    #+#             */
-/*   Updated: 2024/09/19 17:15:08 by fleonte          ###   ########.fr       */
+/*   Updated: 2024/09/19 20:23:59 by fleonte          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,29 +14,19 @@
 
 int	throw_error(int reason, char *file_name, int *open_fds)
 {
+	(close(open_fds[READ]), close(open_fds[WRITE]));
 	if (reason == 1)
-	{
-		(close(open_fds[READ]), close(open_fds[WRITE]));
 		return (ft_putstr_fd("pipex: fork failed\n", 2), 1);
-	}
 	else if (reason == 2)
-	{
-		(close(open_fds[READ]), close(open_fds[WRITE]));
 		return (ft_putstr_fd("pipex: no such file or directory: ", 2),
 			ft_putstr_fd(file_name, 2), ft_putstr_fd("\n", 2), 1);
-	}
 	else if (reason == 3)
-	{
-		(close(open_fds[READ]), close(open_fds[WRITE]));
-//		should close all fds?
 		return (ft_putstr_fd("pipex: command not found: ", 2),
 			ft_putstr_fd(file_name, 2), ft_putstr_fd("\n", 2), 1);
-	}
 	else if (reason == 4)
-	{
-		(close(open_fds[0]), close(open_fds[1]));
 		return (ft_putstr_fd("pipex: wrong argc for here_doc\n", 2), 1);
-	}
+	else if (reason == 5)
+		return (ft_putstr_fd("pipex: command empty\n", 2), 1);
 	else
 		return (0);
 }

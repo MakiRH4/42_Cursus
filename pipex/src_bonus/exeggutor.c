@@ -6,7 +6,7 @@
 /*   By: fleonte <fleonte@student.42madrid.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/03 00:12:22 by fleonte           #+#    #+#             */
-/*   Updated: 2024/09/19 19:10:23 by fleonte          ###   ########.fr       */
+/*   Updated: 2024/09/19 20:55:38 by fleonte          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,17 +29,17 @@ pid_t	exeggutor_last(char **command_id, char *outfile,
 		close(piped_fds[WRITE]);
 		(dup2(piped_fds[READ], STDIN_FILENO), close(piped_fds[READ]));
 		if (command_id == NULL)
-			(throw_error(3, NULL, piped_fds), exit(127));
+			(throw_error(5, NULL, piped_fds), exit(127));
 		if ((execve(command_id[0], command_id, env)) == -1)
 			(throw_error(3, command_id[0], piped_fds), exit(127));
 		exit(0);
 	}
 	(close(piped_fds[READ]), close(piped_fds[WRITE]));
-	free_array(command_id);
+
 	waitpid(-1, &status, 0);
-	if (WEXITSTATUS(status) == 127)
-		return (-1);
-	return (pid);
+//	if (WEXITSTATUS(status) == 127)
+//		return (-1);
+	return (free_array(command_id), pid);
 }
 
 pid_t	exeggutor_halfway(char **command_id, char **argv,
@@ -50,7 +50,7 @@ pid_t	exeggutor_halfway(char **command_id, char **argv,
 
 	pipe(pipe_halfway);
 	if (command_id == NULL)
-		return (throw_error(3, NULL, pipe_halfway), 0);
+		return (throw_error(5, NULL, pipe_halfway), 0);
 	pid = fork();
 	if (pid < 0)
 		return (throw_error(1, argv[0], pipe_halfway), exit(1), -1);
@@ -78,7 +78,7 @@ pid_t	exeggutor_first(char **command_id, char **argv,
 
 	status = 0;
 	if (command_id == NULL)
-		return (throw_error(3, NULL, piped_fds), 0);
+		return (throw_error(5, NULL, piped_fds), exit(127), 0);
 	pid = fork();
 	if (pid < 0)
 		return (throw_error(1, NULL, piped_fds), exit(1), -1);
@@ -86,7 +86,7 @@ pid_t	exeggutor_first(char **command_id, char **argv,
 	{
 		fd = open(argv[1], O_RDONLY);
 		if (fd < 0)
-			return (throw_error(2, argv[1], piped_fds), exit(12), -1);
+			return (throw_error(2, argv[1], piped_fds), exit(127), -1);
 		(dup2(fd, STDIN_FILENO), close(fd));
 		(dup2(piped_fds[WRITE], STDOUT_FILENO), close(piped_fds[WRITE]));
 		if ((execve(command_id[0], command_id, env)) == -1)
@@ -94,45 +94,22 @@ pid_t	exeggutor_first(char **command_id, char **argv,
 		exit(0);
 	}
 	waitpid(-1, &status, 0);
-	if (WEXITSTATUS(status) == 12)
-		return (-1);
+//	if (WEXITSTATUS(status) == 12)
+//		return (-1);
 	return (free_array(command_id), pid);
 }
 
-pid_t	*exeggutor_connex(int argc, char **argv, char **env, int *piped_fds)
+int	*exeggutor_connex(int argc, char **argv, char **env, int *piped_fds)
 {
-	pid_t	*pid;
 	int		i_pid;
 
 	i_pid = 0;
-	pid = malloc(sizeof(pid_t) * (argc - 2));
-	if (!pid)
-		return (NULL);
-	pid[i_pid] = exeggutor_first(ft_verify_command(argv[i_pid + 2], env),
+	exeggutor_first(ft_verify_command(argv[i_pid + 2], env),
 			argv, env, piped_fds);
-	if (pid[i_pid] == -1)
-		return (free(pid), NULL);
-	ft_putnbr_fd(argc, 2); //
 	while (++i_pid + 2 < argc - 2)
-	{
-		pid[i_pid] = exeggutor_halfway(ft_verify_command(argv[i_pid + 2], env),
+		exeggutor_halfway(ft_verify_command(argv[i_pid + 2], env),
 				argv, env, piped_fds);
-		if (pid[i_pid] == -1)
-			return (free(pid), NULL);
-	}
-	pid[i_pid] = exeggutor_last(ft_verify_command(argv[argc - 2], env),
+	exeggutor_last(ft_verify_command(argv[argc - 2], env),
 			argv[argc - 1], env, piped_fds);
-	ft_putnbr_fd(i_pid, 2); //
-	ft_putnbr_fd(pid[i_pid], 2); //
-	if (pid[i_pid] == -1)
-		return (free(pid), NULL);
-/*	{
-		pid[i_pid] = 2;
-		free(pid);
-		
-		return (ft_putstr_fd("gets here\n", 2), ft_putnbr_fd(pid[i_pid], 2), NULL);	
-	}
-*/
-	free(pid);
-	return (NULL);
+	return (0);
 }
