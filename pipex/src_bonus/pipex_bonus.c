@@ -6,7 +6,7 @@
 /*   By: fleonte <fleonte@student.42madrid.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/30 16:17:04 by fleonte           #+#    #+#             */
-/*   Updated: 2024/09/19 18:43:23 by fleonte          ###   ########.fr       */
+/*   Updated: 2024/09/20 12:29:59 by fleonte          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ int	main(int argc, char **argv, char **env)
 	if (argc < 5)
 		return (ft_putstr_fd("pipex: argc error\n", 2), -1);
 	if (pipe(piped_fds) == -1)
-		return (ft_printf("pipe failed"), -1);
+		return (ft_printf("main pipe failed"), -1);
 	if (ft_strncmp(argv[1], "here_doc", 8) == 0 && argc > 5)
 		argc = here_doc(argc, argv, env, piped_fds);
 	else

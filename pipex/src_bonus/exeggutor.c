@@ -6,7 +6,7 @@
 /*   By: fleonte <fleonte@student.42madrid.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/03 00:12:22 by fleonte           #+#    #+#             */
-/*   Updated: 2024/09/20 12:13:01 by fleonte          ###   ########.fr       */
+/*   Updated: 2024/09/20 12:29:25 by fleonte          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,15 +103,12 @@ int	*exeggutor_connex(int argc, char **argv, char **env, int *piped_fds)
 	int		i_argv;
 
 	i_argv = 0;
-	if (ft_strncmp(argv[0], "here_doc", 8) == 0)
-		i_argv = -1;
-	else
+	if (ft_strncmp(argv[1], "here_doc", 8) != 0)
 		exeggutor_first(ft_verify_command(argv[i_argv + 2], env),
 			argv, env, piped_fds);
 	while (++i_argv + 2 < argc - 2)
 		exeggutor_halfway(ft_verify_command(argv[i_argv + 2], env),
 			argv, env, piped_fds);
-	
 	exeggutor_last(ft_verify_command(argv[argc - 2], env),
 		argv[argc - 1], env, piped_fds);
 	return (0);

@@ -6,7 +6,7 @@
 /*   By: fleonte <fleonte@student.42madrid.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/06 23:59:08 by fleonte           #+#    #+#             */
-/*   Updated: 2024/09/20 12:01:08 by fleonte          ###   ########.fr       */
+/*   Updated: 2024/09/20 12:29:27 by fleonte          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,6 @@ int	here_doc(int argc, char **argv, char **env, int *piped_fds)
 {
 	char	*line;
 	char	*lim;
-	char	**new_argv;
-	int		i;
 
 	lim = argv[2];
 	while (TRUE)
@@ -32,16 +30,6 @@ int	here_doc(int argc, char **argv, char **env, int *piped_fds)
 		ft_putstr_fd(line, piped_fds[WRITE]);
 		free(line);
 	}
-	i = 0;
-	new_argv = malloc(sizeof(char *) * (argc));
-	new_argv[argc -1] = NULL;
-	while (i < (argc -1))
-	{
-		new_argv[i] = malloc(sizeof(char) * ft_strlen(argv[i + 1]));
-		new_argv[i][ft_strlen(argv[i + 1])] = 0;
-		ft_memcpy(new_argv[i], argv[i + 1], ft_strlen(argv[i + 1]));
-		++i;
-	}
-	exeggutor_connex((argc -1), new_argv, env, piped_fds);
+	exeggutor_connex(argc, argv, env, piped_fds);
 	return (argc);
 }
