@@ -6,24 +6,11 @@
 /*   By: fleonte <fleonte@student.42madrid.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/06 23:59:08 by fleonte           #+#    #+#             */
-/*   Updated: 2024/09/19 21:00:37 by fleonte          ###   ########.fr       */
+/*   Updated: 2024/09/20 12:01:08 by fleonte          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex_bonus.h"
-
-pid_t	*exeggutor_connex_hd(int argc, char **argv, char **env, int *piped_fds)
-{
-	int		i_pid;
-
-	i_pid = 0;
-	while (++i_pid + 2 < argc - 2)
-		exeggutor_halfway(ft_verify_command(argv[i_pid + 2], env),
-				argv, env, piped_fds);
-	exeggutor_last(ft_verify_command(argv[argc - 2], env),
-			argv[argc - 1], env, piped_fds);
-	return (0);
-}
 
 int	here_doc(int argc, char **argv, char **env, int *piped_fds)
 {
@@ -55,6 +42,6 @@ int	here_doc(int argc, char **argv, char **env, int *piped_fds)
 		ft_memcpy(new_argv[i], argv[i + 1], ft_strlen(argv[i + 1]));
 		++i;
 	}
-	exeggutor_connex_hd((argc -1), new_argv, env, piped_fds);
+	exeggutor_connex((argc -1), new_argv, env, piped_fds);
 	return (argc);
 }

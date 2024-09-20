@@ -6,7 +6,7 @@
 /*   By: fleonte <fleonte@student.42madrid.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/03 00:12:22 by fleonte           #+#    #+#             */
-/*   Updated: 2024/09/19 20:55:38 by fleonte          ###   ########.fr       */
+/*   Updated: 2024/09/20 12:13:01 by fleonte          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,6 @@ pid_t	exeggutor_last(char **command_id, char *outfile,
 		exit(0);
 	}
 	(close(piped_fds[READ]), close(piped_fds[WRITE]));
-
 	waitpid(-1, &status, 0);
 //	if (WEXITSTATUS(status) == 127)
 //		return (-1);
@@ -101,15 +100,19 @@ pid_t	exeggutor_first(char **command_id, char **argv,
 
 int	*exeggutor_connex(int argc, char **argv, char **env, int *piped_fds)
 {
-	int		i_pid;
+	int		i_argv;
 
-	i_pid = 0;
-	exeggutor_first(ft_verify_command(argv[i_pid + 2], env),
+	i_argv = 0;
+	if (ft_strncmp(argv[0], "here_doc", 8) == 0)
+		i_argv = -1;
+	else
+		exeggutor_first(ft_verify_command(argv[i_argv + 2], env),
 			argv, env, piped_fds);
-	while (++i_pid + 2 < argc - 2)
-		exeggutor_halfway(ft_verify_command(argv[i_pid + 2], env),
-				argv, env, piped_fds);
+	while (++i_argv + 2 < argc - 2)
+		exeggutor_halfway(ft_verify_command(argv[i_argv + 2], env),
+			argv, env, piped_fds);
+	
 	exeggutor_last(ft_verify_command(argv[argc - 2], env),
-			argv[argc - 1], env, piped_fds);
+		argv[argc - 1], env, piped_fds);
 	return (0);
 }
