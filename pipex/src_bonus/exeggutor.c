@@ -6,7 +6,7 @@
 /*   By: fleonte <fleonte@student.42madrid.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/03 00:12:22 by fleonte           #+#    #+#             */
-/*   Updated: 2024/09/20 12:29:25 by fleonte          ###   ########.fr       */
+/*   Updated: 2024/09/26 16:42:02 by fleonte          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@ pid_t	exeggutor_last(char **command_id, char *outfile,
 {
 	int		fd;
 	pid_t	pid;
-	int		status;
 
 	pid = fork();
 	if (pid < 0)
@@ -35,9 +34,6 @@ pid_t	exeggutor_last(char **command_id, char *outfile,
 		exit(0);
 	}
 	(close(piped_fds[READ]), close(piped_fds[WRITE]));
-	waitpid(-1, &status, 0);
-//	if (WEXITSTATUS(status) == 127)
-//		return (-1);
 	return (free_array(command_id), pid);
 }
 
@@ -73,9 +69,7 @@ pid_t	exeggutor_first(char **command_id, char **argv,
 {
 	int		fd;
 	pid_t	pid;
-	int		status;
 
-	status = 0;
 	if (command_id == NULL)
 		return (throw_error(5, NULL, piped_fds), exit(127), 0);
 	pid = fork();
@@ -92,9 +86,6 @@ pid_t	exeggutor_first(char **command_id, char **argv,
 			(throw_error(3, command_id[0], piped_fds), exit(127));
 		exit(0);
 	}
-	waitpid(-1, &status, 0);
-//	if (WEXITSTATUS(status) == 12)
-//		return (-1);
 	return (free_array(command_id), pid);
 }
 
