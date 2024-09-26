@@ -6,7 +6,7 @@
 /*   By: fleonte <fleonte@student.42madrid.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/07 23:42:40 by fleonte           #+#    #+#             */
-/*   Updated: 2024/09/19 20:23:59 by fleonte          ###   ########.fr       */
+/*   Updated: 2024/09/26 17:41:44 by fleonte          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,7 @@ int	throw_error(int reason, char *file_name, int *open_fds)
 	if (reason == 1)
 		return (ft_putstr_fd("pipex: fork failed\n", 2), 1);
 	else if (reason == 2)
-		return (ft_putstr_fd("pipex: no such file or directory: ", 2),
-			ft_putstr_fd(file_name, 2), ft_putstr_fd("\n", 2), 1);
+		return (perror("pipex"), 1);
 	else if (reason == 3)
 		return (ft_putstr_fd("pipex: command not found: ", 2),
 			ft_putstr_fd(file_name, 2), ft_putstr_fd("\n", 2), 1);
