@@ -6,7 +6,7 @@
 /*   By: fleonte <fleonte@student.42madrid.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/30 16:17:20 by fleonte           #+#    #+#             */
-/*   Updated: 2024/09/07 00:29:39 by fleonte          ###   ########.fr       */
+/*   Updated: 2024/10/15 22:54:31 by fleonte          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,5 +32,6 @@ int		exeggutor_second(char **command_id,
 char	*find_path(char *command_id, char **env);
 char	*str_in_str(const char *haystack, const char *needle);
 char	**ft_verify_command(char *command, char **env);
+int		throw_error(int reason, char *file_name, int *open_fds);
 
 #endif
