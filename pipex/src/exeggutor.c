@@ -6,7 +6,7 @@
 /*   By: fleonte <fleonte@student.42madrid.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/03 00:12:22 by fleonte           #+#    #+#             */
-/*   Updated: 2024/10/15 22:55:09 by fleonte          ###   ########.fr       */
+/*   Updated: 2024/10/17 22:41:51 by fleonte          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,7 @@ int	exeggutor_second(char **command_id, char **argv, char **env, int *piped_fds)
 			(throw_error(3, command_id[0], piped_fds), exit(127));
 		exit(0);
 	}
+	free_array(command_id);
 	(close(piped_fds[READ]), close(piped_fds[WRITE]));
 	return (pid);
 }

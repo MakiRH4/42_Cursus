@@ -33,22 +33,32 @@ font-antialiasing='grayscale'
 font-hinting='slight'
 gtk-theme='Adwaita-dark'
 icon-theme='Win10Sur-dark'
+text-scaling-factor=1.0
 
 [desktop/lockdown]
 disable-lock-screen=true
 disable-user-switching=true
 
 [desktop/notifications]
-application-children=['code', 'org-gnome-terminal', 'gimp-gimp']
+application-children=['code', 'org-gnome-terminal', 'gimp-gimp', 'org-gnome-nautilus', 'discord-discord', 'slack']
 
 [desktop/notifications/application/code]
 application-id='code.desktop'
 
+[desktop/notifications/application/discord-discord]
+application-id='discord_discord.desktop'
+
 [desktop/notifications/application/gimp-gimp]
 application-id='gimp_gimp.desktop'
 
+[desktop/notifications/application/org-gnome-nautilus]
+application-id='org.gnome.Nautilus.desktop'
+
 [desktop/notifications/application/org-gnome-terminal]
 application-id='org.gnome.Terminal.desktop'
+
+[desktop/notifications/application/slack]
+application-id='slack.desktop'
 
 [desktop/peripherals/keyboard]
 numlock-state=true
@@ -73,12 +83,12 @@ migrated=true
 network-monitor-gio-name=''
 
 [gedit/plugins]
-active-plugins=['sort', 'docinfo', 'filebrowser', 'openlinks', 'modelines', 'spell']
+active-plugins=['docinfo', 'modelines', 'sort', 'filebrowser', 'openlinks', 'spell']
 
 [gedit/plugins/filebrowser]
 root='file:///'
 tree-view=true
-virtual-root='file:///etc'
+virtual-root='file:///home/fleonte/Documents/GitHub/THE_ODIN_PROJECT/JavaScript/UnderstandingErrors'
 
 [gedit/preferences/editor]
 scheme='Yaru-dark'
@@ -90,7 +100,7 @@ show-tabs-mode='auto'
 bottom-panel-size=140
 side-panel-active-page='GeditWindowDocumentsPanel'
 side-panel-size=200
-size=(1514, 1666)
+size=(1514, 1269)
 state=87168
 
 [gnote]
@@ -105,16 +115,20 @@ search-filter-time-type='last_modified'
 search-view='list-view'
 
 [nautilus/window-state]
-initial-size=(890, 550)
+initial-size=(1369, 1292)
 maximized=false
 sidebar-width=207
+
+[power-manager]
+info-history-type='charge'
+info-stats-type='discharge-accuracy'
 
 [settings-daemon/plugins/power]
 sleep-inactive-ac-timeout=uint32 0
 sleep-inactive-ac-type='nothing'
 
 [shell]
-app-picker-layout=[{'ftpkg.desktop': <{'position': <0>}>, 'org.gnome.Contacts.desktop': <{'position': <1>}>, 'software-properties-drivers.desktop': <{'position': <2>}>, 'byobu.desktop': <{'position': <3>}>, 'chromium_chromium.desktop': <{'position': <4>}>, 'org.gnome.Totem.desktop': <{'position': <5>}>, 'emacs.desktop': <{'position': <6>}>, 'org.gnome.Calculator.desktop': <{'position': <7>}>, 'emacs-term.desktop': <{'position': <8>}>, 'org.gnome.gedit.desktop': <{'position': <9>}>, 'org.gnome.Extensions.desktop': <{'position': <10>}>, 'firefox_firefox.desktop': <{'position': <11>}>, 'gnome-system-monitor.desktop': <{'position': <12>}>, 'fish.desktop': <{'position': <13>}>, 'org.gnome.Gnote.desktop': <{'position': <14>}>, 'Utilities': <{'position': <15>}>, 'io.github.Hexchat.desktop': <{'position': <16>}>, 'yelp.desktop': <{'position': <17>}>, 'htop.desktop': <{'position': <18>}>, 'gnome-language-selector.desktop': <{'position': <19>}>, 'libreoffice-startcenter.desktop': <{'position': <20>}>, 'libreoffice-base.desktop': <{'position': <21>}>, 'libreoffice-calc.desktop': <{'position': <22>}>, 'libreoffice-draw.desktop': <{'position': <23>}>}, {'libreoffice-impress.desktop': <{'position': <0>}>, 'libreoffice-math.desktop': <{'position': <1>}>, 'libreoffice-writer.desktop': <{'position': <2>}>, 'mu.codewith.editor.desktop': <{'position': <3>}>, 'virtualbox.desktop': <{'position': <4>}>, 'org.gnome.PowerStats.desktop': <{'position': <5>}>, 'remote-viewer.desktop': <{'position': <6>}>, 'gnome-control-center.desktop': <{'position': <7>}>, 'simplescreenrecorder.desktop': <{'position': <8>}>, 'slack.desktop': <{'position': <9>}>, 'org.gnome.Software.desktop': <{'position': <10>}>, 'software-properties-gtk.desktop': <{'position': <11>}>, 'gnome-session-properties.desktop': <{'position': <12>}>, 'terminator.desktop': <{'position': <13>}>, 'info.desktop': <{'position': <14>}>, 'xtigervncviewer.desktop': <{'position': <15>}>, 'debian-uxterm.desktop': <{'position': <16>}>, 'vim.desktop': <{'position': <17>}>, 'virt-manager.desktop': <{'position': <18>}>, 'vlc.desktop': <{'position': <19>}>, 'brave_brave.desktop': <{'position': <20>}>, 'debian-xterm.desktop': <{'position': <21>}>, 'discord_discord.desktop': <{'position': <22>}>, 'opera_opera.desktop': <{'position': <23>}>}]
+app-picker-layout=[{'ftpkg.desktop': <{'position': <0>}>, 'org.gnome.Contacts.desktop': <{'position': <1>}>, 'software-properties-drivers.desktop': <{'position': <2>}>, 'byobu.desktop': <{'position': <3>}>, 'chromium_chromium.desktop': <{'position': <4>}>, 'org.gnome.Totem.desktop': <{'position': <5>}>, 'emacs.desktop': <{'position': <6>}>, 'org.gnome.Calculator.desktop': <{'position': <7>}>, 'emacs-term.desktop': <{'position': <8>}>, 'org.gnome.gedit.desktop': <{'position': <9>}>, 'org.gnome.Extensions.desktop': <{'position': <10>}>, 'firefox_firefox.desktop': <{'position': <11>}>, 'gnome-system-monitor.desktop': <{'position': <12>}>, 'fish.desktop': <{'position': <13>}>, 'org.gnome.Gnote.desktop': <{'position': <14>}>, 'Utilities': <{'position': <15>}>, 'io.github.Hexchat.desktop': <{'position': <16>}>, 'yelp.desktop': <{'position': <17>}>, 'htop.desktop': <{'position': <18>}>, 'gnome-language-selector.desktop': <{'position': <19>}>, 'libreoffice-startcenter.desktop': <{'position': <20>}>, 'libreoffice-base.desktop': <{'position': <21>}>, 'libreoffice-calc.desktop': <{'position': <22>}>, 'libreoffice-draw.desktop': <{'position': <23>}>}, {'libreoffice-impress.desktop': <{'position': <0>}>, 'libreoffice-math.desktop': <{'position': <1>}>, 'libreoffice-writer.desktop': <{'position': <2>}>, 'mu.codewith.editor.desktop': <{'position': <3>}>, 'virtualbox.desktop': <{'position': <4>}>, 'org.gnome.PowerStats.desktop': <{'position': <5>}>, 'remote-viewer.desktop': <{'position': <6>}>, 'gnome-control-center.desktop': <{'position': <7>}>, 'simplescreenrecorder.desktop': <{'position': <8>}>, 'slack.desktop': <{'position': <9>}>, 'org.gnome.Software.desktop': <{'position': <10>}>, 'software-properties-gtk.desktop': <{'position': <11>}>, 'gnome-session-properties.desktop': <{'position': <12>}>, 'terminator.desktop': <{'position': <13>}>, 'info.desktop': <{'position': <14>}>, 'xtigervncviewer.desktop': <{'position': <15>}>, 'debian-uxterm.desktop': <{'position': <16>}>, 'vim.desktop': <{'position': <17>}>, 'virt-manager.desktop': <{'position': <18>}>, 'vlc.desktop': <{'position': <19>}>, 'brave_brave.desktop': <{'position': <20>}>, 'debian-xterm.desktop': <{'position': <21>}>, 'clion_clion.desktop': <{'position': <22>}>, 'nvim_nvim.desktop': <{'position': <23>}>}, {'pycharm-professional_pycharm-professional.desktop': <{'position': <0>}>}]
 disable-user-extensions=false
 disabled-extensions=['ding@rastersoft.com']
 enabled-extensions=['apps-menu@gnome-shell-extensions.gcampax.github.com', 'LogOutButton@kyle.aims.ac.za', 'drive-menu@gnome-shell-extensions.gcampax.github.com', 'lockscreen@42network.org', 'dash-to-dock@micxgx.gmail.com', 'places-menu@gnome-shell-extensions.gcampax.github.com', 'horizontal-workspace-indicator@tty2.io', 'blur-my-shell@aunetx', 'custom-hot-corners-extended@G-dH.github.com', 'clipboard-indicator@tudmotu.com', 'user-theme@gnome-shell-extensions.gcampax.github.com', 'desktopicons-neo@darkdemon']
@@ -131,7 +145,7 @@ ctrl=true
 
 [shell/extensions/dash-to-dock]
 autohide-in-fullscreen=true
-dock-fixed=false
+dock-fixed=true
 dock-position='BOTTOM'
 extend-height=false
 intellihide-mode='MAXIMIZED_WINDOWS'

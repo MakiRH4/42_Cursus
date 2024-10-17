@@ -6,7 +6,7 @@
 /*   By: fleonte <fleonte@student.42madrid.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/30 23:33:54 by fleonte           #+#    #+#             */
-/*   Updated: 2024/10/15 22:53:53 by fleonte          ###   ########.fr       */
+/*   Updated: 2024/10/17 23:41:39 by fleonte          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,8 @@ void	free_array(char **array)
 {
 	int	strings;
 
+	if (!array)
+		return ;
 	strings = -1;
 	while (array[++strings])
 		free(array[strings]);
@@ -97,7 +99,11 @@ char	**ft_verify_command(char *command, char **env)
 	char	**cmd_splitted;
 	char	*valid_path;
 
+	if (*command == 0)
+		return (NULL);
 	cmd_splitted = ft_split(command, ' ');
+	if (!cmd_splitted || !*cmd_splitted)
+		return (free_array(cmd_splitted), NULL);
 	if (access(cmd_splitted[0], F_OK | X_OK)
 		&& str_in_str(cmd_splitted[0], "./"))
 		return (cmd_splitted);

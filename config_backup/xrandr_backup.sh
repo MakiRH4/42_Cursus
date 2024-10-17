@@ -1,10 +1,10 @@
 Screen 0: minimum 320 x 200, current 3840 x 2160, maximum 16384 x 16384
 eDP connected primary 3840x2160+0+0 (0x59) normal (normal left inverted right x axis y axis) 597mm x 336mm
 	Identifier: 0x54
-	Timestamp:  216435879
+	Timestamp:  1341349987
 	Subpixel:   unknown
 	Gamma:      1.0:1.0:1.0
-	Brightness: 0.90
+	Brightness: 1.0
 	Clones:    
 	CRTC:       0
 	CRTCs:      0 1 2 3 4 5
@@ -13,14 +13,14 @@ eDP connected primary 3840x2160+0+0 (0x59) normal (normal left inverted right x 
 	            0.000000 0.000000 1.000000
 	           filter: 
 	EDID: 
-		00ffffffffffff00061025ae8a6f64cc
-		051c0104b53c2278200a31ae5241b226
-		0d505400000001010101010101010101
+		00ffffffffffff00061025ae885968ee
+		051c0104b53c2278200f21ae5243b026
+		0e505400000001010101010101010101
 		0101010101014dd000a0f0703e803020
 		350055502100001a565e00a0a0a02950
 		3020350055502100001a000000fc0069
 		4d61630a2020202020202020000000ff
-		00383834323143333841364632340104
+		0038363434363442383835393238010e
 		020327c0230907078301000070fa1000
 		00127631fc78fbff02108862d369fa10
 		00faf8f8feffffcd9180a0c008347030
@@ -35,8 +35,8 @@ eDP connected primary 3840x2160+0+0 (0x59) normal (normal left inverted right x 
 		range: (0, -1)
 	GAMMA_LUT: 0 
 		range: (0, 65535)
-	CTM: -859516997 0 861435920 0 7414867 0 139692546 0 -191371516 0 48470796 0 73409298 0 307561070 0 
-		-380647166 0 
+	CTM: 0 1 0 0 0 0 0 0 0 1 0 0 0 0 0 0 
+		0 1 
 	DEGAMMA_LUT: 0 
 		range: (0, 65535)
 	TearFree: auto 
@@ -103,7 +103,7 @@ eDP connected primary 3840x2160+0+0 (0x59) normal (normal left inverted right x 
         v: height  480 start 2163 end 2168 total 2222           clock  60.00Hz
 DisplayPort-0 disconnected (normal left inverted right x axis y axis)
 	Identifier: 0x55
-	Timestamp:  216435879
+	Timestamp:  1341349987
 	Subpixel:   unknown
 	Clones:    
 	CRTCs:      0 1 2 3 4 5
@@ -144,7 +144,7 @@ DisplayPort-0 disconnected (normal left inverted right x axis y axis)
 		range: (0, 1)
 DisplayPort-1 disconnected (normal left inverted right x axis y axis)
 	Identifier: 0x56
-	Timestamp:  216435879
+	Timestamp:  1341349987
 	Subpixel:   unknown
 	Clones:    
 	CRTCs:      0 1 2 3 4 5
@@ -185,7 +185,7 @@ DisplayPort-1 disconnected (normal left inverted right x axis y axis)
 		range: (0, 1)
 DisplayPort-2 disconnected (normal left inverted right x axis y axis)
 	Identifier: 0x57
-	Timestamp:  216435879
+	Timestamp:  1341349987
 	Subpixel:   unknown
 	Clones:    
 	CRTCs:      0 1 2 3 4 5

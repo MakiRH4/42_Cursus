@@ -6,7 +6,7 @@
 /*   By: fleonte <fleonte@student.42madrid.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/07 23:42:40 by fleonte           #+#    #+#             */
-/*   Updated: 2024/09/26 17:41:44 by fleonte          ###   ########.fr       */
+/*   Updated: 2024/10/17 23:43:05 by fleonte          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,8 +102,8 @@ char	**ft_verify_command(char *command, char **env)
 	if (*command == 0)
 		return (NULL);
 	cmd_splitted = ft_split(command, ' ');
-	if (!cmd_splitted)
-		return (NULL);
+	if (!cmd_splitted || !*cmd_splitted)
+		return (free_array(cmd_splitted), NULL);
 	if (access(cmd_splitted[0], F_OK | X_OK)
 		&& str_in_str(cmd_splitted[0], "./"))
 		return (cmd_splitted);
