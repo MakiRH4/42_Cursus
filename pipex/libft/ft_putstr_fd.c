@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_putstr_fd.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: floris <floris@student.42.fr>              +#+  +:+       +#+        */
+/*   By: fleonte <fleonte@student.42madrid.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/14 20:31:57 by fleonte           #+#    #+#             */
-/*   Updated: 2023/11/23 16:22:48 by floris           ###   ########.fr       */
+/*   Updated: 2024/10/21 17:49:36 by fleonte          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 void	ft_putstr_fd(char *s, int fd)
 {
 	if (!s)
-		return;
+		return ;
 	while (*s)
 	{
 		ft_putchar_fd(*s, fd);

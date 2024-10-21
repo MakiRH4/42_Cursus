@@ -6,7 +6,7 @@
 /*   By: fleonte <fleonte@student.42madrid.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/19 20:18:16 by floris            #+#    #+#             */
-/*   Updated: 2024/10/17 23:21:55 by fleonte          ###   ########.fr       */
+/*   Updated: 2024/10/21 17:52:14 by fleonte          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,7 +93,7 @@ char	**ft_split(char const *s, char c)
 	int		number_of_words;
 
 	if (!s)
-		return NULL;
+		return (NULL);
 	copy_of_s = ft_strdup(s);
 	if (!copy_of_s)
 		return (0);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strtrim.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: floris <floris@student.42.fr>              +#+  +:+       +#+        */
+/*   By: fleonte <fleonte@student.42madrid.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/14 22:13:11 by fleonte           #+#    #+#             */
-/*   Updated: 2023/11/23 16:12:37 by floris           ###   ########.fr       */
+/*   Updated: 2024/10/21 17:53:28 by fleonte          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ char	*ft_strtrim(char const *s1, char const *set)
 	int			i;
 
 	if (!s1 || !set)
-		return NULL;
+		return (NULL);
 	start = s1;
 	end = s1 + (ft_strlen(s1) - 1);
 	while (*start && ft_istrimmable(*start, (char *)set))

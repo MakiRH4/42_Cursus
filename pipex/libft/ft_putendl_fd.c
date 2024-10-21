@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_putendl_fd.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: floris <floris@student.42.fr>              +#+  +:+       +#+        */
+/*   By: fleonte <fleonte@student.42madrid.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/19 20:18:26 by floris            #+#    #+#             */
-/*   Updated: 2023/11/23 16:22:44 by floris           ###   ########.fr       */
+/*   Updated: 2024/10/21 17:51:51 by fleonte          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void	ft_putendl_fd(char *s, int fd)
 	char	*output;
 
 	if (!s)
-		return;
+		return ;
 	output = s;
 	while (*output)
 	{
